@@ -37,9 +37,9 @@ public class ApiPermissionService {
     private final Logger log = LoggerFactory.getLogger(ApiPermissionService.class);
     private final List<String> relationCacheNames =
         Arrays.asList(
-        com.honmtech.cms.domain.ApiPermission.class.getName() + ".parent",
-        com.honmtech.cms.domain.ApiPermission.class.getName() + ".children",
-        com.honmtech.cms.domain.ViewPermission.class.getName() + ".apiPermissions"
+        com.aidriveall.cms.domain.ApiPermission.class.getName() + ".parent",
+        com.aidriveall.cms.domain.ApiPermission.class.getName() + ".children",
+        com.aidriveall.cms.domain.ViewPermission.class.getName() + ".apiPermissions"
         );
 
     private final ApiPermissionRepository apiPermissionRepository;
@@ -165,7 +165,7 @@ public class ApiPermissionService {
     }
     // 清除children缓存
     private void clearChildrenCache() {
-        Objects.requireNonNull(cacheManager.getCache(com.honmtech.cms.domain.ApiPermission.class.getName() + ".children"))
+        Objects.requireNonNull(cacheManager.getCache(com.aidriveall.cms.domain.ApiPermission.class.getName() + ".children"))
             .clear();
     }
     private void clearRelationsCache() {

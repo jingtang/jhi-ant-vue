@@ -1,0 +1,57 @@
+{
+  "jhiAntVueApp": {
+    "modelConfigCommonTable": {
+      "home": {
+        "title": "模型",
+        "createLabel": "创建新 模型",
+        "createOrEditLabel": "创建或编辑 模型",
+        "notFound": "No 模型 found"
+      },
+      "created": "模型 {{ param }} 创建成功",
+      "updated": "模型 {{ param }} 更新成功",
+      "deleted": "模型 {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 模型 {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "模型"
+      },
+      "name": "名称",
+      "entityName": "实体名称",
+      "tableName": "数据库表名",
+      "system": "系统表",
+      "clazzName": "类名",
+      "generated": "是否生成",
+      "creatAt": "创建时间",
+      "generateAt": "生成表时间",
+      "generateClassAt": "编译时间",
+      "description": "表说明",
+      "treeTable": "树形表",
+      "baseTableId": "来源Id",
+      "recordActionWidth": "操作栏宽度",
+      "listConfig": "前端列表配置",
+      "formConfig": "前端表单配置",
+      "commonTableFields": "字段",
+      "relationships": "关系",
+      "creator": "创建人",
+      "businessType": "业务类型",
+      "help": {
+        "name": "名称",
+        "entityName": "实体名称",
+        "tableName": "数据库表名",
+        "system": "系统表",
+        "clazzName": "类名",
+        "generated": "是否生成",
+        "creatAt": "创建时间",
+        "generateAt": "生成表时间",
+        "generateClassAt": "编译时间",
+        "description": "表说明",
+        "treeTable": "树形表",
+        "baseTableId": "来源Id",
+        "recordActionWidth": "操作栏宽度",
+        "listConfig": "前端列表配置",
+        "formConfig": "前端表单配置"
+      }
+    }
+  }
+}

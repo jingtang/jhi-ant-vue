@@ -1,0 +1,150 @@
+{
+    "name": "CommonTable",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "80"
+        },
+        {
+            "fieldName": "entityName",
+            "javadoc": "实体名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "80"
+        },
+        {
+            "fieldName": "tableName",
+            "javadoc": "数据库表名",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "80"
+        },
+        {
+            "fieldName": "system",
+            "javadoc": "系统表",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "clazzName",
+            "javadoc": "类名",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "80"
+        },
+        {
+            "fieldName": "generated",
+            "javadoc": "是否生成",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "creatAt",
+            "javadoc": "创建时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "generateAt",
+            "javadoc": "生成表时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "generateClassAt",
+            "javadoc": "编译时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "description",
+            "javadoc": "表说明",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "200"
+        },
+        {
+            "fieldName": "treeTable",
+            "javadoc": "树形表",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "baseTableId",
+            "javadoc": "来源Id",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "recordActionWidth",
+            "javadoc": "操作栏宽度",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "listConfig",
+            "javadoc": "前端列表配置",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "formConfig",
+            "javadoc": "前端表单配置",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "commonTableField",
+            "otherEntityRelationshipName": "commonTable",
+            "javadoc": "字段 config: {\"showInOne\": true, \"orderBy\": \"order asc\"}",
+            "relationshipName": "commonTableFields"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "commonTableRelationship",
+            "otherEntityRelationshipName": "commonTable",
+            "javadoc": "关系 config: {\"showInOne\": true, \"orderBy\": \"order asc\"}",
+            "relationshipName": "relationships"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "commonTable",
+            "javadoc": "创建人",
+            "relationshipName": "creator",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "businessType",
+            "otherEntityRelationshipName": "commonTable",
+            "javadoc": "业务类型",
+            "relationshipName": "businessType",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621082600",
+    "javadoc": "模型",
+    "entityTableName": "common_table",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "modelConfig",
+    "applications": "*",
+    "skipComponent": "domain-repository-serviceClass-restController-listPage-listComponent-clientService-updateComponent-clientRoute"
+}

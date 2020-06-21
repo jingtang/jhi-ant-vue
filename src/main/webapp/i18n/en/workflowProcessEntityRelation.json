@@ -1,0 +1,31 @@
+{
+  "jhiAntVueApp": {
+    "workflowProcessEntityRelation": {
+      "home": {
+        "title": "流程与实体关联",
+        "createLabel": "Create a new 流程与实体关联",
+        "createOrEditLabel": "Create or edit a 流程与实体关联",
+        "notFound": "No 流程与实体关联 found"
+      },
+      "created": "A new 流程与实体关联 is created with identifier {{ param }}",
+      "updated": "A 流程与实体关联 is updated with identifier {{ param }}",
+      "deleted": "A 流程与实体关联 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete 流程与实体关联 {{ id }}?"
+      },
+      "detail": {
+        "title": "流程与实体关联"
+      },
+      "entityType": "Entity Type",
+      "entityId": "Entity Id",
+      "processInstanceId": "Process Instance Id",
+      "status": "Status",
+      "help": {
+        "entityType": "宿主实体名称",
+        "entityId": "宿主实体Id",
+        "processInstanceId": "流程实例Id",
+        "status": "状态"
+      }
+    }
+  }
+}

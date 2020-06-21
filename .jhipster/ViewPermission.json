@@ -1,0 +1,142 @@
+{
+    "name": "ViewPermission",
+    "fields": [
+        {
+            "fieldName": "text",
+            "javadoc": "权限名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "i18n",
+            "javadoc": "i18n主键",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "group",
+            "javadoc": "显示分组名",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "link",
+            "javadoc": "路由",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "externalLink",
+            "javadoc": "外部链接",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "target",
+            "javadoc": "链接目标",
+            "fieldType": "TargetType",
+            "fieldValues": "BLANK,SELF,PARENT,TOP"
+        },
+        {
+            "fieldName": "icon",
+            "javadoc": "图标",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "disabled",
+            "javadoc": "禁用菜单",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hide",
+            "javadoc": "隐藏菜单",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hideInBreadcrumb",
+            "javadoc": "隐藏面包屑",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "shortcut",
+            "javadoc": "快捷菜单项",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "shortcutRoot",
+            "javadoc": "菜单根节点",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "reuse",
+            "javadoc": "允许复用",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "code",
+            "javadoc": "权限代码(ROLE_开头)",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "javadoc": "权限描述",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "javadoc": "权限类型",
+            "fieldType": "ViewPermissionType",
+            "fieldValues": "MENU,BUTTON"
+        },
+        {
+            "fieldName": "order",
+            "javadoc": "排序",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "apiPermissionCodes",
+            "javadoc": "api权限标识串",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "viewPermission",
+            "otherEntityRelationshipName": "parent",
+            "javadoc": "子节点",
+            "relationshipName": "children"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "apiPermission",
+            "otherEntityRelationshipName": "viewPermissions",
+            "javadoc": "API权限",
+            "relationshipName": "apiPermissions",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "viewPermission",
+            "otherEntityRelationshipName": "children",
+            "javadoc": "上级",
+            "relationshipName": "parent",
+            "otherEntityField": "text"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "authority",
+            "otherEntityRelationshipName": "viewPermission",
+            "relationshipName": "authorities",
+            "otherEntityField": "name",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200621082700",
+    "javadoc": "可视权限\\n权限分为菜单权限、按钮权限等\\n",
+    "entityTableName": "view_permission",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "system",
+    "applications": "*"
+}

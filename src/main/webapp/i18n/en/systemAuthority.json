@@ -1,0 +1,37 @@
+{
+  "jhiAntVueApp": {
+    "systemAuthority": {
+      "home": {
+        "title": "角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。",
+        "createLabel": "Create a new 角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。",
+        "createOrEditLabel": "Create or edit a 角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。",
+        "notFound": "No 角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。 found"
+      },
+      "created": "A new 角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。 is created with identifier {{ param }}",
+      "updated": "A 角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。 is updated with identifier {{ param }}",
+      "deleted": "A 角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete 角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。 {{ id }}?"
+      },
+      "detail": {
+        "title": "角色\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。"
+      },
+      "name": "Name",
+      "code": "Code",
+      "info": "Info",
+      "order": "Order",
+      "display": "Display",
+      "children": "子节点",
+      "users": "用户",
+      "viewPermission": "可视权限",
+      "parent": "上级",
+      "help": {
+        "name": "角色名称",
+        "code": "角色代号",
+        "info": "信息",
+        "order": "排序",
+        "display": "展示"
+      }
+    }
+  }
+}

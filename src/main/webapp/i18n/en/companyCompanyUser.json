@@ -1,0 +1,23 @@
+{
+  "jhiAntVueApp": {
+    "companyCompanyUser": {
+      "home": {
+        "title": "人员账号\n客户方人员账号",
+        "createLabel": "Create a new 人员账号\n客户方人员账号",
+        "createOrEditLabel": "Create or edit a 人员账号\n客户方人员账号",
+        "notFound": "No 人员账号\n客户方人员账号 found"
+      },
+      "created": "A new 人员账号\n客户方人员账号 is created with identifier {{ param }}",
+      "updated": "A 人员账号\n客户方人员账号 is updated with identifier {{ param }}",
+      "deleted": "A 人员账号\n客户方人员账号 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete 人员账号\n客户方人员账号 {{ id }}?"
+      },
+      "detail": {
+        "title": "人员账号\n客户方人员账号"
+      },
+      "user": "关联账户",
+      "company": "所属单位"
+    }
+  }
+}

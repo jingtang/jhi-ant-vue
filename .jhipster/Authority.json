@@ -1,0 +1,77 @@
+{
+    "name": "Authority",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "角色名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "javadoc": "角色代号",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "info",
+            "javadoc": "信息",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "order",
+            "javadoc": "排序",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "display",
+            "javadoc": "展示",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "authority",
+            "otherEntityRelationshipName": "parent",
+            "javadoc": "子节点",
+            "relationshipName": "children"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "authority",
+            "javadoc": "用户",
+            "relationshipName": "users",
+            "otherEntityField": "login",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "viewPermission",
+            "otherEntityRelationshipName": "authorities",
+            "javadoc": "可视权限",
+            "relationshipName": "viewPermission",
+            "otherEntityField": "text",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "authority",
+            "otherEntityRelationshipName": "children",
+            "javadoc": "上级",
+            "relationshipName": "parent",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621082600",
+    "javadoc": "角色\\n采用自分组的形式,采用向下包含关系，选中本节点继承父层并包含本节点内容及其所有子节点内容。",
+    "entityTableName": "authority",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "system",
+    "applications": "*",
+    "skipComponent": "domain-repository"
+}

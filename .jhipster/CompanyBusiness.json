@@ -1,0 +1,60 @@
+{
+    "name": "CompanyBusiness",
+    "fields": [
+        {
+            "fieldName": "status",
+            "javadoc": "开通状态",
+            "fieldType": "CompanyBusinessStatus",
+            "fieldValues": "OPEN,TRIAL,CLOSE"
+        },
+        {
+            "fieldName": "expirationTime",
+            "javadoc": "到期时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "startTime",
+            "javadoc": "开通时间或试用开始时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "operateUserId",
+            "javadoc": "操作用户Id",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "groupId",
+            "javadoc": "百度人员组id",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "businessType",
+            "otherEntityRelationshipName": "companyBusiness",
+            "javadoc": "业务类型",
+            "relationshipName": "businessType",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "companyCustomer",
+            "otherEntityRelationshipName": "companyBusinesses",
+            "javadoc": "公司",
+            "relationshipName": "company",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621084500",
+    "javadoc": "客户业务\\n客户公司开通业务",
+    "entityTableName": "company_business",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "company",
+    "applications": "*"
+}

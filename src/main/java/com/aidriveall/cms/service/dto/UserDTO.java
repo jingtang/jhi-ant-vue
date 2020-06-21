@@ -55,8 +55,6 @@ public class UserDTO {
 
     private Set<String> authorities;
 
-    private String mobile;
-
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -208,7 +206,7 @@ public class UserDTO {
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
             ", mobile='" + mobile + '\'' +
-            ", birthday='" + birthday + '\'' + 
+            ", birthday='" + birthday + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +

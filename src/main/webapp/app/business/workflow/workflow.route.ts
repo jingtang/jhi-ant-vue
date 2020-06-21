@@ -2,6 +2,10 @@ import { RouteConfig } from 'vue-router';
 import { PageView } from '@/layouts';
 import { deploymentRoute } from '@/business/workflow/deployment/deployment.route';
 import { processDesignRoute } from '@/business/workflow/process-design/process-design.route';
+import { processTableConfigRoute } from '@/business/workflow/process-table-config/process-table-config.route';
+import { processFormConfigRoute } from '@/business/workflow/process-form-config/process-form-config.route';
+import { processEntityRelationRoute } from '@/business/workflow/process-entity-relation/process-entity-relation.route';
+import { leaveRoute } from '@/business/workflow/leave/leave.route';
 // jhipster-needle-add-entity-to-client-root-folder-router-import - JHipster will import entities to the client root folder router here
 
 export const workflowRoute: RouteConfig = {
@@ -28,7 +32,11 @@ export const workflowRoute: RouteConfig = {
       name: 'process-definition',
       component: () => import('./process-definition/process-definition.vue'),
       meta: { authorities: ['ROLE_USER'], title: '流程定义' }
-    }
+    },
+    processTableConfigRoute,
+    processFormConfigRoute,
+    processEntityRelationRoute,
+    leaveRoute
     // jhipster-needle-add-entity-to-client-root-folder-router - JHipster will add entities to the client root folder router here
   ]
 };

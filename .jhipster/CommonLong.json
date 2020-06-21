@@ -1,0 +1,25 @@
+{
+    "name": "CommonLong",
+    "fields": [
+        {
+            "fieldName": "value",
+            "javadoc": "值",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621083100",
+    "javadoc": "通用长整\\nconfig: {\"commonField\": true}",
+    "entityTableName": "common_long",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "modelConfig",
+    "applications": "*",
+    "skipComponent": "restController-controllerTest",
+    "skipClient": true,
+    "commonField": true
+}

@@ -1,0 +1,10 @@
+{
+  "jhiAntVueApp": {
+    "CompanyBusinessStatus": {
+      "null": "",
+      "OPEN": "OPEN",
+      "TRIAL": "TRIAL",
+      "CLOSE": "CLOSE"
+    }
+  }
+}

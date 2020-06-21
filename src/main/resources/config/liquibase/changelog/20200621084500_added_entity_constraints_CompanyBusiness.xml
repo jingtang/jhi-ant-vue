@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity CompanyBusiness.
+    -->
+    <changeSet id="20200621084500-2" author="jhipster">
+                <addForeignKeyConstraint baseColumnNames="business_type_id"
+                                 baseTableName="company_business"
+                                 constraintName="fk_company_business_business_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="business_type"/>
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="company_business"
+                                 constraintName="fk_company_business_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company_customer"/>
+    </changeSet>
+</databaseChangeLog>

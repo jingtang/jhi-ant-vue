@@ -1,0 +1,87 @@
+{
+    "name": "CompanyCustomer",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "javadoc": "代码",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "javadoc": "地址",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNum",
+            "javadoc": "联系电话",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "logo",
+            "javadoc": "logo地址",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contact",
+            "javadoc": "联系人",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createUserId",
+            "javadoc": "创建用户 Id",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "createTime",
+            "javadoc": "创建时间",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "companyCustomer",
+            "otherEntityRelationshipName": "parent",
+            "javadoc": "子节点",
+            "relationshipName": "children"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "companyUser",
+            "otherEntityRelationshipName": "company",
+            "javadoc": "员工",
+            "relationshipName": "companyUsers"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "companyBusiness",
+            "otherEntityRelationshipName": "company",
+            "javadoc": "开通业务",
+            "relationshipName": "companyBusinesses"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "companyCustomer",
+            "otherEntityRelationshipName": "children",
+            "javadoc": "上级",
+            "relationshipName": "parent",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621084300",
+    "javadoc": "客户单位\\n安装设备的客户公司",
+    "entityTableName": "company_customer",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "company",
+    "applications": "*"
+}

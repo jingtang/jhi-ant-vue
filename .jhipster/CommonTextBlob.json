@@ -1,0 +1,26 @@
+{
+    "name": "CommonTextBlob",
+    "fields": [
+        {
+            "fieldName": "value",
+            "javadoc": "值",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621083700",
+    "javadoc": "通用长文本\\nconfig: {\"commonField\": true}",
+    "entityTableName": "common_text_blob",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "modelConfig",
+    "applications": "*",
+    "skipComponent": "restController-controllerTest",
+    "skipClient": true,
+    "commonField": true
+}

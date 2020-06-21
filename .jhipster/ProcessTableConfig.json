@@ -1,0 +1,66 @@
+{
+    "name": "ProcessTableConfig",
+    "fields": [
+        {
+            "fieldName": "processDefinitionId",
+            "javadoc": "流程Id",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processDefinitionKey",
+            "javadoc": "流程Key",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processDefinitionName",
+            "javadoc": "流程名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "javadoc": "描述",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processBpmnData",
+            "javadoc": "流程数据",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "deploied",
+            "javadoc": "是否部署",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "commonTable",
+            "otherEntityRelationshipName": "processTableConfig",
+            "javadoc": "关联表",
+            "relationshipName": "commonTable",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "processTableConfig",
+            "javadoc": "创建人",
+            "relationshipName": "creator",
+            "otherEntityField": "login"
+        }
+    ],
+    "changelogDate": "20200621084500",
+    "javadoc": "流程业务配置",
+    "entityTableName": "process_table_config",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "workflow",
+    "applications": "*",
+    "skipComponent": "listPage-listComponent"
+}

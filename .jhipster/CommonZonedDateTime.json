@@ -1,0 +1,25 @@
+{
+    "name": "CommonZonedDateTime",
+    "fields": [
+        {
+            "fieldName": "value",
+            "javadoc": "值",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621083400",
+    "javadoc": "通用日期时间\\nconfig: {\"commonField\": true}",
+    "entityTableName": "common_zoned_date_time",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "modelConfig",
+    "applications": "*",
+    "skipComponent": "restController-controllerTest",
+    "skipClient": true,
+    "commonField": true
+}

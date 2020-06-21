@@ -1,0 +1,25 @@
+{
+    "name": "CommonInteger",
+    "fields": [
+        {
+            "fieldName": "value",
+            "javadoc": "值",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621083000",
+    "javadoc": "通用整数\\nconfig: {\"commonField\": true}",
+    "entityTableName": "common_integer",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "modelConfig",
+    "applications": "*",
+    "skipComponent": "restController-controllerTest",
+    "skipClient": true,
+    "commonField": true
+}

@@ -1,0 +1,9 @@
+{
+  "jhiAntVueApp": {
+    "SourceType": {
+      "null": "",
+      "ENTITY": "ENTITY",
+      "DATA_DICTIONARY": "DATA_DICTIONARY"
+    }
+  }
+}

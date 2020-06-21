@@ -37,10 +37,10 @@ public class CommonTableService {
     private final Logger log = LoggerFactory.getLogger(CommonTableService.class);
     private final List<String> relationCacheNames =
         Arrays.asList(
-        com.honmtech.cms.domain.CommonTableField.class.getName() + ".commonTable",
-        com.honmtech.cms.domain.CommonTableRelationship.class.getName() + ".commonTable",
-        com.honmtech.cms.domain.User.class.getName() + ".commonTable",
-        com.honmtech.cms.domain.BusinessType.class.getName() + ".commonTable"
+        com.aidriveall.cms.domain.CommonTableField.class.getName() + ".commonTable",
+        com.aidriveall.cms.domain.CommonTableRelationship.class.getName() + ".commonTable",
+        com.aidriveall.cms.domain.User.class.getName() + ".commonTable",
+        com.aidriveall.cms.domain.BusinessType.class.getName() + ".commonTable"
         );
 
     private final CommonTableRepository commonTableRepository;

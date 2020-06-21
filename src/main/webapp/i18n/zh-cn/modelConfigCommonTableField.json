@@ -1,0 +1,68 @@
+{
+  "jhiAntVueApp": {
+    "modelConfigCommonTableField": {
+      "home": {
+        "title": "模型字段",
+        "createLabel": "创建新 模型字段",
+        "createOrEditLabel": "创建或编辑 模型字段",
+        "notFound": "No 模型字段 found"
+      },
+      "created": "模型字段 {{ param }} 创建成功",
+      "updated": "模型字段 {{ param }} 更新成功",
+      "deleted": "模型字段 {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 模型字段 {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "模型字段"
+      },
+      "title": "标题",
+      "entityFieldName": "属性名称",
+      "type": "类型",
+      "tableColumnName": "字段名称",
+      "columnWidth": "列宽",
+      "order": "显示顺序",
+      "editInList": "行内编辑",
+      "hideInList": "列表隐藏",
+      "hideInForm": "表单隐藏",
+      "enableFilter": "可过滤",
+      "validateRules": "验证规则",
+      "showInFilterTree": "显示在过滤树",
+      "fixed": "列固定",
+      "sortable": "可排序",
+      "treeIndicator": "树形标识",
+      "clientReadOnly": "前端只读",
+      "fieldValues": "值范围",
+      "notNull": "必填",
+      "system": "系统字段",
+      "help": "字段说明",
+      "fontColor": "字体颜色",
+      "backgroundColor": "列背景色",
+      "commonTable": "所属表",
+      "help": {
+        "title": "标题",
+        "entityFieldName": "属性名称",
+        "type": "类型",
+        "tableColumnName": "字段名称",
+        "columnWidth": "列宽",
+        "order": "显示顺序",
+        "editInList": "行内编辑",
+        "hideInList": "列表隐藏",
+        "hideInForm": "表单隐藏",
+        "enableFilter": "可过滤",
+        "validateRules": "验证规则",
+        "showInFilterTree": "显示在过滤树",
+        "fixed": "列固定",
+        "sortable": "可排序",
+        "treeIndicator": "树形标识",
+        "clientReadOnly": "前端只读",
+        "fieldValues": "值范围",
+        "notNull": "必填",
+        "system": "系统字段",
+        "help": "字段说明",
+        "fontColor": "字体颜色",
+        "backgroundColor": "列背景色"
+      }
+    }
+  }
+}

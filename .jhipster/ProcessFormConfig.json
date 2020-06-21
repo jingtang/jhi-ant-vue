@@ -1,0 +1,44 @@
+{
+    "name": "ProcessFormConfig",
+    "fields": [
+        {
+            "fieldName": "processDefinitionKey",
+            "javadoc": "流程Id",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "taskNodeId",
+            "javadoc": "节点Id",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "taskNodeName",
+            "javadoc": "任务节点名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "commonTableId",
+            "javadoc": "业务功能Id",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "formData",
+            "javadoc": "表单配置",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621084600",
+    "javadoc": "流程表单",
+    "entityTableName": "process_form_config",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "workflow",
+    "applications": "*",
+    "skipMenu": true
+}

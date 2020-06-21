@@ -1,0 +1,217 @@
+{
+    "name": "CommonTableRelationship",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "relationshipType",
+            "javadoc": "关系类型",
+            "fieldType": "RelationshipType",
+            "fieldValues": "ONE_TO_MANY,MANY_TO_ONE,MANY_TO_MANY,ONE_TO_ONE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sourceType",
+            "javadoc": "来源类型",
+            "fieldType": "SourceType",
+            "fieldValues": "ENTITY,DATA_DICTIONARY"
+        },
+        {
+            "fieldName": "otherEntityField",
+            "javadoc": "关联表显示字段",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "otherEntityName",
+            "javadoc": "关联实体名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "relationshipName",
+            "javadoc": "关系属性名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "otherEntityRelationshipName",
+            "javadoc": "对方属性名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "columnWidth",
+            "javadoc": "列宽",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "order",
+            "javadoc": "显示顺序",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fixed",
+            "javadoc": "列固定",
+            "fieldType": "FixedType",
+            "fieldValues": "LEFT,RIGHT"
+        },
+        {
+            "fieldName": "editInList",
+            "javadoc": "行内编辑",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "enableFilter",
+            "javadoc": "可过滤",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hideInList",
+            "javadoc": "列表隐藏",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hideInForm",
+            "javadoc": "表单隐藏",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "fontColor",
+            "javadoc": "字体颜色",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "80"
+        },
+        {
+            "fieldName": "backgroundColor",
+            "javadoc": "列背景色",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "80"
+        },
+        {
+            "fieldName": "help",
+            "javadoc": "详细字段说明",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "200"
+        },
+        {
+            "fieldName": "ownerSide",
+            "javadoc": "是否维护端",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "dataName",
+            "javadoc": "数据源名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "webComponentType",
+            "javadoc": "Web控件类型",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "otherEntityIsTree",
+            "javadoc": "是否树形实体",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "showInFilterTree",
+            "javadoc": "显示在过滤树",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "dataDictionaryCode",
+            "javadoc": "字典表代码",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "clientReadOnly",
+            "javadoc": "前端只读",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "commonTable",
+            "otherEntityRelationshipName": "commonTableRelationship",
+            "javadoc": "关联实体",
+            "relationshipName": "relationEntity",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "dataDictionary",
+            "otherEntityRelationshipName": "commonTableRelationship",
+            "javadoc": "字典表节点",
+            "relationshipName": "dataDictionaryNode",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "commonTable",
+            "otherEntityRelationshipName": "relationships",
+            "javadoc": "所属表 config: {\"showInOne\": true, \"additionalShowFields\": [\"entityName\"]}",
+            "relationshipName": "commonTable",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621082800",
+    "javadoc": "模型关系",
+    "entityTableName": "common_table_relationship",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "modelConfig",
+    "applications": "*",
+    "skipMenu": true
+}

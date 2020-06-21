@@ -1,0 +1,38 @@
+{
+    "name": "GpsInfo",
+    "fields": [
+        {
+            "fieldName": "type",
+            "javadoc": "gps坐标类型",
+            "fieldType": "GpsType",
+            "fieldValues": "BAIDU,GOOGLE_MAP,GOOGLE_EART,AMAP"
+        },
+        {
+            "fieldName": "latitude",
+            "javadoc": "纬度",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "longitude",
+            "javadoc": "经度",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "address",
+            "javadoc": "地址描述",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621082600",
+    "javadoc": "GPS信息",
+    "entityTableName": "gps_info",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "settings",
+    "applications": "*"
+}

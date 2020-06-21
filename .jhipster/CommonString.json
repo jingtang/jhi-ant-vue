@@ -1,0 +1,25 @@
+{
+    "name": "CommonString",
+    "fields": [
+        {
+            "fieldName": "value",
+            "javadoc": "值",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621083300",
+    "javadoc": "通用字符串\\nconfig: {\"commonField\": true}",
+    "entityTableName": "common_string",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "modelConfig",
+    "applications": "*",
+    "skipComponent": "restController-controllerTest",
+    "skipClient": true,
+    "commonField": true
+}

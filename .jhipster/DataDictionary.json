@@ -1,0 +1,58 @@
+{
+    "name": "DataDictionary",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "javadoc": "代码",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "javadoc": "描述",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fontColor",
+            "javadoc": "字体颜色",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "backgroundColor",
+            "javadoc": "背景颜色",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "dataDictionary",
+            "otherEntityRelationshipName": "parent",
+            "javadoc": "子节点",
+            "relationshipName": "children"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "dataDictionary",
+            "otherEntityRelationshipName": "children",
+            "javadoc": "上级节点",
+            "relationshipName": "parent",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621082500",
+    "javadoc": "数据字典",
+    "entityTableName": "data_dictionary",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "settings",
+    "applications": "*"
+}

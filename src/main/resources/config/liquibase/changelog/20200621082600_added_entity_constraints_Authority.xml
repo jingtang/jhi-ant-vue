@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Authority.
+    -->
+    <changeSet id="20200621082600-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="authority_id"
+                                 baseTableName="authority_users"
+                                 constraintName="fk_authority_users_authority_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="authority"/>
+
+        <addForeignKeyConstraint baseColumnNames="users_id"
+                                 baseTableName="authority_users"
+                                 constraintName="fk_authority_users_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="authority_id"
+                                 baseTableName="authority_view_permission"
+                                 constraintName="fk_authority_view_permission_authority_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="authority"/>
+
+        <addForeignKeyConstraint baseColumnNames="view_permission_id"
+                                 baseTableName="authority_view_permission"
+                                 constraintName="fk_authority_view_permission_view_permission_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="view_permission"/>
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="authority"
+                                 constraintName="fk_authority_parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="authority"/>
+    </changeSet>
+</databaseChangeLog>

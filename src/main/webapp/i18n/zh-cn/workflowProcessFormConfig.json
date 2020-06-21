@@ -1,0 +1,33 @@
+{
+  "jhiAntVueApp": {
+    "workflowProcessFormConfig": {
+      "home": {
+        "title": "流程表单",
+        "createLabel": "创建新 流程表单",
+        "createOrEditLabel": "创建或编辑 流程表单",
+        "notFound": "No 流程表单 found"
+      },
+      "created": "流程表单 {{ param }} 创建成功",
+      "updated": "流程表单 {{ param }} 更新成功",
+      "deleted": "流程表单 {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 流程表单 {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "流程表单"
+      },
+      "processDefinitionKey": "流程Id",
+      "taskNodeId": "节点Id",
+      "taskNodeName": "任务节点名称",
+      "commonTableId": "业务功能Id",
+      "formData": "表单配置",
+      "help": {
+        "processDefinitionKey": "流程Id",
+        "taskNodeId": "节点Id",
+        "taskNodeName": "任务节点名称",
+        "commonTableId": "业务功能Id",
+        "formData": "表单配置"
+      }
+    }
+  }
+}

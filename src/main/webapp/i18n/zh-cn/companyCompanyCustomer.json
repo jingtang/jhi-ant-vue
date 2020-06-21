@@ -1,0 +1,43 @@
+{
+  "jhiAntVueApp": {
+    "companyCompanyCustomer": {
+      "home": {
+        "title": "客户单位\n安装设备的客户公司",
+        "createLabel": "创建新 客户单位\n安装设备的客户公司",
+        "createOrEditLabel": "创建或编辑 客户单位\n安装设备的客户公司",
+        "notFound": "No 客户单位\n安装设备的客户公司 found"
+      },
+      "created": "客户单位\n安装设备的客户公司 {{ param }} 创建成功",
+      "updated": "客户单位\n安装设备的客户公司 {{ param }} 更新成功",
+      "deleted": "客户单位\n安装设备的客户公司 {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 客户单位\n安装设备的客户公司 {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "客户单位\n安装设备的客户公司"
+      },
+      "name": "名称",
+      "code": "代码",
+      "address": "地址",
+      "phoneNum": "联系电话",
+      "logo": "logo地址",
+      "contact": "联系人",
+      "createUserId": "创建用户 Id",
+      "createTime": "创建时间",
+      "children": "子节点",
+      "companyUsers": "员工",
+      "companyBusinesses": "开通业务",
+      "parent": "上级",
+      "help": {
+        "name": "名称",
+        "code": "代码",
+        "address": "地址",
+        "phoneNum": "联系电话",
+        "logo": "logo地址",
+        "contact": "联系人",
+        "createUserId": "创建用户 Id",
+        "createTime": "创建时间"
+      }
+    }
+  }
+}

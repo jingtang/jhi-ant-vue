@@ -1,0 +1,9 @@
+{
+  "jhiAntVueApp": {
+    "ViewPermissionType": {
+      "null": "",
+      "MENU": "MENU",
+      "BUTTON": "BUTTON"
+    }
+  }
+}

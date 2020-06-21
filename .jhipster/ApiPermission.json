@@ -1,0 +1,63 @@
+{
+    "name": "ApiPermission",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "权限名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "javadoc": "权限代码(ROLE_开头)",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "javadoc": "权限描述",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "javadoc": "类型",
+            "fieldType": "ApiPermissionType",
+            "fieldValues": "BUSINESS,API"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "apiPermission",
+            "otherEntityRelationshipName": "parent",
+            "javadoc": "子节点",
+            "relationshipName": "children"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "apiPermission",
+            "otherEntityRelationshipName": "children",
+            "javadoc": "上级",
+            "relationshipName": "parent",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "viewPermission",
+            "otherEntityRelationshipName": "apiPermissions",
+            "relationshipName": "viewPermissions",
+            "otherEntityField": "text",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200621082800",
+    "javadoc": "API权限\\n菜单或按钮下有相关的api权限",
+    "entityTableName": "api_permission",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "system",
+    "applications": "*",
+    "skipComponent": "repository-serviceClass"
+}

@@ -45,6 +45,66 @@ import AccountService from './account/account.service';
 import TranslationService from '@/locale/translation.service';
 import TrackerService from './admin/tracker/tracker.service';
 import UserService from '@/shared/service/user.service';
+import UploadFile from '@/business/files/upload-file';
+Vue.use(UploadFile);
+import UploadFileService from '@/business/files/upload-file/upload-file.service';
+import UploadImage from '@/business/files/upload-image';
+Vue.use(UploadImage);
+import UploadImageService from '@/business/files/upload-image/upload-image.service';
+import DataDictionary from '@/business/settings/data-dictionary';
+Vue.use(DataDictionary);
+import DataDictionaryService from '@/business/settings/data-dictionary/data-dictionary.service';
+import GpsInfo from '@/business/settings/gps-info';
+Vue.use(GpsInfo);
+import GpsInfoService from '@/business/settings/gps-info/gps-info.service';
+import AdministrativeDivision from '@/business/settings/administrative-division';
+Vue.use(AdministrativeDivision);
+import AdministrativeDivisionService from '@/business/settings/administrative-division/administrative-division.service';
+import Authority from '@/business/system/authority';
+Vue.use(Authority);
+import AuthorityService from '@/business/system/authority/authority.service';
+import ViewPermission from '@/business/system/view-permission';
+Vue.use(ViewPermission);
+import ViewPermissionService from '@/business/system/view-permission/view-permission.service';
+import ApiPermission from '@/business/system/api-permission';
+Vue.use(ApiPermission);
+import ApiPermissionService from '@/business/system/api-permission/api-permission.service';
+import CommonTable from '@/business/modelConfig/common-table';
+Vue.use(CommonTable);
+import CommonTableService from '@/business/modelConfig/common-table/common-table.service';
+import CommonTableField from '@/business/modelConfig/common-table-field';
+Vue.use(CommonTableField);
+import CommonTableFieldService from '@/business/modelConfig/common-table-field/common-table-field.service';
+import CommonTableRelationship from '@/business/modelConfig/common-table-relationship';
+Vue.use(CommonTableRelationship);
+import CommonTableRelationshipService from '@/business/modelConfig/common-table-relationship/common-table-relationship.service';
+import CompanyCustomer from '@/business/company/company-customer';
+Vue.use(CompanyCustomer);
+import CompanyCustomerService from '@/business/company/company-customer/company-customer.service';
+import CompanyUser from '@/business/company/company-user';
+Vue.use(CompanyUser);
+import CompanyUserService from '@/business/company/company-user/company-user.service';
+import CompanyBusiness from '@/business/company/company-business';
+Vue.use(CompanyBusiness);
+import CompanyBusinessService from '@/business/company/company-business/company-business.service';
+import BusinessType from '@/business/company/business-type';
+Vue.use(BusinessType);
+import BusinessTypeService from '@/business/company/business-type/business-type.service';
+import UReportFile from '@/business/report/u-report-file';
+Vue.use(UReportFile);
+import UReportFileService from '@/business/report/u-report-file/u-report-file.service';
+import ProcessTableConfig from '@/business/workflow/process-table-config';
+Vue.use(ProcessTableConfig);
+import ProcessTableConfigService from '@/business/workflow/process-table-config/process-table-config.service';
+import ProcessFormConfig from '@/business/workflow/process-form-config';
+Vue.use(ProcessFormConfig);
+import ProcessFormConfigService from '@/business/workflow/process-form-config/process-form-config.service';
+import ProcessEntityRelation from '@/business/workflow/process-entity-relation';
+Vue.use(ProcessEntityRelation);
+import ProcessEntityRelationService from '@/business/workflow/process-entity-relation/process-entity-relation.service';
+import Leave from '@/business/workflow/leave';
+Vue.use(Leave);
+import LeaveService from '@/business/workflow/leave/leave.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 import ProcessDefinitionService from '@/business/workflow/process-definition/process-definition.service';
 import DeploymentService from '@/business/workflow/deployment/deployment.service';
@@ -104,6 +164,26 @@ new Vue({
     accountService: () => accountService,
     alertService: () => alertService,
     userService: () => new UserService(),
+    uploadFileService: () => new UploadFileService(),
+    uploadImageService: () => new UploadImageService(),
+    dataDictionaryService: () => new DataDictionaryService(),
+    gpsInfoService: () => new GpsInfoService(),
+    administrativeDivisionService: () => new AdministrativeDivisionService(),
+    authorityService: () => new AuthorityService(),
+    viewPermissionService: () => new ViewPermissionService(),
+    apiPermissionService: () => new ApiPermissionService(),
+    commonTableService: () => new CommonTableService(),
+    commonTableFieldService: () => new CommonTableFieldService(),
+    commonTableRelationshipService: () => new CommonTableRelationshipService(),
+    companyCustomerService: () => new CompanyCustomerService(),
+    companyUserService: () => new CompanyUserService(),
+    companyBusinessService: () => new CompanyBusinessService(),
+    businessTypeService: () => new BusinessTypeService(),
+    uReportFileService: () => new UReportFileService(),
+    processTableConfigService: () => new ProcessTableConfigService(),
+    processFormConfigService: () => new ProcessFormConfigService(),
+    processEntityRelationService: () => new ProcessEntityRelationService(),
+    leaveService: () => new LeaveService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     processDefinitionService: () => new ProcessDefinitionService(),
     deploymentService: () => new DeploymentService(),

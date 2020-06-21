@@ -1,0 +1,9 @@
+{
+  "jhiAntVueApp": {
+    "ApiPermissionType": {
+      "null": "",
+      "BUSINESS": "BUSINESS",
+      "API": "API"
+    }
+  }
+}

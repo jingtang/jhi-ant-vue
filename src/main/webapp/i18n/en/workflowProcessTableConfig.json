@@ -1,0 +1,37 @@
+{
+  "jhiAntVueApp": {
+    "workflowProcessTableConfig": {
+      "home": {
+        "title": "流程业务配置",
+        "createLabel": "Create a new 流程业务配置",
+        "createOrEditLabel": "Create or edit a 流程业务配置",
+        "notFound": "No 流程业务配置 found"
+      },
+      "created": "A new 流程业务配置 is created with identifier {{ param }}",
+      "updated": "A 流程业务配置 is updated with identifier {{ param }}",
+      "deleted": "A 流程业务配置 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete 流程业务配置 {{ id }}?"
+      },
+      "detail": {
+        "title": "流程业务配置"
+      },
+      "processDefinitionId": "Process Definition Id",
+      "processDefinitionKey": "Process Definition Key",
+      "processDefinitionName": "Process Definition Name",
+      "description": "Description",
+      "processBpmnData": "Process Bpmn Data",
+      "deploied": "Deploied",
+      "commonTable": "关联表",
+      "creator": "创建人",
+      "help": {
+        "processDefinitionId": "流程Id",
+        "processDefinitionKey": "流程Key",
+        "processDefinitionName": "流程名称",
+        "description": "描述",
+        "processBpmnData": "流程数据",
+        "deploied": "是否部署"
+      }
+    }
+  }
+}

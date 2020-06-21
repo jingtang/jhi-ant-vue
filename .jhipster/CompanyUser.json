@@ -1,0 +1,33 @@
+{
+    "name": "CompanyUser",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "companyUser",
+            "javadoc": "关联账户",
+            "relationshipName": "user",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "companyCustomer",
+            "otherEntityRelationshipName": "companyUsers",
+            "javadoc": "所属单位",
+            "relationshipName": "company",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621084400",
+    "javadoc": "人员账号\\n客户方人员账号",
+    "entityTableName": "company_user",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "company",
+    "applications": "*"
+}

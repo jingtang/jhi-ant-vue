@@ -1,0 +1,99 @@
+{
+    "name": "UploadImage",
+    "fields": [
+        {
+            "fieldName": "fullName",
+            "javadoc": "完整文件名，不含路径",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "name",
+            "javadoc": "文件名，不含扩展名",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ext",
+            "javadoc": "扩展名",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "javadoc": "文件类型",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "url",
+            "javadoc": "Web Url地址",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "path",
+            "javadoc": "本地路径",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "folder",
+            "javadoc": "本地存储目录",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "entityName",
+            "javadoc": "使用实体名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createAt",
+            "javadoc": "创建时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fileSize",
+            "javadoc": "文件大小",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "smartUrl",
+            "javadoc": "小图Url",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mediumUrl",
+            "javadoc": "中等图Url",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "referenceCount",
+            "javadoc": "文件被引用次数",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "uploadImage",
+            "javadoc": "上传者",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "leave",
+            "otherEntityRelationshipName": "images",
+            "javadoc": "内容 config: { \"unidirectionSkip\": true }",
+            "relationshipName": "leave",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621082600",
+    "javadoc": "上传图片",
+    "entityTableName": "upload_image",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "files",
+    "applications": "*"
+}

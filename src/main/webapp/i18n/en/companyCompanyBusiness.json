@@ -1,0 +1,35 @@
+{
+  "jhiAntVueApp": {
+    "companyCompanyBusiness": {
+      "home": {
+        "title": "客户业务\n客户公司开通业务",
+        "createLabel": "Create a new 客户业务\n客户公司开通业务",
+        "createOrEditLabel": "Create or edit a 客户业务\n客户公司开通业务",
+        "notFound": "No 客户业务\n客户公司开通业务 found"
+      },
+      "created": "A new 客户业务\n客户公司开通业务 is created with identifier {{ param }}",
+      "updated": "A 客户业务\n客户公司开通业务 is updated with identifier {{ param }}",
+      "deleted": "A 客户业务\n客户公司开通业务 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete 客户业务\n客户公司开通业务 {{ id }}?"
+      },
+      "detail": {
+        "title": "客户业务\n客户公司开通业务"
+      },
+      "status": "Status",
+      "expirationTime": "Expiration Time",
+      "startTime": "Start Time",
+      "operateUserId": "Operate User Id",
+      "groupId": "Group Id",
+      "businessType": "业务类型",
+      "company": "公司",
+      "help": {
+        "status": "开通状态",
+        "expirationTime": "到期时间",
+        "startTime": "开通时间或试用开始时间",
+        "operateUserId": "操作用户Id",
+        "groupId": "百度人员组id"
+      }
+    }
+  }
+}

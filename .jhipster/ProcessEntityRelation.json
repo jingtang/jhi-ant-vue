@@ -1,0 +1,40 @@
+{
+    "name": "ProcessEntityRelation",
+    "fields": [
+        {
+            "fieldName": "entityType",
+            "javadoc": "宿主实体名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "entityId",
+            "javadoc": "宿主实体Id",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "processInstanceId",
+            "javadoc": "流程实例Id",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "javadoc": "状态",
+            "fieldType": "ProcessEntityStatus",
+            "fieldValues": "START,RUNNING,END"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621084700",
+    "javadoc": "流程与实体关联",
+    "entityTableName": "process_entity_relation",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "workflow",
+    "applications": "*",
+    "skipComponent": "domain-repository",
+    "skipMenu": true
+}

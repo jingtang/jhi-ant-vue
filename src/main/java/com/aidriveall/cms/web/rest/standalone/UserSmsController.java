@@ -159,7 +159,7 @@ public class UserSmsController {
             Optional<User> currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get());
             if (currentUser.isPresent()) {
                 currentUser.get().setMobile(mobile);
-                userService.updateUser(new com.honmtech.cms.service.dto.UserDTO(currentUser.get()));
+                userService.updateUser(new UserDTO(currentUser.get()));
             } else {
                 return ResponseEntity.badRequest().body(Result.error(ErrorEnum.SMS_CODE_INCORRECT));
             }

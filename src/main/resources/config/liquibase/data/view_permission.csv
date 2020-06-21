@@ -13,3 +13,24 @@ id;text;i_18_n;jhi_group;link;external_link;target;icon;disabled;hide;hide_in_br
 104;流程部署;;false;/business/workflow/deployment;;SELF;;false;false;false;false;false;false;;;MENU;;;100
 105;系统设置;;false;/settings/system;;NULL;anticon anticon-setting;false;false;false;false;false;false;;;MENU;;;87
 106;用户管理;;false;/business/system/user;;SELF;;false;false;false;false;false;false;;;MENU;;;105
+107;文件管理;;false;/business/files;;SELF;anticon anticon-file;false;false;false;false;false;false;;;MENU;;;87
+108;上传文件;;false;/business/files/upload-file;;SELF;;false;false;false;false;false;false;;;MENU;;;107
+109;上传图片;;false;/business/files/upload-image;;SELF;;false;false;false;false;false;false;;;MENU;;;107
+110;配置管理;;false;/business/settings;;SELF;anticon anticon-database;false;false;false;false;false;false;;;MENU;;;87
+111;数据字典;;false;/business/settings/data-dictionary;;SELF;;false;false;false;false;false;false;;;MENU;;;110
+112;GPS信息;;false;/business/settings/gps-info;;SELF;;false;false;false;false;false;false;;;MENU;;;110
+113;行政区划;;false;/business/settings/administrative-division;;SELF;;false;false;false;false;false;false;;;MENU;;;110
+114;角色;;false;/business/system/authority;;SELF;;false;false;false;false;false;false;;;MENU;;;105
+115;可视权限;;false;/business/system/view-permission;;SELF;;false;false;false;false;false;false;;;MENU;;;105
+116;API权限;;false;/business/system/api-permission;;SELF;;false;false;false;false;false;false;;;MENU;;;105
+117;modelConfig;;false;/business/modelConfig;;SELF;anticon anticon-project;false;false;false;false;false;false;;;MENU;;;87
+118;模型;;false;/business/modelConfig/common-table;;SELF;;false;false;false;false;false;false;;;MENU;;;117
+119;客户管理;;false;/business/company;;SELF;anticon anticon-contacts;false;false;false;false;false;false;;;MENU;;;87
+120;客户单位;;false;/business/company/company-customer;;SELF;;false;false;false;false;false;false;;;MENU;;;119
+121;人员账号;;false;/business/company/company-user;;SELF;;false;false;false;false;false;false;;;MENU;;;119
+122;客户业务;;false;/business/company/company-business;;SELF;;false;false;false;false;false;false;;;MENU;;;119
+123;业务类型;;false;/business/company/business-type;;SELF;;false;false;false;false;false;false;;;MENU;;;119
+124;report;;false;/business/report;;SELF;anticon anticon-project;false;false;false;false;false;false;;;MENU;;;87
+125;报表存储;;false;/business/report/u-report-file;;SELF;;false;false;false;false;false;false;;;MENU;;;124
+126;流程业务配置;;false;/business/workflow/process-table-config;;SELF;;false;false;false;false;false;false;;;MENU;;;100
+127;请假;;false;/business/workflow/leave;;SELF;;false;false;false;false;false;false;;;MENU;;;100

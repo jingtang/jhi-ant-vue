@@ -1,0 +1,37 @@
+{
+  "jhiAntVueApp": {
+    "workflowLeave": {
+      "home": {
+        "title": "请假",
+        "createLabel": "Create a new 请假",
+        "createOrEditLabel": "Create or edit a 请假",
+        "notFound": "No 请假 found"
+      },
+      "created": "A new 请假 is created with identifier {{ param }}",
+      "updated": "A 请假 is updated with identifier {{ param }}",
+      "deleted": "A 请假 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete 请假 {{ id }}?"
+      },
+      "detail": {
+        "title": "请假"
+      },
+      "createTime": "Create Time",
+      "name": "Name",
+      "days": "Days",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "reason": "Reason",
+      "images": "附件列表",
+      "creator": "申请人",
+      "help": {
+        "createTime": "创建时间",
+        "name": "名称",
+        "days": "天数",
+        "startTime": "开始时间",
+        "endTime": "结束时间",
+        "reason": "原因"
+      }
+    }
+  }
+}

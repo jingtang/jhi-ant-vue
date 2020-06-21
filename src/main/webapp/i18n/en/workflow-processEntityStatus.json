@@ -1,0 +1,10 @@
+{
+  "jhiAntVueApp": {
+    "ProcessEntityStatus": {
+      "null": "",
+      "START": "START",
+      "RUNNING": "RUNNING",
+      "END": "END"
+    }
+  }
+}

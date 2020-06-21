@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ViewPermission.
+    -->
+    <changeSet id="20200621082700-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="view_permission_id"
+                                 baseTableName="view_permission_api_permissions"
+                                 constraintName="fk_view_permission_api_permissions_view_permission_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="view_permission"/>
+
+        <addForeignKeyConstraint baseColumnNames="api_permissions_id"
+                                 baseTableName="view_permission_api_permissions"
+                                 constraintName="fk_view_permission_api_permissions_api_permissions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="api_permission"/>
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="view_permission"
+                                 constraintName="fk_view_permission_parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="view_permission"/>
+    </changeSet>
+</databaseChangeLog>

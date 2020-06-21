@@ -1,0 +1,49 @@
+{
+    "name": "CommonExtData",
+    "fields": [
+        {
+            "fieldName": "fieldName",
+            "javadoc": "属性名",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "commonFieldType",
+            "javadoc": "通用字段类型",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "commonFieldId",
+            "javadoc": "通用数据Id",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "ownerType",
+            "javadoc": "宿主实体名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ownerId",
+            "javadoc": "宿主实体Id",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200621082900",
+    "javadoc": "通用扩展数据",
+    "entityTableName": "common_ext_data",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "modelConfig",
+    "applications": "*",
+    "skipComponent": "domain-repository-serviceClass-restController-controllerTest",
+    "skipClient": true
+}

@@ -1,0 +1,78 @@
+{
+    "name": "AdministrativeDivision",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "areaCode",
+            "javadoc": "地区代码",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cityCode",
+            "javadoc": "城市代码",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mergerName",
+            "javadoc": "全名",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "shortName",
+            "javadoc": "短名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "zipCode",
+            "javadoc": "邮政编码",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "level",
+            "javadoc": "行政区域等级（0: 省级 1:市级 2:县级 3:镇级 4:乡村级）",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "lng",
+            "javadoc": "经度",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "lat",
+            "javadoc": "纬度",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "administrativeDivision",
+            "otherEntityRelationshipName": "parent",
+            "javadoc": "子节点",
+            "relationshipName": "children"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "administrativeDivision",
+            "otherEntityRelationshipName": "children",
+            "javadoc": "上级节点",
+            "relationshipName": "parent",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200621082700",
+    "javadoc": "行政区划",
+    "entityTableName": "administrative_division",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "settings",
+    "applications": "*"
+}

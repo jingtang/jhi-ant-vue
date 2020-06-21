@@ -1,0 +1,11 @@
+{
+  "jhiAntVueApp": {
+    "TargetType": {
+      "null": "",
+      "BLANK": "BLANK",
+      "SELF": "SELF",
+      "PARENT": "PARENT",
+      "TOP": "TOP"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "jhiAntVueApp": {
+    "systemApiPermission": {
+      "home": {
+        "title": "API权限\n菜单或按钮下有相关的api权限",
+        "createLabel": "创建新 API权限\n菜单或按钮下有相关的api权限",
+        "createOrEditLabel": "创建或编辑 API权限\n菜单或按钮下有相关的api权限",
+        "notFound": "No API权限\n菜单或按钮下有相关的api权限 found"
+      },
+      "created": "API权限\n菜单或按钮下有相关的api权限 {{ param }} 创建成功",
+      "updated": "API权限\n菜单或按钮下有相关的api权限 {{ param }} 更新成功",
+      "deleted": "API权限\n菜单或按钮下有相关的api权限 {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 API权限\n菜单或按钮下有相关的api权限 {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "API权限\n菜单或按钮下有相关的api权限"
+      },
+      "name": "权限名称",
+      "code": "权限代码(ROLE_开头)",
+      "description": "权限描述",
+      "type": "类型",
+      "children": "子节点",
+      "parent": "上级",
+      "viewPermissions": "View Permissions",
+      "help": {
+        "name": "权限名称",
+        "code": "权限代码(ROLE_开头)",
+        "description": "权限描述",
+        "type": "类型"
+      }
+    }
+  }
+}

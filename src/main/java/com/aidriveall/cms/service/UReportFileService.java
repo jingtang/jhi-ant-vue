@@ -30,7 +30,7 @@ public class UReportFileService {
     private final Logger log = LoggerFactory.getLogger(UReportFileService.class);
     private final List<String> relationCacheNames =
         Arrays.asList(
-        com.honmtech.cms.domain.CommonTable.class.getName() + ".uReportFile"
+        com.aidriveall.cms.domain.CommonTable.class.getName() + ".uReportFile"
         );
 
     private final UReportFileRepository uReportFileRepository;

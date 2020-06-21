@@ -1,0 +1,63 @@
+{
+    "name": "Leave",
+    "fields": [
+        {
+            "fieldName": "createTime",
+            "javadoc": "创建时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "name",
+            "javadoc": "名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "days",
+            "javadoc": "天数",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "startTime",
+            "javadoc": "开始时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "endTime",
+            "javadoc": "结束时间",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "reason",
+            "javadoc": "原因",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "uploadImage",
+            "otherEntityRelationshipName": "leave",
+            "javadoc": "附件列表 config: { \"unidirection\": true }",
+            "relationshipName": "images"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "leave",
+            "javadoc": "申请人",
+            "relationshipName": "creator",
+            "otherEntityField": "login"
+        }
+    ],
+    "changelogDate": "20200621084800",
+    "javadoc": "请假",
+    "entityTableName": "leave",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "workflow",
+    "applications": "*"
+}

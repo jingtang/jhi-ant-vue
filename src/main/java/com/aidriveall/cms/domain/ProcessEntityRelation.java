@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 import java.io.Serializable;
 
-import com.honmtech.cms.domain.enumeration.ProcessEntityStatus;
+import com.aidriveall.cms.domain.enumeration.ProcessEntityStatus;
 import org.hibernate.annotations.Cache;
 
 /**
