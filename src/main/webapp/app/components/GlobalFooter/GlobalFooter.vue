@@ -16,7 +16,7 @@
     </div>
     <div class="copyright">
       Copyright
-      <a-icon type="copyright" /> 2020 <span>中科鸿蒙出品</span>
+      <a-icon type="copyright" /> 2020 <span>AIDriveAll出品</span>
     </div>
   </div>
 </template>

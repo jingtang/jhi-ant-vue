@@ -6,14 +6,15 @@
 
 在生成此项目之前，必须在计算机上安装和配置以下依赖项：
 
-1. [Node.js][]:
+1.  [Node.js][]:
+    注意先创建 MySQL 数据库，编码：utf8mb4，数据库名：JhiAntVue
+    数据库用户名和密码在 application-dev.yml 中修改。默认用户名：root，密码为空
+    安装依赖，在项目目录下运行：
 
-安装依赖，在项目目录下运行：
+        npm install
 
-    npm install
-
-    ./mvnw   启动后端
-    npm start 启动前端
+        ./mvnw   启动后端
+        npm start 启动前端
 
 ## 上线打包
 
@@ -30,6 +31,7 @@
 
 打开浏览器 [http://localhost:8080](http://localhost:8080).
 
+用户名：admin，密码：admin
 其他内容 [Using JHipster in production][]
 
 ### 打包为 War 包
