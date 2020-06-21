@@ -1,0 +1,141 @@
+/**
+ * 文章
+ * 适用于通知、文章、新闻等内容
+ * config: {"enableCommonField": true}
+ */
+@extendData
+entity Article {
+	title String /** 标题 */
+	createAt ZonedDateTime /** 添加时间 */
+	intro String /** 简要标题 */
+	pageViews Long /** 浏览次数 */
+	status ArticleStatus /** 状态 */
+	top Boolean /** 置顶 */
+	hot Boolean /** 热门 */
+	content TextBlob /** 详细内容 */
+	specification TextBlob /** 规格参数 */
+	packaging TextBlob /** 包装信息 */
+}
+
+/** 栏目 */
+entity SiteColumn {
+	title String /** 标题 */
+	code String /** 代码标识 */
+}
+
+/** 模板 */
+entity Template {
+	name String /** 名称 */
+}
+
+/** 模板文件 */
+entity TemplateFile {
+	type TemplateFileType /** 模板类型 */
+}
+
+relationship ManyToMany {
+	/** 图片集 */
+	Article{images(url)}
+	to
+	UploadImage{articles(title)}
+
+	/** 附件 */
+	Article{files(url)}
+	to
+	UploadFile{articles(title)}
+}
+/** 友情连接 */
+entity FriendLink {
+	title String /** 名称 */
+	siteUrl String /** 网站地址 */
+}
+
+/** 导航 */
+entity Navigation {
+	title String /** 标题 */
+	url String /** 连接地址 */
+	icon String /** ICON */
+	order Integer /** 排序 */
+}
+/** 网站信息 */
+entity SiteInfo {
+	title String /** 网站标题 */
+	companyName String /** 公司名称 */
+	contactNumber String /** 联系电话 */
+	domain String /** 网站域名 */
+	beianLicenseNumber String /** 备案许可证号 */
+	mainSite Boolean /** 是否默认网站 */
+	siteKeywords String /** 关键字 */
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+
+	/** 封面图 */
+	Article{pic(url)}
+	to
+	UploadImage
+
+	/** 发布人 */
+	Article{publisher(firstName)}
+	to
+	User
+
+	/** 栏目图片 */
+	SiteColumn{pic(url)}
+	to
+	UploadImage
+	/** LOGO */
+	FriendLink{logo(url)}
+	 to
+	UploadImage
+	/** 图片 */
+	Navigation{image(url)}
+	 to
+	UploadImage
+
+	/** LOGO */
+	SiteInfo{logo(url)}
+	 to
+	UploadImage
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	/** 文章列表 */
+	SiteColumn{articles(title)}
+	to
+	/** 所属栏目 */
+	Article{column(title)}
+
+	/** 子栏目 */
+	SiteColumn{children(title)}
+	to
+	/** 父栏目 */
+	SiteColumn{parent(title)}
+
+	/** 子节点 */
+	Navigation{children(title)}
+	to
+	/** 上层 */
+	Navigation{parent(title)}
+
+}
+
+enum TemplateFileType {
+	INDEX,ARTICLE_DETAIL,ARTICLE_LIST,ABOUT
+}
+
+enum ArticleStatus {
+	ADD,SUCCESS,REJECT
+}
+service all with serviceClass
+filter *
+clientRootFolder Article, SiteColumn, Template, TemplateFile, Navigation, FriendLink, SiteInfo  with cms
+dto Article, SiteColumn, Template, TemplateFile, Navigation, FriendLink, SiteInfo with mapstruct
+paginate Article, SiteColumn, Template, TemplateFile, Navigation, FriendLink, SiteInfo with pagination
+//

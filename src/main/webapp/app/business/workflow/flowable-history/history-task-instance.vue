@@ -1,0 +1,100 @@
+<template>
+    <a-card :bordered="false">
+        <a-row :gutter="16">
+            <a-col :span="filterTreeSpan" v-if="filterTreeSpan > 0">
+                <a-tree style="border: #bbcedd 1px solid; height: 100%;"
+                        @expand="onExpand"
+                        :expandedKeys="expandedKeys"
+                        :autoExpandParent="autoExpandParent"
+                        v-model="checkedKeys"
+                        @select="onSelect"
+                        :selectedKeys="selectedKeys"
+                        :treeData="treeFilterData"
+                />
+            </a-col>
+            <a-col :span="24-filterTreeSpan">
+                <vxe-grid
+                border
+                show-overflow
+                tree-config
+                keep-source
+                ref="xGrid"
+                :loading="loading"
+                :data="xGridData"
+                :columns="xGridColumns"
+                :toolbar="xGridTableToolbars"
+                :edit-config="{trigger: 'click', mode: 'cell'}"
+                :pagerConfig="xGridPagerConfig"
+                @checkbox-change="xGridCheckboxChangeEvent"
+                @checkbox-all="xGridCheckboxChangeEvent"
+                @edit-closed="editClosedEvent"
+                @page-change="xGridPageChange"
+            >
+                <template v-slot:top>
+                    <a-alert type="warning" :message="`已选择 ${xGridSelectRecords.length} 项`" banner></a-alert>
+                </template>
+                <template v-slot:toolbar_buttons>
+                    <a-row class="toolbar_buttons_xgrid" :gutter="16">
+                        <a-col :lg="2" :md="2" :sm="4" v-if="treeFilterData.length > 0">
+                            <span class="table-page-search-submitButtons">
+                                <a-button type="primary" :icon=" filterTreeSpan >0 ? 'pic-center' : 'pic-right'" @click="switchFilterTree"></a-button>
+                            </span>
+                        </a-col>
+                        <a-col :lg="8" :md="12" :sm="9">
+                            <a-input-search placeholder="请输入关键字" v-model="searchValue" @search="loadAll" enterButton ref="searchInput">
+                                <a-icon v-if="searchValue" slot="suffix" type="close-circle" @click="emitEmpty" />
+                            </a-input-search>
+                        </a-col>
+                        <a-col :lg="14" :md="10" :sm="11" align="right">
+                            <span class="table-page-search-submitButtons">
+                                <a-button type="primary" icon="plus" @click="newEntity"></a-button>
+                            </span>
+                            <span class="table-page-search-submitButtons">
+                                <a-button type="primary" icon="copy" @click="copyEntity" :disabled="xGridSelectRecords.length !== 1"></a-button>
+                            </span>
+                            <span class="table-page-search-submitButtons">
+                                <a-button type="primary" icon="sync" @click="loadAll"></a-button>
+                            </span>
+                        </a-col>
+                    </a-row>
+                </template>
+                <template slot-scope="{row, column}" slot="recordAction">
+                    <a-tooltip placement="top" title="删除本行"  v-if="!row.system">
+                        <a-popconfirm title="确定删除本行数据吗？" @confirm="removeById(row.id)" okText="确定" cancelText="取消">
+                            <a-button type="danger" shape="circle" size="small">
+                                <a-icon type="close" theme="outlined"></a-icon>
+                            </a-button>
+                        </a-popconfirm>
+                    </a-tooltip>
+                    <a-tooltip placement="top" title="处理任务">
+                        <a-button type="primary" shape="circle" size="small" @click="handleTask(row)">
+                            <a-icon type="setting"></a-icon>
+                        </a-button>
+                    </a-tooltip>
+                    <a-tooltip placement="top" title="跟踪流程">
+                        <a-button type="primary" shape="circle" size="small" @click="designForm(row.id)">
+                            <a-icon type="layout"></a-icon>
+                        </a-button>
+                    </a-tooltip>
+                </template>
+            </vxe-grid>
+            </a-col>
+        </a-row>
+        <a-modal :visible="showTaskUpdateFrom" :destroyOnClose="true" :footer="null" :maskClosable="false"
+                 :title="'编辑流程任务'" :width="'80%'" @cancel="closeTaskUpdate"
+        >
+            <jhi-flowable-task-update :update-form-tag="updateFormTag" :processEntityId="processEntityId" :formJsonData="formJsonData" :taskId="taskId" @closeModal="closeTaskUpdate"></jhi-flowable-task-update>
+        </a-modal>
+    </a-card>
+</template>
+
+<script lang="ts" src="./history-task-instance.component.ts">
+</script>
+<style>
+    .toolbar_buttons_xgrid {
+        margin-left: 5px !important;
+    }
+    .table-page-search-submitButtons {
+        display: inline-block !important;
+    }
+</style>

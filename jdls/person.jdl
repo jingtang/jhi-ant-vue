@@ -1,0 +1,17 @@
+/**
+ * 个人信息
+ */
+@skipComponent(repository-serviceClass)
+entity Person {
+	birthday ZonedDateTime /** 出生日期 */
+	mobile String /** 手机号码 */
+}
+relationship OneToOne {
+	Person{user(login)} to User with jpaDerivedIdentifier
+}
+service all with serviceClass
+filter *
+dto Person with mapstruct
+paginate Person with pagination
+clientRootFolder Person with system
+//

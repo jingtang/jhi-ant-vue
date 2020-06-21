@@ -1,0 +1,100 @@
+/**
+ *客户单位
+ *安装设备的客户公司
+ */
+entity CompanyCustomer {
+    name String /** 名称 */
+    code String /** 代码 */
+    address String /** 地址 */
+    phoneNum String /** 联系电话 */
+    logo String /** logo地址 */
+    contact String /** 联系人 */
+    createUserId Long /** 创建用户 Id */
+    createTime ZonedDateTime /** 创建时间 */
+}
+/**
+ *人员账号
+ *客户方人员账号
+ */
+entity CompanyUser {
+}
+/**
+ *客户业务
+ *客户公司开通业务
+ */
+entity CompanyBusiness {
+    status CompanyBusinessStatus /** 开通状态 */
+    expirationTime ZonedDateTime /** 到期时间 */
+    startTime ZonedDateTime /** 开通时间或试用开始时间 */
+    operateUserId Long /** 操作用户Id */
+    groupId String /** 百度人员组id */
+}
+
+/** 业务类型 */
+entity BusinessType {
+    name String /** 名称 */
+    code String /** 代码 */
+    description String /** 描述 */
+    icon String /** 图标 */
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    /** 子节点 */
+    CompanyCustomer{children}
+    to
+    /** 上级 */
+    CompanyCustomer{parent(name)}
+
+    /** 员工 */
+    CompanyCustomer{companyUsers}
+    to
+    /** 所属单位 */
+    CompanyUser{company(name)}
+
+    /** 开通业务 */
+    CompanyCustomer{companyBusinesses}
+    to
+    /** 公司 */
+    CompanyBusiness{company(name)}
+
+
+}
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+
+    /** 关联账户 */
+    CompanyUser{user(firstName)}
+    to
+    User
+
+    /** 业务类型 */
+    CompanyBusiness{businessType(name)}
+    to
+    BusinessType
+}
+/**
+ * 客户业务开通状态
+ * {config: {
+ *    value: {
+ *         OPEN: '开通',
+ *         TRIAL: '试用',
+ *         CLOSE: '关闭'
+ *       }
+ * 	  }
+ * }
+ */
+enum CompanyBusinessStatus {
+    OPEN, TRIAL, CLOSE
+}
+
+service all with serviceClass
+filter *
+dto CompanyCustomer, CompanyUser, CompanyBusiness, BusinessType with mapstruct
+paginate CompanyCustomer, CompanyUser, CompanyBusiness, BusinessType with pagination
+clientRootFolder CompanyCustomer, CompanyUser, CompanyBusiness, BusinessType with company
+//

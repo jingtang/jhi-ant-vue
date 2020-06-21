@@ -1,0 +1,92 @@
+/**
+*流程业务配置
+*/
+@skipComponent(listPage-listComponent)
+entity ProcessTableConfig {
+    processDefinitionId String /** 流程Id */
+    processDefinitionKey String /** 流程Key */
+    processDefinitionName String /** 流程名称 */
+    description String /** 描述 */
+    processBpmnData TextBlob /** 流程数据 */
+    deploied Boolean /** 是否部署 */
+}
+
+/**
+ * 流程表单
+ */
+@skipMenu
+entity ProcessFormConfig {
+    processDefinitionKey String /** 流程Id */
+    taskNodeId String /** 节点Id */
+    taskNodeName String /** 任务节点名称 */
+    commonTableId Long /** 业务功能Id */
+    formData TextBlob /** 表单配置 */
+}
+
+/**
+ * 流程与实体关联
+ */
+@skipMenu
+@skipComponent(domain-repository)
+entity ProcessEntityRelation {
+    entityType String /** 宿主实体名称 */
+	entityId Long /** 宿主实体Id */
+    processInstanceId String /** 流程实例Id */
+    status ProcessEntityStatus /** 状态 */
+}
+
+enum ProcessEntityStatus {
+    START,RUNNING,END
+}
+
+/**
+ * 请假
+ */
+entity Leave {
+    createTime ZonedDateTime /** 创建时间 */
+    name String /** 名称 */
+    days Integer /** 天数 */
+    startTime ZonedDateTime /** 开始时间  */
+    endTime ZonedDateTime /** 结束时间 */
+    reason String /** 原因 */
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    /** 附件列表 config: { "unidirection": true } */
+	Leave{images(url)}
+	to
+	/** 内容 config: { "unidirectionSkip": true } */
+	UploadImage{Leave(name)}
+}
+
+
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+    /** 申请人 */
+    Leave{creator(login)}
+    to
+    User
+
+    /** 关联表 */
+    ProcessTableConfig{commonTable(name)}
+    to
+    CommonTable
+
+    /** 创建人 */
+    ProcessTableConfig{creator(login)}
+    to
+    User
+}
+
+service all with serviceClass
+filter *
+dto ProcessTableConfig, ProcessFormConfig, ProcessEntityRelation, Leave with mapstruct
+paginate ProcessTableConfig, ProcessFormConfig, ProcessEntityRelation, Leave with pagination
+clientRootFolder ProcessTableConfig, ProcessFormConfig, ProcessEntityRelation, Leave with workflow
+//

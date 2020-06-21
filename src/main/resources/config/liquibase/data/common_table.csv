@@ -1,0 +1,4 @@
+id;name;entity_name;table_name;clazz_name;jhi_system;generated;creat_at;generate_at;generate_class_at;description;creator_id;business_type_id;tree_table
+1;用户表;User;jhi_user;User;true;true;2019-10-30 05:49:43.000000000;2019-10-29 16:15:50.000000000;2019-10-29 17:38:10.000000000;用户表;3;1;false
+2;历史任务实例;HistoryTaskInstance;t_his_task_ins;HistoryTaskInstance;true;true;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;历史任务实例;3;8;false
+

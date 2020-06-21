@@ -1,0 +1,52 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.aidriveall.cms",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "monolith",
+    "baseName": "JhiAntVue",
+    "packageName": "com.aidriveall.cms",
+    "packageFolder": "com/aidriveall/cms",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "YjBiOGI1ZmVkMjVmZjE2ZDMwOTljZjZjM2RmNzNlYmVkZTIzMmFjMjM5MzEyODQ5MDA3M2M2YjEyNjk0NjE5MWJiODYzYmViODFmNDEzNmJmNWUyMDNkYmFlNWJiZjEzNzk3NTU0OGVlMDI4YjRmYjU4OWZjNDQ4Y2NlODViYTc=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "vue",
+    "clientTheme": "none",
+    "creationTimestamp": 1592727862384,
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-pro671",
+        "version": "0.0.1"
+      }
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "zh-cn",
+    "languages": ["zh-cn", "en"],
+    "blueprints": [
+      {
+        "name": "generator-jhipster-pro671",
+        "version": "0.0.1"
+      }
+    ]
+  }
+}

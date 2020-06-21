@@ -1,0 +1,51 @@
+/** 上传文件 */
+entity UploadFile {
+    fullName String /** 完整文件名，不含路径 */
+    name String /** 文件名，不含扩展名 */
+    ext String /** 扩展名 */
+    type String /** 文件类型 */
+    url String /** Web Url地址 */
+    path String /** 本地路径 */
+    folder String /** 本地存储目录 */
+    entityName String /** 使用实体名称 */
+    createAt ZonedDateTime /** 创建时间 */
+    fileSize Long /** 文件大小 */
+    referenceCount Long /** 文件被引用次数 */
+}
+/** 上传图片 */
+entity UploadImage {
+    fullName String /** 完整文件名，不含路径 */
+    name String /** 文件名，不含扩展名 */
+    ext String /** 扩展名 */
+    type String /** 文件类型 */
+    url String /** Web Url地址 */
+    path String /** 本地路径 */
+    folder String /** 本地存储目录 */
+    entityName String /** 使用实体名称 */
+    createAt ZonedDateTime /** 创建时间 */
+    fileSize Long /** 文件大小 */
+    smartUrl String /** 小图Url */
+    mediumUrl String /** 中等图Url */
+    referenceCount Long /** 文件被引用次数 */
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+	/** 上传者 */
+    UploadFile{user(login)}
+     to
+    User
+
+    /** 上传者 */
+    UploadImage{user(login)}
+     to
+    User
+}
+service all with serviceClass
+filter *
+dto UploadFile, UploadImage with mapstruct
+paginate UploadFile, UploadImage with pagination
+clientRootFolder UploadFile, UploadImage with files
+//

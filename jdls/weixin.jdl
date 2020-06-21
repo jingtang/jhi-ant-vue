@@ -1,0 +1,186 @@
+/**
+ *
+ * 小程序用户信息
+ * @author A true hipster
+ */
+entity WxMaUser {
+    appid String /** 应用appid */
+    openid String /** app内唯一id */
+    nickName String /** 用户昵称 */
+    gender String  /** 性别 */
+    avatarUrl String /** 用户头像 */
+    phoneNumber String /** 绑定的手机号 */
+    purePhoneNumber String /** 无区号手机号 */
+    countryCode String /** 区号 */
+    province String /** 用户所在省份 */
+    city String /** 用户所在城市 */
+    country String /** 用户所在国家 */
+    language String /** 所用的语言 */
+    unionid String /** 统一id */
+    createTime ZonedDateTime /** 创建时间 */
+}
+/**
+ *公众号用户信息
+ *
+*/
+entity WxMpUser {
+    subscribe Boolean /** 是否关注 */
+    openid String /** app内唯一id */
+    nickName String /** 用户昵称 */
+    /**
+     * 性别描述信息：男、女、未知等.
+    */
+    sexDesc String
+    /**
+    * 性别表示
+    * 1，2等数字.
+    */
+    sex Integer
+    language String /** 语言 */
+    city String /** 城市 */
+    province String /** 省份 */
+    country String /** 国家 */
+    headImgUrl String /** 头像地址 */
+    subscribeTime Long /** 关注时间 */
+    unionId String /** 唯一ID */
+    remark String /** 备注 */
+    groupId Integer /** 分组Id */
+    subscribeScene String /** 关注的渠道来源 */
+    qrScene String /** 扫码场景 */
+    qrSceneStr String /** 扫码场景描述 */
+}
+/** 公众号用户标签 */
+entity WxUserTag {
+    tagid Long /** 标签id */
+    name String /** 标签名称 */
+    count Integer /** 用户数 */
+    appId String /** 归属公众号Id */
+}
+/** 图文素材 */
+entity WxMpMaterialNewsArticle {
+    thumbMediaId String /** 缩略图Id */
+    thumbUrl String /** 封面url */
+    author String /** 作者 */
+    /** 标题 */
+    title String
+    /**
+     * 页面链接
+     * 在图文消息页面点击“阅读原文”后的页面链接.
+     */
+    contentSourceUrl String
+    /**
+     * 消息页面的内容
+     * (必填) 图文消息页面的内容，支持HTML标签.
+     */
+    content String
+    /**
+     * 图文消息的描述.
+     */
+    digest String
+    /**
+     * 是否显示封面
+     * 是否显示封面，true为显示，false为不显示.
+     */
+    showCoverPic Boolean
+    /**
+     * 点击图文消息跳转链接.
+     */
+    url String
+    /**
+     * 是否打开评论
+     * 是否打开评论，0不打开，1打开.
+     */
+    needOpenComment Boolean
+    /**
+     * 是否粉丝才可评论
+     * 是否粉丝才可评论，0所有人可评论，1粉丝才可评论.
+     */
+    onlyFansCanComment Boolean
+}
+
+/** 模板列表信息 */
+entity WxMpTemplate {
+    templateId String /** 模板ID */
+    title String /** 模板标题 */
+    primaryIndustry String /** 一级行业 */
+    deputyIndustry String /** 二级行业 */
+    content String /** 模板内容 */
+    example String /** 模板示例 */
+
+}
+relationship ManyToOne {
+
+    /** 所属客户 */
+    WeixinConfig{company(name)} to CompanyCustomer
+
+    /** 登录账户 */
+    WxMaUser{user(login)} to User
+    /** 登录账户 */
+    WxMpUser{user(login)} to User
+}
+/** Weixin配置 */
+entity WeixinConfig {
+    appId String /** appid */
+    secret String /** appsecret */
+    token String /** 接口配置Token */
+    aesKey String /** 接口配置AESKey */
+    type WeiXinConfigType /** 类型 */
+    name String /** 名称 */
+}
+
+/**
+ * 公众号菜单
+ */
+entity WxMenuButton {
+    type String /** 菜单类型 */
+    name String /** 菜单名称 */
+    key String /** 菜单KEY */
+    url String /** 网页链接 */
+    mediaId String /** media_id */
+    appId String /** 小程序的appid */
+    pagePath String /** 小程序页面路径 */
+    order String /** 菜单位置 */
+    mpAppid String /** 公众号原始id */
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    /** 子菜单 */
+    WxMenuButton{children(name)}
+    to
+    /** 上级菜单 */
+    WxMenuButton{parent(name)}
+
+    /** 用户标签 */
+    WeixinConfig{userTags(name)}
+    to
+    /** 应用账号 */
+    WxUserTag{weixinConfig(name)}
+
+    WeixinConfig{newsArticles(title)}
+    to
+    WxMpMaterialNewsArticle{weixinConfig(name)}
+
+    WeixinConfig{templates(title)}
+    to
+    WxMpTemplate{weixinConfig(name)}
+
+    /** 公众号菜单 config: {"showInOne": true} */
+    WeixinConfig{menuButtons(name)}
+    to
+    /** 微信配置 config: {"showInOne": true} */
+    WxMenuButton{weixinConfig(name)}
+}
+
+enum WeiXinConfigType {
+    MINI_APP,OFFIACCOUNT, OPEN_PLATFORM, AI_SPEECH, MINI_GAME
+}
+
+service all with serviceClass
+filter *
+dto WxMaUser, WxMpUser, WxUserTag, WxMpMaterialNewsArticle, WxMpTemplate, WeixinConfig, WxMenuButton with mapstruct
+paginate WxMaUser, WxMpUser, WxUserTag, WxMpMaterialNewsArticle, WxMpTemplate, WeixinConfig, WxMenuButton with pagination
+clientRootFolder WxMaUser, WxMpUser, WxUserTag, WxMpMaterialNewsArticle, WxMpTemplate, WeixinConfig, WxMenuButton with weixin
+//

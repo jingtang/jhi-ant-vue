@@ -1,0 +1,15 @@
+id;text;i_18_n;jhi_group;link;external_link;target;icon;disabled;hide;hide_in_breadcrumb;shortcut;shortcut_root;reuse;code;description;type;jhi_order;api_permission_codes;parent_id
+1;主导航;;true;/;;TOP;;false;false;true;false;false;false;ROLE_MAIN;;MENU;;;
+2;仪表盘;;false;/dashboard;;PARENT;anticon anticon-dashboard;false;false;false;false;false;false;ROLE_DASHBOARD;;MENU;5147;;1
+3;分析页;;false;/dashboard/analysis;;BLANK;;false;false;false;false;false;false;ROLE_MAIN_DASHBOARD_ANALYSIS;;MENU;0;;2
+77;设置;;true;/settings;;NULL;;false;false;true;false;false;false;;;MENU;;;
+87;业务;;true;/business;;NULL;;false;false;true;false;false;false;;;MENU;;;
+97;开发参考;;false;/development;;SELF;anticon anticon-code;false;false;false;false;false;false;;;MENU;;;77
+99;API;;false;/admin/docs;;SELF;;false;false;false;false;false;false;;;MENU;;;97
+100;流程管理;;false;/business/workflow;;SELF;anticon anticon-box-plot;false;false;false;false;false;false;;;MENU;;;87
+101;流程定义;;false;/business/workflow/process-definition;;SELF;;false;false;false;false;false;false;;;MENU;;;100
+102;流程实例;;false;/business/workflow/process-instance;;SELF;;false;false;false;false;false;false;;;MENU;;;100
+103;流程任务;;false;/business/workflow/flowable-task;;SELF;;false;false;false;false;false;false;;;MENU;;;100
+104;流程部署;;false;/business/workflow/deployment;;SELF;;false;false;false;false;false;false;;;MENU;;;100
+105;系统设置;;false;/settings/system;;NULL;anticon anticon-setting;false;false;false;false;false;false;;;MENU;;;87
+106;用户管理;;false;/business/system/user;;SELF;;false;false;false;false;false;false;;;MENU;;;105
