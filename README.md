@@ -85,7 +85,9 @@
 
 ### 1.登录
 
-![image](./doc/image/login.png)
+<div align="center">
+	<img src="doc/image/login.png" width="800">
+</div>
 
 ### 2.首页
 
