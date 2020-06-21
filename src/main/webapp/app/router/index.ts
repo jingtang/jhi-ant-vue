@@ -174,15 +174,70 @@ export default new Router({
       name: 'JhiConfigurationComponent',
       component: JhiConfigurationComponent,
       meta: { authorities: ['ROLE_ADMIN'] }
-    }
-,
+    },
     {
       path: '/admin/jhi-tracker',
       name: 'JhiTrackerComponent',
       component: JhiTrackerComponent,
       meta: { authorities: ['ROLE_ADMIN'] }
-    }
-    ,{
+    },
+    // account
+    {
+      path: '/account',
+      component: BasicLayout,
+      redirect: '/account/center',
+      name: 'account',
+      meta: { title: '个人页', icon: 'user', keepAlive: true, permission: ['user'] },
+      children: [
+        {
+          path: '/account/center',
+          name: 'center',
+          component: () => import('@/views/account/center/Index.vue'),
+          meta: { title: '个人中心', keepAlive: true, permission: ['user'] }
+        },
+        {
+          path: '/account/settings',
+          name: 'settings',
+          component: () => import('@/views/account/settings/Index.vue'),
+          meta: { title: '个人设置', hideHeader: true, permission: ['user'] },
+          redirect: '/account/settings/base',
+          // hideChildrenInMenu: true,
+          children: [
+            {
+              path: '/account/settings/base',
+              name: 'BaseSettings',
+              component: () => import('@/views/account/settings/BaseSetting.vue'),
+              meta: { title: '基本设置', permission: ['user'] }
+            },
+            {
+              path: '/account/settings/security',
+              name: 'SecuritySettings',
+              component: () => import('@/views/account/settings/Security.vue'),
+              meta: { title: '安全设置', keepAlive: true, permission: ['user'] }
+            },
+            {
+              path: '/account/settings/custom',
+              name: 'CustomSettings',
+              component: () => import('@/views/account/settings/Custom.vue'),
+              meta: { title: '个性化设置', keepAlive: true, permission: ['user'] }
+            },
+            {
+              path: '/account/settings/binding',
+              name: 'BindingSettings',
+              component: () => import('@/views/account/settings/Binding.vue'),
+              meta: { title: '账户绑定', keepAlive: true, permission: ['user'] }
+            },
+            {
+              path: '/account/settings/notification',
+              name: 'NotificationSettings',
+              component: () => import('@/views/account/settings/Notification.vue'),
+              meta: { title: '新消息通知', keepAlive: true, permission: ['user'] }
+            }
+          ]
+        }
+      ]
+    },
+    {
       path: '/user',
       component: UserLayout,
       redirect: '/user/login',
