@@ -76,7 +76,10 @@
 因其他原因代码部分不含自定义的基于 Jhipster 的代码生成器。目前系统结构对官方代码生成器兼容性较差。
 另感谢部分组件作者：k-form-design,vxe-table,jeecg-boot,uReport 等等。
 微信交流群：
-![image](./doc/image/wx.png)
+
+<div align="left">
+	<img src="doc/image/wx.png"  height="200" width="200">
+</div>
 
 ## 部分截图，演示后续再上吧。
 
