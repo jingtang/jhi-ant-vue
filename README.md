@@ -91,31 +91,45 @@
 
 ### 2.首页
 
-![image](./doc/image/index.png)
+<div align="center">
+	<img src="doc/image/index.png" width="800">
+</div>
 
 ### 3.API
 
-![image](./doc/image/api.png)
+<div align="center">
+	<img src="doc/image/api.png" width="800">
+</div>
 
 ### 4.菜单管理
 
-![image](./doc/image/menu.png)
+<div align="center">
+	<img src="doc/image/menu.png" width="800">
+</div>
 
 ### 5.列表配置
 
-![image](./doc/image/listconfig.png)
+<div align="center">
+	<img src="doc/image/listconfig.png" width="800">
+</div>
 
 ### 6.模型配置
 
-![image](./doc/image/model.png)
+<div align="center">
+	<img src="doc/image/model.png" width="800">
+</div>
 
 ### 7.用户列表
 
-![image](./doc/image/user.png)
+<div align="center">
+	<img src="doc/image/user.png" width="800">
+</div>
 
 ### 8.表单配置
 
-![image](./doc/image/form.png)
+<div align="center">
+	<img src="doc/image/form.png" width="800">
+</div>
 其他内容请浏览 Jhipster 官网。
 
 [jhipster homepage and latest documentation]: https://www.jhipster.tech
