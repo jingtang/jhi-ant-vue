@@ -47,6 +47,70 @@
 
     ./mvnw verify
 
+## 技术栈列表
+
+### 后台系统（基本以 Jhipster 提供为主）
+
+- spring-boot 2.2.4.RELEASE
+- spring-boot-security 用户登录验证
+- undertow web 容器
+- mysql 优秀的开源数据库
+- hikari 速度最快的数据库连接池
+- spring-data-jpa
+- liquibase
+- uReport 报表
+- flowable 流程引擎
+
+### 前端系统（Vue）
+
+- Vue 2.6.x
+- Ant-Design-Vue 1.5.2
+- vue-class-component
+- vue-property-decorator
+- vxe-table
+- bpmn-js
+- k-form-design
+
+## 特别说明
+
+因其他原因代码部分不含自定义的基于 Jhipster 的代码生成器。目前系统结构对官方代码生成器兼容性较差。
+另感谢部分组件作者：k-form-design,vxe-table,jeecg-boot,uReport 等等。
+微信交流群：
+![image](./doc/image/wx.png)
+
+## 部分截图，演示后续再上吧。
+
+### 1.登录
+
+![image](./doc/image/login.png)
+
+### 2.首页
+
+![image](./doc/image/index.png)
+
+### 3.API
+
+![image](./doc/image/api.png)
+
+### 4.菜单管理
+
+![image](./doc/image/menu.png)
+
+### 5.列表配置
+
+![image](./doc/image/listconfig.png)
+
+### 6.模型配置
+
+![image](./doc/image/model.png)
+
+### 7.用户列表
+
+![image](./doc/image/user.png)
+
+### 8.表单配置
+
+![image](./doc/image/form.png)
 其他内容请浏览 Jhipster 官网。
 
 [jhipster homepage and latest documentation]: https://www.jhipster.tech
