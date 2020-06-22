@@ -70,6 +70,8 @@ public class ApiPermission implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("children")
     private ApiPermission parent;
+
+
     @ManyToMany(mappedBy = "apiPermissions")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore

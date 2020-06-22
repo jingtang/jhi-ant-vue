@@ -3,6 +3,7 @@ package com.aidriveall.cms.web.rest;
 import com.aidriveall.cms.domain.User;
 import com.aidriveall.cms.repository.UserRepository;
 import com.aidriveall.cms.security.SecurityUtils;
+import com.aidriveall.cms.security.annotation.PermissionDefine;
 import com.aidriveall.cms.service.MailService;
 import com.aidriveall.cms.service.UserService;
 import com.aidriveall.cms.service.dto.PasswordChangeDTO;
@@ -88,6 +89,8 @@ public class AccountResource {
      * @return the login if the user is authenticated.
      */
     @GetMapping("/authenticate")
+    @PermissionDefine(groupCode = "SYSTEM", groupName = "系统设置", entityName = "用户",
+        entityCode = "USER", permissionCode = "AUTHENTICATE", permissionName = "认证")
     public String isAuthenticated(HttpServletRequest request) {
         log.debug("REST request to check if the current user is authenticated");
         return request.getRemoteUser();

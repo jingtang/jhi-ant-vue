@@ -6,7 +6,7 @@
         target="_blank"
       >Pro 首页</a>
       <a
-        href="https://github.com/sendya/ant-design-pro-vue"
+        href="https://www.gitee.com/wangxinxx/jhi-ant-vue"
         target="_blank"
       >
         <a-icon type="github" />

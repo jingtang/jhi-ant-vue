@@ -169,8 +169,8 @@ export function generateDataForDesigner(commonTableData: ICommonTable) {
                   item.key = relationship.relationshipName + 'Id';
                   item.options.dynamic = true;
                   item.options.dynamicKey = relationship.dataName;
+                  item.options.selectListName = 'jhi-' + kebabCase(relationship.otherEntityName);
                   item.commonTableName = relationship.otherEntityName;
-                  item.selectListName = 'jhi-' + kebabCase(relationship.otherEntityName);
                   item.options.valueField = 'id';
                   item.options.labelField = relationship.otherEntityField;
                   dataContent.push(item);
@@ -183,8 +183,8 @@ export function generateDataForDesigner(commonTableData: ICommonTable) {
                   item.options.labelField = relationship.otherEntityField;
                   item.options.dynamic = true;
                   item.options.dynamicKey = relationship.dataName;
+                  item.options.selectListName = 'jhi-' + kebabCase(relationship.otherEntityName);
                   item.commonTableName = relationship.otherEntityName;
-                  item.selectListName = 'jhi-' + kebabCase(relationship.otherEntityName);
                   dataContent.push(item);
                 }
               }

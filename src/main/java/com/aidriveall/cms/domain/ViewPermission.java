@@ -18,7 +18,7 @@ import com.aidriveall.cms.domain.enumeration.ViewPermissionType;
 
 /**
  * 可视权限
- * 权限分为菜单权限、按钮权限等\n
+ * 权限分为菜单权限、按钮权限等
  */
 
 @Entity

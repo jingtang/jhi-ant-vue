@@ -13,6 +13,8 @@ import java.lang.annotation.*;
 public @interface PermissionDefine {
     String groupName() default "系统设置";
     String groupCode() default "GROUP_SYSTEM";
+    String entityCode();
+    String entityName();
     String permissionName();
     String permissionCode();
 }

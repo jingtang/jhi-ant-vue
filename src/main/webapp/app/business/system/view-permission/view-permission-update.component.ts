@@ -200,6 +200,7 @@ export default class ViewPermissionUpdate extends Vue {
             this.formJsonData = JSON.parse(commonTableData.formConfig);
           } else {
             this.formJsonData.list = generateDataForDesigner(commonTableData);
+            console.log(this.formJsonData);
           }
           this.viewPermission = getDataByFormField(this.formJsonData.list, this.viewPermission);
           this.$nextTick(() => {
