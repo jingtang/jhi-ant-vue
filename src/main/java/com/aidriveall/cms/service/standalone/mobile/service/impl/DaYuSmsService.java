@@ -31,9 +31,7 @@ public class DaYuSmsService extends BaseSmsService<DaYuConfig> {
     // private final DaYuConfig config;
     public DaYuSmsService(DaYuConfig config) {
         super(config);
-        // this.config = config;
         //初始化client,使用单例方式
-        // DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "f04GAox0OGWGxyw4", "UCtwoQlfLxpNGbkjcm088GZlaEwMRR");
         DefaultProfile profile = DefaultProfile.getProfile(config.getRegionId(), config.getAccessKeyId(), config.getSecret());
         client = new DefaultAcsClient(profile);
     }

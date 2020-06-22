@@ -137,7 +137,6 @@ export default {
     }
   },
   mounted () {
-    this.getTeams()
   },
   methods: {
     ...mapGetters(['nickname', 'avatar']),
