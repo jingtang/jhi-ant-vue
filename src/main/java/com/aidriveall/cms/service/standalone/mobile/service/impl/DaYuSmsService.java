@@ -51,7 +51,7 @@ public class DaYuSmsService extends BaseSmsService<DaYuConfig> {
         request.setSysVersion("2017-05-25");
         request.setSysAction("SendSms");
         request.putQueryParameter("RegionId", super.CONFIG.getRegionId());
-        request.putQueryParameter("PhoneNumbers", "13704755857");
+        request.putQueryParameter("PhoneNumbers", "1370475xxxx");
         request.putQueryParameter("SignName", "精彩美课");
         request.putQueryParameter("TemplateCode", (String) smsParams.get("TemplateCode"));
         request.putQueryParameter("TemplateParam", (String) smsParams.get("TemplateParam"));
