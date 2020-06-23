@@ -136,6 +136,12 @@
 <div align="center">
 	<img src="doc/image/workflow.png" width="800">
 </div>
+
+### 9.报表设计器
+
+<div align="center">
+	<img src="doc/image/report.png" width="800">
+</div>
 其他内容请浏览 Jhipster 官网。
 
 [jhipster homepage and latest documentation]: https://www.jhipster.tech

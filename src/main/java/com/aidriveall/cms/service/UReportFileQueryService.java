@@ -187,6 +187,7 @@ public class UReportFileQueryService extends QueryService<UReportFile> {
                 if (commonTableRelationship.getRelationshipType().equals(RelationshipType.ONE_TO_MANY) || commonTableRelationship.getRelationshipType().equals(RelationshipType.MANY_TO_MANY)) {
                     toManyRelationships.add(commonTableRelationship);
                 } else {
+                    root.join(commonTableRelationship.getRelationshipName(),JoinType.LEFT);
                     s.add(root.get(commonTableRelationship.getRelationshipName()).get("id")
                         .alias(commonTableRelationship.getRelationshipName() + "Id"));
                     s.add(root.get(commonTableRelationship.getRelationshipName()).get(commonTableRelationship.getOtherEntityField())

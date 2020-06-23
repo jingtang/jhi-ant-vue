@@ -36,6 +36,7 @@ module.exports = merge(baseWebpackConfig, {
       {
         context: [
           '/process-api',
+          '/ureport',
           '/api',
           '/data',
           '/avatar',

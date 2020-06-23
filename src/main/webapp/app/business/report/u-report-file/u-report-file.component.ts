@@ -53,6 +53,8 @@ export default class UReportFileComponent extends mixins(JhiDataUtils, Vue2Filte
   public previousPage = 1;
   public propOrder = 'id';
   public filterTreeSpan = 0;
+  public designerVisible = false;
+  public reportUrl = '/ureport/designer';
 
   @Prop(Object) otherPresetOrder: { [key: string]: any };
   public treeFilterData = [];
@@ -175,6 +177,10 @@ export default class UReportFileComponent extends mixins(JhiDataUtils, Vue2Filte
     this.$router.push({ path: row.id + '/edit', append: true });
   }
 
+  public closeDesigner() {
+    this.designerVisible = false;
+  }
+
   getCommonTableData() {
     this.commonTableService()
       .findByEntityName('UReportFile')
@@ -228,8 +234,8 @@ export default class UReportFileComponent extends mixins(JhiDataUtils, Vue2Filte
     this.searchValue = '';
   }
 
-  public newEntity(): void {
-    this.$router.push({ path: 'new', append: true });
+  public newReport(): void {
+    this.designerVisible = true;
   }
   public onExpand(expandedKeys) {
     console.log('onExpand', expandedKeys);

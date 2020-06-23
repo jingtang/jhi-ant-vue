@@ -52,7 +52,7 @@
                         </a-col>
                         <a-col :lg="14" :md="10" :sm="11" align="right">
                             <span class="table-page-search-submitButtons">
-                                <a-button type="primary" icon="plus" @click="newEntity"></a-button>
+                                <a-button type="primary" icon="plus" @click="newReport"></a-button>
                             </span>
                             <span class="table-page-search-submitButtons">
                                 <a-button type="primary" icon="sync" @click="loadAll"></a-button>
@@ -77,6 +77,16 @@
             </vxe-grid>
             </a-col>
         </a-row>
+        <a-drawer
+            title="报表设计器"
+            :width="'100%'"
+            :destroyOnClose="true"
+            :visible="designerVisible"
+            :body-style="{ paddingBottom: '80px', height: '100%' }"
+            @close="closeDesigner" :maskClosable="false"
+        >
+            <iframe :src="reportUrl" width="100%" height="100%" seamless title="Swagger UI"></iframe>
+        </a-drawer>
     </a-card>
 </template>
 
