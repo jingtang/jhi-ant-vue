@@ -3,11 +3,6 @@ import { Component, Inject, Prop, Watch, Ref } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import JhiDataUtils from '@/shared/data/data-utils.service';
 
-import { numeric, required, minLength, maxLength } from 'vuelidate/lib/validators';
-import moment from 'moment';
-import { FieldType } from '@/shared/model/modelConfig/common-table-field.model';
-import { RelationshipType } from '@/shared/model/modelConfig/common-table-relationship.model';
-
 import CommonTableService from '../../modelConfig//common-table/common-table.service';
 import { ICommonTable } from '@/shared/model/modelConfig/common-table.model';
 
@@ -41,7 +36,7 @@ export default class UReportFileUpdate extends mixins(JhiDataUtils) {
   @Inject('alertService') private alertService: () => AlertService;
   @Inject('uReportFileService') private uReportFileService: () => UReportFileService;
   public uReportFile: IUReportFile = new UReportFile();
-
+  @Prop(Boolean) showInModal;
   @Inject('commonTableService') private commonTableService: () => CommonTableService;
 
   public commonTables: ICommonTable[] = [];
@@ -95,7 +90,11 @@ export default class UReportFileUpdate extends mixins(JhiDataUtils) {
           this.isSaving = false;
           const message = this.$t('jhiAntVueApp.reportUReportFile.updated', { param: param.data.id }).toString();
           this.alertService().showAlert(message, 'info');
-          this.$router.go(-1);
+          if (this.showInModal) {
+            this.$emit('cancel', true);
+          } else {
+            this.$router.go(-1);
+          }
         });
     } else {
       this.uReportFileService()
@@ -104,7 +103,11 @@ export default class UReportFileUpdate extends mixins(JhiDataUtils) {
           this.isSaving = false;
           const message = this.$t('jhiAntVueApp.reportUReportFile.created', { param: param.data.id }).toString();
           this.alertService().showAlert(message, 'success');
-          this.$router.go(-1);
+          if (this.showInModal) {
+            this.$emit('cancel', true);
+          } else {
+            this.$router.go(-1);
+          }
         });
     }
   }
@@ -119,7 +122,11 @@ export default class UReportFileUpdate extends mixins(JhiDataUtils) {
   }
 
   public previousState(): void {
-    this.$router.go(-1);
+    if (this.showInModal) {
+      this.$emit('cancel', false);
+    } else {
+      this.$router.go(-1);
+    }
   }
 
   public initRelationships(): void {

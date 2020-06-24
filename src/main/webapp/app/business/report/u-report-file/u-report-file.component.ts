@@ -20,6 +20,9 @@ export default class UReportFileComponent extends mixins(JhiDataUtils, Vue2Filte
   @Inject('commonTableService') private commonTableService: () => CommonTableService;
   @Ref('searchInput') public searchInput;
   @Ref('xGrid') public xGrid;
+
+  public clickUReportFileId;
+  public updateModalVisible = false;
   public xGridData = [];
   public xGridColumns = [];
   public xGridTableToolbars = {
@@ -174,7 +177,23 @@ export default class UReportFileComponent extends mixins(JhiDataUtils, Vue2Filte
   }
 
   public editEntity(row: IUReportFile): void {
-    this.$router.push({ path: row.id + '/edit', append: true });
+    this.clickUReportFileId = row.id;
+    this.updateModalVisible = true;
+    // this.$router.push({ path: row.id + '/edit', append: true });
+  }
+
+  public reportDesinger(row: IUReportFile): void {
+    this.reportUrl = '/ureport/designer?_u=db:' + row.name;
+    this.designerVisible = true;
+  }
+
+  public reportPreview(row: IUReportFile): void {
+    this.reportUrl = '/ureport/preview?_u=db:' + row.name;
+    this.designerVisible = true;
+  }
+
+  public switchFilterTree() {
+    this.filterTreeSpan = this.filterTreeSpan > 0 ? 0 : 6;
   }
 
   public closeDesigner() {
@@ -344,6 +363,11 @@ export default class UReportFileComponent extends mixins(JhiDataUtils, Vue2Filte
       tempValues = datas[0];
     }
     this.mapOfFilter[property] = { value: tempValues, type: type };
+    this.loadAll();
+  }
+
+  public updateModalCancel(e) {
+    this.updateModalVisible = false;
     this.loadAll();
   }
 }

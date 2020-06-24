@@ -73,6 +73,16 @@
                             <a-icon type="setting"></a-icon>
                         </a-button>
                     </a-tooltip>
+                    <a-tooltip placement="top" title="报表设计">
+                        <a-button type="primary" shape="circle" size="small" @click="reportDesinger(row)">
+                            <a-icon type="schedule" />
+                        </a-button>
+                    </a-tooltip>
+                    <a-tooltip placement="top" title="报表预览">
+                        <a-button type="primary" shape="circle" size="small" @click="reportPreview(row)">
+                            <a-icon type="area-chart"></a-icon>
+                        </a-button>
+                    </a-tooltip>
                 </template>
             </vxe-grid>
             </a-col>
@@ -87,6 +97,13 @@
         >
             <iframe :src="reportUrl" width="100%" height="100%" seamless title="Swagger UI"></iframe>
         </a-drawer>
+        <a-modal title="新增或编辑" :visible="updateModalVisible"
+                 :destroyOnClose="true" :footer="null"
+                 @cancel="updateModalCancel" width="85%" :maskClosable="false">
+            <jhi-u-report-file-update :commonTableId="commonTableId"
+                                       @cancel="updateModalCancel" :showInModal="true" :uReportFileId="clickUReportFileId"/>
+        </a-modal>
+
     </a-card>
 </template>
 
