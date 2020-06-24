@@ -191,10 +191,7 @@ export function generateTableColumns(
         }
         if (field.enableFilter) {
           mapOfFilter[field.entityFieldName] = {
-            list: [
-              { text: '是', value: 'true' },
-              { text: '否', value: 'false' }
-            ],
+            list: [{ text: '是', value: 'true' }, { text: '否', value: 'false' }],
             value: [],
             type: 'boolean'
           };
@@ -344,7 +341,7 @@ export function xGenerateTableColumns(
     const column: any = {
       title: field.title,
       field: field.entityFieldName,
-      width: field.columnWidth
+      minWidth: field.columnWidth
     };
     if (field.treeIndicator) {
       column.treeNode = true;
@@ -504,10 +501,7 @@ export function xGenerateTableColumns(
               filterArray.push({ label: fieldValuesObject[key], value: key });
             });
           } else {
-            column.filters = [
-              { label: '是', value: 'true' },
-              { label: '否', value: 'false' }
-            ];
+            column.filters = [{ label: '是', value: 'true' }, { label: '否', value: 'false' }];
           }
         }
         result.push(column);
@@ -516,7 +510,7 @@ export function xGenerateTableColumns(
   const relationships = commonTableData.relationships.filter(relationship => !relationship.hideInList);
   relationships.forEach(relationship => {
     const column: any = {
-      width: relationship.columnWidth,
+      minWidth: relationship.columnWidth,
       title: relationship.name,
       // key: relationship.relationshipName,
       sortOrder: mapOfSort[relationship.relationshipName]
