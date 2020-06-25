@@ -341,4 +341,8 @@ export default class UploadFileComponent extends mixins(Vue2Filters.mixin, Alert
     this.mapOfFilter[property] = { value: tempValues, type: type };
     this.loadAll();
   }
+
+  public switchFilterTree() {
+    this.filterTreeSpan = this.filterTreeSpan > 0 ? 0 : 6;
+  }
 }
