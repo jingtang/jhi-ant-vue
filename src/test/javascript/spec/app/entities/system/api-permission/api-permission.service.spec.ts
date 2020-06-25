@@ -21,7 +21,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new ApiPermissionService();
 
-      elemDefault = new ApiPermission(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', ApiPermissionType.BUSINESS);
+      elemDefault = new ApiPermission(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', ApiPermissionType.BUSINESS, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -54,7 +54,9 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             code: 'BBBBBB',
             description: 'BBBBBB',
-            type: 'BBBBBB'
+            type: 'BBBBBB',
+            method: 'BBBBBB',
+            url: 'BBBBBB'
           },
           elemDefault
         );
@@ -72,7 +74,9 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             code: 'BBBBBB',
             description: 'BBBBBB',
-            type: 'BBBBBB'
+            type: 'BBBBBB',
+            method: 'BBBBBB',
+            url: 'BBBBBB'
           },
           elemDefault
         );

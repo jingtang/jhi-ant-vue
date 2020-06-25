@@ -53,6 +53,12 @@ public class ApiPermissionResourceIT {
     private static final ApiPermissionType DEFAULT_TYPE = ApiPermissionType.BUSINESS;
     private static final ApiPermissionType UPDATED_TYPE = ApiPermissionType.API;
 
+    private static final String DEFAULT_METHOD = "AAAAAAAAAA";
+    private static final String UPDATED_METHOD = "BBBBBBBBBB";
+
+    private static final String DEFAULT_URL = "AAAAAAAAAA";
+    private static final String UPDATED_URL = "BBBBBBBBBB";
+
     @Autowired
     private ApiPermissionRepository apiPermissionRepository;
 
@@ -107,7 +113,9 @@ public class ApiPermissionResourceIT {
             .name(DEFAULT_NAME)
             .code(DEFAULT_CODE)
             .description(DEFAULT_DESCRIPTION)
-            .type(DEFAULT_TYPE);
+            .type(DEFAULT_TYPE)
+            .method(DEFAULT_METHOD)
+            .url(DEFAULT_URL);
         return apiPermission;
     }
     /**
@@ -121,7 +129,9 @@ public class ApiPermissionResourceIT {
             .name(UPDATED_NAME)
             .code(UPDATED_CODE)
             .description(UPDATED_DESCRIPTION)
-            .type(UPDATED_TYPE);
+            .type(UPDATED_TYPE)
+            .method(UPDATED_METHOD)
+            .url(UPDATED_URL);
         return apiPermission;
     }
 
@@ -150,6 +160,8 @@ public class ApiPermissionResourceIT {
         assertThat(testApiPermission.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testApiPermission.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testApiPermission.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testApiPermission.getMethod()).isEqualTo(DEFAULT_METHOD);
+        assertThat(testApiPermission.getUrl()).isEqualTo(DEFAULT_URL);
     }
 
     @Test
@@ -187,7 +199,9 @@ public class ApiPermissionResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].method").value(hasItem(DEFAULT_METHOD)))
+            .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL)));
     }
     
     @Test
@@ -204,7 +218,9 @@ public class ApiPermissionResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.method").value(DEFAULT_METHOD))
+            .andExpect(jsonPath("$.url").value(DEFAULT_URL));
     }
 
 
@@ -515,6 +531,162 @@ public class ApiPermissionResourceIT {
 
     @Test
     @Transactional
+    public void getAllApiPermissionsByMethodIsEqualToSomething() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where method equals to DEFAULT_METHOD
+        defaultApiPermissionShouldBeFound("method.equals=" + DEFAULT_METHOD);
+
+        // Get all the apiPermissionList where method equals to UPDATED_METHOD
+        defaultApiPermissionShouldNotBeFound("method.equals=" + UPDATED_METHOD);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByMethodIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where method not equals to DEFAULT_METHOD
+        defaultApiPermissionShouldNotBeFound("method.notEquals=" + DEFAULT_METHOD);
+
+        // Get all the apiPermissionList where method not equals to UPDATED_METHOD
+        defaultApiPermissionShouldBeFound("method.notEquals=" + UPDATED_METHOD);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByMethodIsInShouldWork() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where method in DEFAULT_METHOD or UPDATED_METHOD
+        defaultApiPermissionShouldBeFound("method.in=" + DEFAULT_METHOD + "," + UPDATED_METHOD);
+
+        // Get all the apiPermissionList where method equals to UPDATED_METHOD
+        defaultApiPermissionShouldNotBeFound("method.in=" + UPDATED_METHOD);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByMethodIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where method is not null
+        defaultApiPermissionShouldBeFound("method.specified=true");
+
+        // Get all the apiPermissionList where method is null
+        defaultApiPermissionShouldNotBeFound("method.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllApiPermissionsByMethodContainsSomething() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where method contains DEFAULT_METHOD
+        defaultApiPermissionShouldBeFound("method.contains=" + DEFAULT_METHOD);
+
+        // Get all the apiPermissionList where method contains UPDATED_METHOD
+        defaultApiPermissionShouldNotBeFound("method.contains=" + UPDATED_METHOD);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByMethodNotContainsSomething() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where method does not contain DEFAULT_METHOD
+        defaultApiPermissionShouldNotBeFound("method.doesNotContain=" + DEFAULT_METHOD);
+
+        // Get all the apiPermissionList where method does not contain UPDATED_METHOD
+        defaultApiPermissionShouldBeFound("method.doesNotContain=" + UPDATED_METHOD);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where url equals to DEFAULT_URL
+        defaultApiPermissionShouldBeFound("url.equals=" + DEFAULT_URL);
+
+        // Get all the apiPermissionList where url equals to UPDATED_URL
+        defaultApiPermissionShouldNotBeFound("url.equals=" + UPDATED_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByUrlIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where url not equals to DEFAULT_URL
+        defaultApiPermissionShouldNotBeFound("url.notEquals=" + DEFAULT_URL);
+
+        // Get all the apiPermissionList where url not equals to UPDATED_URL
+        defaultApiPermissionShouldBeFound("url.notEquals=" + UPDATED_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where url in DEFAULT_URL or UPDATED_URL
+        defaultApiPermissionShouldBeFound("url.in=" + DEFAULT_URL + "," + UPDATED_URL);
+
+        // Get all the apiPermissionList where url equals to UPDATED_URL
+        defaultApiPermissionShouldNotBeFound("url.in=" + UPDATED_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where url is not null
+        defaultApiPermissionShouldBeFound("url.specified=true");
+
+        // Get all the apiPermissionList where url is null
+        defaultApiPermissionShouldNotBeFound("url.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllApiPermissionsByUrlContainsSomething() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where url contains DEFAULT_URL
+        defaultApiPermissionShouldBeFound("url.contains=" + DEFAULT_URL);
+
+        // Get all the apiPermissionList where url contains UPDATED_URL
+        defaultApiPermissionShouldNotBeFound("url.contains=" + UPDATED_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllApiPermissionsByUrlNotContainsSomething() throws Exception {
+        // Initialize the database
+        apiPermissionRepository.saveAndFlush(apiPermission);
+
+        // Get all the apiPermissionList where url does not contain DEFAULT_URL
+        defaultApiPermissionShouldNotBeFound("url.doesNotContain=" + DEFAULT_URL);
+
+        // Get all the apiPermissionList where url does not contain UPDATED_URL
+        defaultApiPermissionShouldBeFound("url.doesNotContain=" + UPDATED_URL);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllApiPermissionsByChildrenIsEqualToSomething() throws Exception {
         // Initialize the database
         apiPermissionRepository.saveAndFlush(apiPermission);
@@ -583,7 +755,9 @@ public class ApiPermissionResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].method").value(hasItem(DEFAULT_METHOD)))
+            .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL)));
 
         // Check, that the count call also returns 1
         restApiPermissionMockMvc.perform(get("/api/api-permissions/count?sort=id,desc&" + filter))
@@ -634,7 +808,9 @@ public class ApiPermissionResourceIT {
             .name(UPDATED_NAME)
             .code(UPDATED_CODE)
             .description(UPDATED_DESCRIPTION)
-            .type(UPDATED_TYPE);
+            .type(UPDATED_TYPE)
+            .method(UPDATED_METHOD)
+            .url(UPDATED_URL);
         ApiPermissionDTO apiPermissionDTO = apiPermissionMapper.toDto(updatedApiPermission);
 
         restApiPermissionMockMvc.perform(put("/api/api-permissions")
@@ -650,6 +826,8 @@ public class ApiPermissionResourceIT {
         assertThat(testApiPermission.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testApiPermission.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testApiPermission.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testApiPermission.getMethod()).isEqualTo(UPDATED_METHOD);
+        assertThat(testApiPermission.getUrl()).isEqualTo(UPDATED_URL);
     }
 
     @Test

@@ -11,6 +11,8 @@ export interface IApiPermission {
   code?: string;
   description?: string;
   type?: ApiPermissionType;
+  method?: string;
+  url?: string;
   children?: IApiPermission[];
   parentName?: string;
   parentId?: number;
@@ -26,6 +28,8 @@ export class ApiPermission implements IApiPermission {
     public code?: string,
     public description?: string,
     public type?: ApiPermissionType,
+    public method?: string,
+    public url?: string,
     public children?: IApiPermission[],
     public parentName?: string,
     public parentId?: number,

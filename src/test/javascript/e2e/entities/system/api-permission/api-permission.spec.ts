@@ -74,6 +74,12 @@ describe('ApiPermission e2e test', () => {
 
       await selectLastOption(updatePage.typeSelect);
 
+      await updatePage.methodInput.sendKeys('method');
+      expect(await updatePage.methodInput.getAttribute('value')).to.match(/method/);
+
+      await updatePage.urlInput.sendKeys('url');
+      expect(await updatePage.urlInput.getAttribute('value')).to.match(/url/);
+
       // await  selectLastOption(updatePage.parentSelect);
 
       expect(await updatePage.saveButton.isEnabled()).to.be.true;
@@ -143,6 +149,14 @@ describe('ApiPermission e2e test', () => {
         await updatePage.descriptionInput.clear();
         await updatePage.descriptionInput.sendKeys('modified');
         expect(await updatePage.descriptionInput.getAttribute('value')).to.match(/modified/);
+
+        await updatePage.methodInput.clear();
+        await updatePage.methodInput.sendKeys('modified');
+        expect(await updatePage.methodInput.getAttribute('value')).to.match(/modified/);
+
+        await updatePage.urlInput.clear();
+        await updatePage.urlInput.sendKeys('modified');
+        expect(await updatePage.urlInput.getAttribute('value')).to.match(/modified/);
 
         await updatePage.saveButton.click();
 

@@ -15,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.springframework.web.filter.CorsFilter;
@@ -31,12 +32,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CorsFilter corsFilter;
     private final SecurityProblemSupport problemSupport;
     private final ApiPermissionService apiPermissionService;
+    private final AccessSecurityMetadataSource accessSecurityMetadataSource;
+    private final AccessDecisionManagerImpl accessDecisionManagerImpl;
 
-    public SecurityConfiguration(TokenProvider tokenProvider, CorsFilter corsFilter, ApiPermissionService apiPermissionService, SecurityProblemSupport problemSupport) {
+    public SecurityConfiguration(TokenProvider tokenProvider, CorsFilter corsFilter, ApiPermissionService apiPermissionService, SecurityProblemSupport problemSupport, AccessSecurityMetadataSource accessSecurityMetadataSource, AccessDecisionManagerImpl accessDecisionManagerImpl) {
         this.tokenProvider = tokenProvider;
         this.corsFilter = corsFilter;
         this.problemSupport = problemSupport;
         this.apiPermissionService = apiPermissionService;
+        this.accessSecurityMetadataSource = accessSecurityMetadataSource;
+        this.accessDecisionManagerImpl = accessDecisionManagerImpl;
     }
 
     @Bean
@@ -74,6 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .csrf()
             .disable()
             .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterAt(new AccessSecurityInterceptor(accessSecurityMetadataSource, accessDecisionManagerImpl), FilterSecurityInterceptor.class)
             .exceptionHandling()
                 .authenticationEntryPoint(problemSupport)
                 .accessDeniedHandler(problemSupport)

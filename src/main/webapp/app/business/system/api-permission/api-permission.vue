@@ -57,6 +57,9 @@
                             <span class="table-page-search-submitButtons">
                                 <a-button type="primary" icon="sync" @click="loadAll"></a-button>
                             </span>
+                            <span class="table-page-search-submitButtons">
+                                <a-button type="primary" icon="cloud-sync" @click="generate"></a-button>
+                            </span>
                         </a-col>
                     </a-row>
                 </template>

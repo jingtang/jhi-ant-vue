@@ -50,6 +50,8 @@ entity ApiPermission {
     code String /** 权限代码(ROLE_开头) */
     description String /** 权限描述 */
     type ApiPermissionType /** 类型 */
+    method String /** 请求类型 */
+    url String /** url 地址 */
 }
 
 relationship OneToMany {
@@ -94,7 +96,7 @@ enum ViewPermissionType {
 }
 /** Api权限类型 */
 enum ApiPermissionType {
-    BUSINESS, API
+    BUSINESS, API, ENTITY
 }
 
 /** 链接目标 */

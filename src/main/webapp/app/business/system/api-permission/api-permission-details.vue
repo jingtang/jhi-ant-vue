@@ -29,6 +29,18 @@
                         <span v-text="$t('jhiAntVueApp.ApiPermissionType.' + apiPermission.type)">{{apiPermission.type}}</span>
                     </dd>
                     <dt>
+                        <span v-text="$t('jhiAntVueApp.systemApiPermission.method')">Method</span>
+                    </dt>
+                    <dd>
+                        <span>{{apiPermission.method}}</span>
+                    </dd>
+                    <dt>
+                        <span v-text="$t('jhiAntVueApp.systemApiPermission.url')">Url</span>
+                    </dt>
+                    <dd>
+                        <span>{{apiPermission.url}}</span>
+                    </dd>
+                    <dt>
                         <span v-text="$t('jhiAntVueApp.systemApiPermission.parent')">上级</span>
                     </dt>
                     <dd>

@@ -90,7 +90,7 @@ export default class CommonTableRelationshipComponent extends mixins(Vue2Filters
   public created(): void {
     this.initRelationships();
     if (this.commonTableId) {
-      this.mapOfFilter['commonTable'] = { list: [], value: this.commonTableId, type: 'many-to-one' };
+      this.mapOfFilter['commonTable'] = { list: [], value: [this.commonTableId], type: 'many-to-one' };
     }
   }
 
@@ -107,8 +107,8 @@ export default class CommonTableRelationshipComponent extends mixins(Vue2Filters
     if (this.showInOther && !this.commonTableId) {
       return;
     }
+    this.mapOfFilter['commonTable'] = { list: [], value: [this.commonTableId], type: 'many-to-one' };
     this.loading = true;
-
     const paginationQuery = {
       listModelName: 'CommonTableRelationship',
       page: this.xGridPagerConfig.currentPage - 1,

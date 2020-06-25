@@ -12,7 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
@@ -86,6 +88,18 @@ public class ApiPermissionService {
         log.debug("Request to get all ApiPermissions");
         return apiPermissionRepository.findAll(pageable)
             .map(apiPermissionMapper::toDto);
+    }
+
+    /**
+     * Get all the apiPermissions.
+     *
+     * @param type the ApiPermissionType.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public List<ApiPermissionDTO> findAllByType(ApiPermissionType type) {
+        log.debug("Request to get all ApiPermissions by type");
+        return apiPermissionMapper.toDto(apiPermissionRepository.findAllByType(type));
     }
 
     /**
@@ -186,20 +200,66 @@ public class ApiPermissionService {
             if (permissionDefineAnnotation != null) {
                 // 处理group
                 ApiPermission apiPermissionGroup = apiPermissionRepository.findOneByCode(permissionDefineAnnotation.groupCode())
-                    .orElse(apiPermissionRepository.save(
+                    .orElseGet(() -> apiPermissionRepository.save(
                         new ApiPermission()
                             .code(permissionDefineAnnotation.groupCode())
                             .name(permissionDefineAnnotation.groupName())
                             .type(ApiPermissionType.BUSINESS)));
+                // 处理实体
+                ApiPermission apiPermissionEntity = apiPermissionRepository.findOneByCode(permissionDefineAnnotation.groupCode() + "_" +permissionDefineAnnotation.entityCode())
+                    .orElseGet(() -> apiPermissionRepository.save(
+                        new ApiPermission()
+                            .code(permissionDefineAnnotation.groupCode() + "_" + permissionDefineAnnotation.entityCode())
+                            .name(permissionDefineAnnotation.entityName())
+                            .type(ApiPermissionType.ENTITY)));
+                apiPermissionRepository.save(apiPermissionEntity.parent(apiPermissionGroup));
                 // 处理permission
-                ApiPermission apiPermission = apiPermissionRepository.findOneByCode(permissionDefineAnnotation.permissionCode())
-                    .orElse(apiPermissionRepository.save(
+                // 获得相关的methodType
+
+                ApiPermission apiPermission = apiPermissionRepository.findOneByCode(permissionDefineAnnotation.groupCode() + "_" + permissionDefineAnnotation.entityCode() + "_" + permissionDefineAnnotation.permissionCode())
+                    .orElseGet(() -> apiPermissionRepository.save(
                         new ApiPermission()
-                            .code(permissionDefineAnnotation.groupCode())
-                            .name(permissionDefineAnnotation.groupName())
-                            .type(ApiPermissionType.BUSINESS)));
-                // 设置parent并保存
-                apiPermissionRepository.save(apiPermission.parent(apiPermissionGroup));
+                            .code(permissionDefineAnnotation.groupCode() + "_" + permissionDefineAnnotation.entityCode() + "_" + permissionDefineAnnotation.permissionCode())
+                            .name(permissionDefineAnnotation.permissionName())
+                            .parent(apiPermissionEntity)
+                            .type(ApiPermissionType.API)));
+
+                GetMapping getMappingAnnotation = method.getMethodAnnotation(GetMapping.class);
+                PostMapping postMappingAnnotation = method.getMethodAnnotation(PostMapping.class);
+                DeleteMapping deleteMappingAnnotation = method.getMethodAnnotation(DeleteMapping.class);
+                PutMapping putMappingAnnotation = method.getMethodAnnotation(PutMapping.class);
+                RequestMapping requestMappingAnnotation = method.getMethodAnnotation(RequestMapping.class);
+                StringBuilder methodType = new StringBuilder();
+                if (getMappingAnnotation != null) {
+                    methodType = new StringBuilder("GET");
+                }
+                if (postMappingAnnotation != null) {
+                    methodType = new StringBuilder("POST");
+                }
+                if (deleteMappingAnnotation != null) {
+                    methodType = new StringBuilder("DELETE");
+                }
+                if (putMappingAnnotation != null) {
+                    methodType = new StringBuilder("PUT");
+                }
+                if (requestMappingAnnotation != null && requestMappingAnnotation.method() != null) {
+                    if (requestMappingAnnotation.method().length > 0) {
+                        RequestMethod[] methods = requestMappingAnnotation.method();
+                        for (RequestMethod r : methods) {
+                            if (methodType.indexOf(r.name()) == -1) {
+                                methodType.append(",").append(r.name());
+                            }
+                        }
+                        if (methodType.charAt(0) == ',') {
+                            methodType.deleteCharAt(0);
+                        }
+                    }
+                }
+                // url
+                PatternsRequestCondition patternsCondition = m.getKey().getPatternsCondition();
+                String url = patternsCondition.toString();
+                apiPermission.method(methodType.toString()).url(url);
+                apiPermissionRepository.save(apiPermission.parent(apiPermissionEntity));
             }
         }
     }

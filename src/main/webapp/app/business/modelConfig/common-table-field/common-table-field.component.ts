@@ -83,7 +83,7 @@ export default class CommonTableFieldComponent extends mixins(Vue2Filters.mixin,
   public created(): void {
     this.initRelationships();
     if (this.commonTableId) {
-      this.mapOfFilter['commonTable'] = { list: [], value: this.commonTableId, type: 'many-to-one' };
+      this.mapOfFilter['commonTable'] = { list: [], value: [this.commonTableId], type: 'many-to-one' };
     }
   }
 
@@ -100,6 +100,9 @@ export default class CommonTableFieldComponent extends mixins(Vue2Filters.mixin,
     if (this.showInOther && !this.commonTableId) {
       return;
     }
+    this.mapOfFilter['commonTable'] = { list: [], value: [this.commonTableId], type: 'many-to-one' };
+    console.log('showInOther', this.showInOther);
+    console.log('this.commonTableId', this.commonTableId);
     this.loading = true;
 
     const paginationQuery = {
@@ -109,6 +112,7 @@ export default class CommonTableFieldComponent extends mixins(Vue2Filters.mixin,
       sort: this.sort(),
       filter: getFilter(this.searchValue, this.mapOfFilter)
     };
+    console.log(getFilter(this.searchValue, this.mapOfFilter));
     this.commonTableFieldService()
       .retrieve(paginationQuery)
       .subscribe(

@@ -76,6 +76,8 @@ class ApiPermissionGatlingTest extends Simulation {
                 , "code":"SAMPLE_TEXT"
                 , "description":"SAMPLE_TEXT"
                 , "type":"BUSINESS"
+                , "method":"SAMPLE_TEXT"
+                , "url":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_apiPermission_url"))).exitHereIfFailed

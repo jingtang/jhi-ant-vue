@@ -30,6 +30,10 @@ export default class ApiPermissionService {
     return Axios.delete(`${baseApiUrl}/${id}`);
   }
 
+  public generate(): Observable<AxiosResponse> {
+    return Axios.get(`${baseApiUrl}/generate`);
+  }
+
   deleteByIds(ids: string[]): Observable<AxiosResponse> {
     return Axios.delete(`${baseApiUrl}`, qs.stringify({ ids }, { indices: false }));
   }

@@ -43,6 +43,18 @@ public class ApiPermissionDTO implements Serializable {
     @ApiModelProperty(value = "类型")
     private ApiPermissionType type;
 
+    /**
+     * 请求类型
+     */
+    @ApiModelProperty(value = "请求类型")
+    private String method;
+
+    /**
+     * url 地址
+     */
+    @ApiModelProperty(value = "url 地址")
+    private String url;
+
 
     /**
      * 子节点
@@ -95,6 +107,22 @@ public class ApiPermissionDTO implements Serializable {
 
     public void setType(ApiPermissionType type) {
         this.type = type;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public LinkedHashSet<ApiPermissionDTO> getChildren() {
@@ -152,6 +180,8 @@ public class ApiPermissionDTO implements Serializable {
             ", code='" + getCode() + "'" +
             ", description='" + getDescription() + "'" +
             ", type='" + getType() + "'" +
+            ", method='" + getMethod() + "'" +
+            ", url='" + getUrl() + "'" +
             ", parent=" + getParentId() +
             ", parentName='" + getParentName() + "'" +
             "}";

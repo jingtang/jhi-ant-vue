@@ -20,7 +20,9 @@ const validations: any = {
     name: {},
     code: {},
     description: {},
-    type: {}
+    type: {},
+    method: {},
+    url: {}
   }
 };
 

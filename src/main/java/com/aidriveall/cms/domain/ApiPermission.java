@@ -58,6 +58,18 @@ public class ApiPermission implements Serializable {
     private ApiPermissionType type;
 
     /**
+     * 请求类型
+     */
+    @Column(name = "method")
+    private String method;
+
+    /**
+     * url 地址
+     */
+    @Column(name = "url")
+    private String url;
+
+    /**
      * 子节点
      */
     @OneToMany(mappedBy = "parent")
@@ -70,8 +82,6 @@ public class ApiPermission implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("children")
     private ApiPermission parent;
-
-
     @ManyToMany(mappedBy = "apiPermissions")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
@@ -136,6 +146,32 @@ public class ApiPermission implements Serializable {
 
     public void setType(ApiPermissionType type) {
         this.type = type;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public ApiPermission method(String method) {
+        this.method = method;
+        return this;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public ApiPermission url(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Set<ApiPermission> getChildren() {
@@ -227,6 +263,8 @@ public class ApiPermission implements Serializable {
             ", code='" + getCode() + "'" +
             ", description='" + getDescription() + "'" +
             ", type='" + getType() + "'" +
+            ", method='" + getMethod() + "'" +
+            ", url='" + getUrl() + "'" +
             "}";
     }
 }

@@ -369,4 +369,17 @@ export default class ApiPermissionComponent extends mixins(Vue2Filters.mixin, Al
     this.mapOfFilter[property] = { value: tempValues, type: type };
     this.loadAll();
   }
+
+  public switchFilterTree() {
+    this.filterTreeSpan = this.filterTreeSpan > 0 ? 0 : 6;
+  }
+
+  public generate() {
+    this.apiPermissionService()
+      .generate()
+      .subscribe(res => {
+        this.$message.success('更新成功');
+        this.loadAll();
+      });
+  }
 }

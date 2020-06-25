@@ -15,5 +15,10 @@ export default class ApiPermissionUpdatePage extends AlertPage {
   descriptionInput: ElementFinder = element(by.css('input#api-permission-description'));
 
   typeSelect = element(by.css('select#api-permission-type'));
+
+  methodInput: ElementFinder = element(by.css('input#api-permission-method'));
+
+  urlInput: ElementFinder = element(by.css('input#api-permission-url'));
+
   parentSelect = element(by.css('select#api-permission-parent'));
 }

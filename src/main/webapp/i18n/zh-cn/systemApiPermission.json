@@ -20,6 +20,8 @@
       "code": "权限代码(ROLE_开头)",
       "description": "权限描述",
       "type": "类型",
+      "method": "请求类型",
+      "url": "url 地址",
       "children": "子节点",
       "parent": "上级",
       "viewPermissions": "View Permissions",
@@ -27,7 +29,9 @@
         "name": "权限名称",
         "code": "权限代码(ROLE_开头)",
         "description": "权限描述",
-        "type": "类型"
+        "type": "类型",
+        "method": "请求类型",
+        "url": "url 地址"
       }
     }
   }

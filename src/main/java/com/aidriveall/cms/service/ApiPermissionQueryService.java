@@ -122,6 +122,12 @@ public class ApiPermissionQueryService extends QueryService<ApiPermission> {
                     specification = specification.or(buildStringSpecification(
                         new StringFilter().setContains(criteria.getJhiCommonSearchKeywords()),ApiPermission_.description)
                     );
+                    specification = specification.or(buildStringSpecification(
+                        new StringFilter().setContains(criteria.getJhiCommonSearchKeywords()),ApiPermission_.method)
+                    );
+                    specification = specification.or(buildStringSpecification(
+                        new StringFilter().setContains(criteria.getJhiCommonSearchKeywords()),ApiPermission_.url)
+                    );
                 }
             } else {
                 if (criteria.getId() != null) {
@@ -138,6 +144,12 @@ public class ApiPermissionQueryService extends QueryService<ApiPermission> {
                 }
                 if (criteria.getType() != null) {
                     specification = specification.and(buildSpecification(criteria.getType(), ApiPermission_.type));
+                }
+                if (criteria.getMethod() != null) {
+                    specification = specification.and(buildStringSpecification(criteria.getMethod(), ApiPermission_.method));
+                }
+                if (criteria.getUrl() != null) {
+                    specification = specification.and(buildStringSpecification(criteria.getUrl(), ApiPermission_.url));
                 }
                 if (criteria.getChildrenId() != null) {
                     specification = specification.and(buildSpecification(criteria.getChildrenId(),
@@ -203,6 +215,7 @@ public class ApiPermissionQueryService extends QueryService<ApiPermission> {
                 if (commonTableRelationship.getRelationshipType().equals(RelationshipType.ONE_TO_MANY) || commonTableRelationship.getRelationshipType().equals(RelationshipType.MANY_TO_MANY)) {
                     toManyRelationships.add(commonTableRelationship);
                 } else {
+                    root.join(commonTableRelationship.getRelationshipName(),JoinType.LEFT);
                     s.add(root.get(commonTableRelationship.getRelationshipName()).get("id")
                         .alias(commonTableRelationship.getRelationshipName() + "Id"));
                     s.add(root.get(commonTableRelationship.getRelationshipName()).get(commonTableRelationship.getOtherEntityField())

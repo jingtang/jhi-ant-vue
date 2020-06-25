@@ -155,13 +155,24 @@ public class ApiPermissionResource {
     }
 
     /**
+     * GET  /api-permissions/generate : regenerate all api permissions.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of apiPermissions in body
+     */
+    @GetMapping("/api-permissions/generate")
+    public ResponseEntity<Void> generate() {
+        log.debug("REST request to get a page of ApiPermissions");
+        apiPermissionService.regenerateApiPermissions();
+        return ResponseEntity.ok().build();
+    }
+
+    /**
      * {@code GET  /api-permissions/:id} : get the "id" apiPermission.
      *
      * @param id the id of the apiPermissionDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the apiPermissionDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/api-permissions/{id}")
-
     public ResponseEntity<ApiPermissionDTO> getApiPermission(@PathVariable Long id) {
         log.debug("REST request to get ApiPermission : {}", id);
         Optional<ApiPermissionDTO> apiPermissionDTO = apiPermissionService.findOne(id);

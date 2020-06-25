@@ -54,6 +54,10 @@ public class ApiPermissionCriteria implements Serializable, Criteria {
 
     private ApiPermissionTypeFilter type;
 
+    private StringFilter method;
+
+    private StringFilter url;
+
     private LongFilter childrenId;
 
     private LongFilter parentId;
@@ -69,6 +73,8 @@ public class ApiPermissionCriteria implements Serializable, Criteria {
         this.code = other.code == null ? null : other.code.copy();
         this.description = other.description == null ? null : other.description.copy();
         this.type = other.type == null ? null : other.type.copy();
+        this.method = other.method == null ? null : other.method.copy();
+        this.url = other.url == null ? null : other.url.copy();
         this.childrenId = other.childrenId == null ? null : other.childrenId.copy();
         this.parentId = other.parentId == null ? null : other.parentId.copy();
         this.viewPermissionsId = other.viewPermissionsId == null ? null : other.viewPermissionsId.copy();
@@ -119,6 +125,22 @@ public class ApiPermissionCriteria implements Serializable, Criteria {
         this.type = type;
     }
 
+    public StringFilter getMethod() {
+        return method;
+    }
+
+    public void setMethod(StringFilter method) {
+        this.method = method;
+    }
+
+    public StringFilter getUrl() {
+        return url;
+    }
+
+    public void setUrl(StringFilter url) {
+        this.url = url;
+    }
+
     public LongFilter getChildrenId() {
         return childrenId;
     }
@@ -166,6 +188,8 @@ public class ApiPermissionCriteria implements Serializable, Criteria {
             Objects.equals(code, that.code) &&
             Objects.equals(description, that.description) &&
             Objects.equals(type, that.type) &&
+            Objects.equals(method, that.method) &&
+            Objects.equals(url, that.url) &&
             Objects.equals(childrenId, that.childrenId) &&
             Objects.equals(parentId, that.parentId) &&
             Objects.equals(viewPermissionsId, that.viewPermissionsId);
@@ -179,6 +203,8 @@ public class ApiPermissionCriteria implements Serializable, Criteria {
         code,
         description,
         type,
+        method,
+        url,
         childrenId,
         parentId,
         viewPermissionsId
@@ -193,6 +219,8 @@ public class ApiPermissionCriteria implements Serializable, Criteria {
                 (code != null ? "code=" + code + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
                 (type != null ? "type=" + type + ", " : "") +
+                (method != null ? "method=" + method + ", " : "") +
+                (url != null ? "url=" + url + ", " : "") +
                 (childrenId != null ? "childrenId=" + childrenId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
                 (viewPermissionsId != null ? "viewPermissionsId=" + viewPermissionsId + ", " : "") +

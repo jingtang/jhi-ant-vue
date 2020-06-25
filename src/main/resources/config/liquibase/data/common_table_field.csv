@@ -247,3 +247,9 @@ id;title;entity_field_name;type;table_column_name;column_width;hide_in_list;comm
 246;结束时间;endTime;ZONED_DATE_TIME;end_time;100;false;33;true;false;false;NULL;5;false;NULL;false
 247;原因;reason;STRING;reason;100;false;33;true;false;false;NULL;6;false;NULL;false
 248;Id;id;LONG;id;100;false;4;true;false;true;NULL;0;false;NULL;false
+249;请求类型;method;STRING;method;100;false;10;true;false;false;NULL;1;false;NULL;false
+251;权限名称;name;STRING;name;100;false;10;true;false;false;NULL;1;false;NULL;true
+252;权限代码(ROLE_开头);code;STRING;code;100;false;10;true;false;false;NULL;2;false;NULL;false
+253;权限描述;description;STRING;description;100;false;10;true;false;false;NULL;3;false;NULL;false
+254;类型;type;ENUM;type;100;false;10;true;false;false;{"BUSINESS":"BUSINESS","API":"API"};4;false;NULL;false
+255;url 地址;url;STRING;url;100;false;10;true;false;false;NULL;5;false;NULL;false
