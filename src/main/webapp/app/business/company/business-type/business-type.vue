@@ -77,6 +77,11 @@
             </vxe-grid>
             </a-col>
         </a-row>
+        <a-modal title="新增或编辑" :visible="updateModalVisible"
+                 :destroyOnClose="true" :footer="null"
+                 @cancel="updateModalCancel" width="85%" :maskClosable="false">
+            <jhi-business-type-update @cancel="updateModalCancel" :showInModal="true" :updateEntityId="businessTypeId"/>
+        </a-modal>
     </a-card>
 </template>
 

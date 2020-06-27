@@ -43,7 +43,10 @@ export default class BusinessTypeComponent extends mixins(Vue2Filters.mixin, Ale
   public xGridFilterConfig = {
     remote: true
   };
-
+  public updateModalVisible: boolean = false;
+  public businessTypeId = null;
+  @Prop(Boolean) showInOther;
+  public editInModal = false;
   private removeId: number = null;
   public itemsPerPage = 20;
   public queryCount: number = null;
@@ -166,13 +169,19 @@ export default class BusinessTypeComponent extends mixins(Vue2Filters.mixin, Ale
   }
 
   public editEntity(row: IBusinessType): void {
-    this.$router.push({ path: row.id + '/edit', append: true });
+    if (this.showInOther || this.editInModal) {
+      this.businessTypeId = row.id;
+      this.updateModalVisible = true;
+    } else {
+      this.$router.push({ path: row.id + '/edit', append: true });
+    }
   }
 
   getCommonTableData() {
     this.commonTableService()
       .findByEntityName('BusinessType')
       .subscribe(res => {
+        this.editInModal = res.data.editInModal;
         this.xGridColumns = xGenerateTableColumns(res.data, this.relationshipsData, this.mapOfSort, this.mapOfFilter, this.changeEvent);
         this.treeFilterData = xGenerateFilterTree(res.data, this.relationshipsData);
         if (res.data.treeTable) {
@@ -223,7 +232,11 @@ export default class BusinessTypeComponent extends mixins(Vue2Filters.mixin, Ale
   }
 
   public newEntity(): void {
-    this.$router.push({ path: 'new', append: true });
+    if (this.showInOther || this.editInModal) {
+      this.updateModalVisible = true;
+    } else {
+      this.$router.push({ path: 'new', append: true });
+    }
   }
   public onExpand(expandedKeys) {
     console.log('onExpand', expandedKeys);
@@ -317,6 +330,11 @@ export default class BusinessTypeComponent extends mixins(Vue2Filters.mixin, Ale
       tempValues = datas[0];
     }
     this.mapOfFilter[property] = { value: tempValues, type: type };
+    this.loadAll();
+  }
+
+  public updateModalCancel() {
+    this.updateModalVisible = false;
     this.loadAll();
   }
 }
