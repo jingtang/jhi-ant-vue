@@ -132,6 +132,12 @@ public class CommonTable implements Serializable {
     private String formConfig;
 
     /**
+     * 弹窗编辑
+     */
+    @Column(name = "edit_in_modal")
+    private Boolean editInModal;
+
+    /**
      * 字段
      */
     @OneToMany(mappedBy = "commonTable")
@@ -364,6 +370,19 @@ public class CommonTable implements Serializable {
         this.formConfig = formConfig;
     }
 
+    public Boolean isEditInModal() {
+        return editInModal;
+    }
+
+    public CommonTable editInModal(Boolean editInModal) {
+        this.editInModal = editInModal;
+        return this;
+    }
+
+    public void setEditInModal(Boolean editInModal) {
+        this.editInModal = editInModal;
+    }
+
     public Set<CommonTableField> getCommonTableFields() {
         return commonTableFields;
     }
@@ -477,6 +496,7 @@ public class CommonTable implements Serializable {
             ", recordActionWidth=" + getRecordActionWidth() +
             ", listConfig='" + getListConfig() + "'" +
             ", formConfig='" + getFormConfig() + "'" +
+            ", editInModal='" + isEditInModal() + "'" +
             "}";
     }
 }

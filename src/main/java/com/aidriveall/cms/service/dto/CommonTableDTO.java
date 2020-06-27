@@ -122,6 +122,11 @@ public class CommonTableDTO implements Serializable {
     @Lob
     private String formConfig;
 
+    /**
+     * 弹窗编辑
+     */
+    @ApiModelProperty(value = "弹窗编辑")
+    private Boolean editInModal;
 
     /**
      * 字段
@@ -276,6 +281,14 @@ public class CommonTableDTO implements Serializable {
         this.formConfig = formConfig;
     }
 
+    public Boolean isEditInModal() {
+        return editInModal;
+    }
+
+    public void setEditInModal(Boolean editInModal) {
+        this.editInModal = editInModal;
+    }
+
     public LinkedHashSet<CommonTableFieldDTO> getCommonTableFields() {
         return this.commonTableFields;
     }
@@ -306,7 +319,7 @@ public class CommonTableDTO implements Serializable {
     public void setCreatorImageUrl(String userImageUrl) {
         this.creatorImageUrl = userImageUrl;
     }
-    
+
     public String getCreatorLogin() {
         return creatorLogin;
     }
@@ -322,7 +335,7 @@ public class CommonTableDTO implements Serializable {
     public void setBusinessTypeId(Long businessTypeId) {
         this.businessTypeId = businessTypeId;
     }
-    
+
     public String getBusinessTypeName() {
         return businessTypeName;
     }
@@ -373,6 +386,7 @@ public class CommonTableDTO implements Serializable {
             ", recordActionWidth=" + getRecordActionWidth() +
             ", listConfig='" + getListConfig() + "'" +
             ", formConfig='" + getFormConfig() + "'" +
+            ", editInModal='" + isEditInModal() + "'" +
             ", creator=" + getCreatorId() +
             ", creatorLogin='" + getCreatorLogin() + "'" +
             ", businessType=" + getBusinessTypeId() +

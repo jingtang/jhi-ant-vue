@@ -19,6 +19,7 @@ export interface ICommonTable {
   recordActionWidth?: number;
   listConfig?: any;
   formConfig?: any;
+  editInModal?: boolean;
   commonTableFields?: ICommonTableField[];
   relationships?: ICommonTableRelationship[];
   creatorLogin?: string;
@@ -45,6 +46,7 @@ export class CommonTable implements ICommonTable {
     public recordActionWidth?: number,
     public listConfig?: any,
     public formConfig?: any,
+    public editInModal?: boolean,
     public commonTableFields?: ICommonTableField[],
     public relationships?: ICommonTableRelationship[],
     public creatorLogin?: string,
@@ -55,5 +57,6 @@ export class CommonTable implements ICommonTable {
     this.system = this.system || false;
     this.generated = this.generated || false;
     this.treeTable = this.treeTable || false;
+    this.editInModal = this.editInModal || false;
   }
 }

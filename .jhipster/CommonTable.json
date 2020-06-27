@@ -101,6 +101,11 @@
             "javadoc": "前端表单配置",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "text"
+        },
+        {
+          "fieldName": "editInModal",
+          "javadoc": "弹窗编辑",
+          "fieldType": "Boolean"
         }
     ],
     "relationships": [

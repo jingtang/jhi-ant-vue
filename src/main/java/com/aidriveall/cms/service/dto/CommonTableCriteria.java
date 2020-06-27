@@ -54,6 +54,8 @@ public class CommonTableCriteria implements Serializable, Criteria {
 
     private IntegerFilter recordActionWidth;
 
+    private BooleanFilter editInModal;
+
     private LongFilter commonTableFieldsId;
 
     private LongFilter relationshipsId;
@@ -80,6 +82,7 @@ public class CommonTableCriteria implements Serializable, Criteria {
         this.treeTable = other.treeTable == null ? null : other.treeTable.copy();
         this.baseTableId = other.baseTableId == null ? null : other.baseTableId.copy();
         this.recordActionWidth = other.recordActionWidth == null ? null : other.recordActionWidth.copy();
+        this.editInModal = other.editInModal == null ? null : other.editInModal.copy();
         this.commonTableFieldsId = other.commonTableFieldsId == null ? null : other.commonTableFieldsId.copy();
         this.relationshipsId = other.relationshipsId == null ? null : other.relationshipsId.copy();
         this.creatorId = other.creatorId == null ? null : other.creatorId.copy();
@@ -203,6 +206,14 @@ public class CommonTableCriteria implements Serializable, Criteria {
         this.recordActionWidth = recordActionWidth;
     }
 
+    public BooleanFilter getEditInModal() {
+        return editInModal;
+    }
+
+    public void setEditInModal(BooleanFilter editInModal) {
+        this.editInModal = editInModal;
+    }
+
     public LongFilter getCommonTableFieldsId() {
         return commonTableFieldsId;
     }
@@ -267,6 +278,7 @@ public class CommonTableCriteria implements Serializable, Criteria {
             Objects.equals(treeTable, that.treeTable) &&
             Objects.equals(baseTableId, that.baseTableId) &&
             Objects.equals(recordActionWidth, that.recordActionWidth) &&
+            Objects.equals(editInModal, that.editInModal) &&
             Objects.equals(commonTableFieldsId, that.commonTableFieldsId) &&
             Objects.equals(relationshipsId, that.relationshipsId) &&
             Objects.equals(creatorId, that.creatorId) &&
@@ -290,6 +302,7 @@ public class CommonTableCriteria implements Serializable, Criteria {
         treeTable,
         baseTableId,
         recordActionWidth,
+        editInModal,
         commonTableFieldsId,
         relationshipsId,
         creatorId,
@@ -314,6 +327,7 @@ public class CommonTableCriteria implements Serializable, Criteria {
                 (treeTable != null ? "treeTable=" + treeTable + ", " : "") +
                 (baseTableId != null ? "baseTableId=" + baseTableId + ", " : "") +
                 (recordActionWidth != null ? "recordActionWidth=" + recordActionWidth + ", " : "") +
+                (editInModal != null ? "editInModal=" + editInModal + ", " : "") +
                 (commonTableFieldsId != null ? "commonTableFieldsId=" + commonTableFieldsId + ", " : "") +
                 (relationshipsId != null ? "relationshipsId=" + relationshipsId + ", " : "") +
                 (creatorId != null ? "creatorId=" + creatorId + ", " : "") +

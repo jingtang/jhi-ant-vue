@@ -253,3 +253,4 @@ id;title;entity_field_name;type;table_column_name;column_width;hide_in_list;comm
 253;权限描述;description;STRING;description;100;false;10;true;false;false;NULL;3;false;NULL;false
 254;类型;type;ENUM;type;100;false;10;true;false;false;{"BUSINESS":"BUSINESS","API":"API"};4;false;NULL;false
 255;url 地址;url;STRING;url;100;false;10;true;false;false;NULL;5;false;NULL;false
+256;弹窗编辑;editInModal;BOOLEAN;edit_in_modal;100;false;11;true;false;false;NULL;16;false;NULL;false

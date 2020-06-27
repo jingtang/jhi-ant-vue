@@ -16,6 +16,7 @@ entity CommonTable {
 	recordActionWidth Integer /** 操作栏宽度 */
 	listConfig TextBlob /** 前端列表配置 */
 	formConfig TextBlob /** 前端表单配置 */
+	editInModal Boolean /** 弹窗编辑 */
 }
 
 /** 模型字段 */
