@@ -37,6 +37,7 @@ export default class UReportFileUpdate extends mixins(JhiDataUtils) {
   @Inject('uReportFileService') private uReportFileService: () => UReportFileService;
   public uReportFile: IUReportFile = new UReportFile();
   @Prop(Boolean) showInModal;
+  @Prop(Number) updateEntityId;
   @Inject('commonTableService') private commonTableService: () => CommonTableService;
 
   public commonTables: ICommonTable[] = [];
@@ -62,6 +63,9 @@ export default class UReportFileUpdate extends mixins(JhiDataUtils) {
     // 判断是否从路由中获得实体id
     if (this.$route.params.uReportFileId) {
       this.uReportFileId = this.$route.params.uReportFileId;
+    }
+    if (this.updateEntityId) {
+      this.uReportFileId = this.updateEntityId;
     }
     this.initRelationships();
   }

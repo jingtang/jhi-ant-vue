@@ -76,7 +76,6 @@ export default class UReportFileComponent extends mixins(JhiDataUtils, Vue2Filte
   public editStatus: { [key: string]: any } = {};
   public isFetching = false;
   public searchValue = '';
-  commontablesNzTreeNodes: any[]; // todo 有时可能多余。
   commontables: ICommonTable[];
 
   public created(): void {

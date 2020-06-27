@@ -97,13 +97,10 @@
         >
             <iframe :src="reportUrl" width="100%" height="100%" seamless title="Swagger UI"></iframe>
         </a-drawer>
-        <a-modal title="新增或编辑" :visible="updateModalVisible"
-                 :destroyOnClose="true" :footer="null"
+        <a-modal title="新增或编辑" :visible="updateModalVisible" :destroyOnClose="true" :footer="null"
                  @cancel="updateModalCancel" width="85%" :maskClosable="false">
-            <jhi-u-report-file-update :commonTableId="commonTableId"
-                                       @cancel="updateModalCancel" :showInModal="true" :uReportFileId="clickUReportFileId"/>
+            <jhi-u-report-file-update @cancel="updateModalCancel" :showInModal="true" :updateEntityId="clickUReportFileId"/>
         </a-modal>
-
     </a-card>
 </template>
 
