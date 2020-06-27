@@ -32,6 +32,8 @@ export default class BusinessTypeUpdate extends Vue {
   public isSaving = false;
   public loading = false;
   @Ref('updateForm') readonly updateForm: any;
+  @Prop(Number) updateEntityId;
+  @Prop(Boolean) showInModal;
   public formJsonData = {
     list: [],
     config: {
@@ -52,6 +54,7 @@ export default class BusinessTypeUpdate extends Vue {
     if (this.$route.params.businessTypeId) {
       this.businessTypeId = this.$route.params.businessTypeId;
     }
+    this.initRelationships();
   }
 
   public mounted(): void {}
@@ -78,7 +81,11 @@ export default class BusinessTypeUpdate extends Vue {
           this.isSaving = false;
           const message = this.$t('jhiAntVueApp.companyBusinessType.updated', { param: param.data.id }).toString();
           this.alertService().showAlert(message, 'info');
-          this.$router.go(-1);
+          if (this.showInModal) {
+            this.$emit('cancel', true);
+          } else {
+            this.$router.go(-1);
+          }
         });
     } else {
       this.businessTypeService()
@@ -87,7 +94,11 @@ export default class BusinessTypeUpdate extends Vue {
           this.isSaving = false;
           const message = this.$t('jhiAntVueApp.companyBusinessType.created', { param: param.data.id }).toString();
           this.alertService().showAlert(message, 'success');
-          this.$router.go(-1);
+          if (this.showInModal) {
+            this.$emit('cancel', true);
+          } else {
+            this.$router.go(-1);
+          }
         });
     }
   }
@@ -102,13 +113,19 @@ export default class BusinessTypeUpdate extends Vue {
   }
 
   public previousState(): void {
-    this.$router.go(-1);
+    if (this.showInModal) {
+      this.$emit('cancel', true);
+    } else {
+      this.$router.go(-1);
+    }
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.getData();
+  }
   public getData() {
-    if (this.businessTypeId) {
-      this.retrieveBusinessType(this.businessTypeId);
+    if (this.businessTypeId || this.updateEntityId) {
+      this.retrieveBusinessType(this.businessTypeId || this.updateEntityId);
     } else {
       this.getFormData();
     }
