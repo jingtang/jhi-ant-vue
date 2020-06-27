@@ -165,8 +165,6 @@ public class UReportFileQueryService extends QueryService<UReportFile> {
     public Page<UReportFileDTO> selectByCustomEntity(String entityName, UReportFileCriteria criteria, Predicate predicate, Pageable pageable) {
         List<UReportFileDTO> dataList = new ArrayList<>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-        Root<UReportFile> countRoot = countQuery.from(UReportFile.class);
         CriteriaQuery<Tuple> q = cb.createTupleQuery();
         Root<UReportFile> root = q.from(UReportFile.class);
         if (StringUtils.isEmpty(entityName)) {
@@ -196,18 +194,15 @@ public class UReportFileQueryService extends QueryService<UReportFile> {
             });
         }
         s.addAll(fields.stream().map(fieldName -> root.get(fieldName).alias(fieldName)).collect(Collectors.toList()));
-        countQuery.select(cb.countDistinct(countRoot.get("id")));
         q.multiselect(s);
         Predicate criteriaPredicate = createSpecification(criteria).toPredicate(root, q, cb);
         if (criteriaPredicate != null) {
             q.where(criteriaPredicate);
-            countQuery.where(criteriaPredicate);
         } else if (predicate != null) {
             q.where(predicate);
-            countQuery.where(predicate);
         }
         q.distinct(true);
-        Long totalItems = em.createQuery(countQuery).getSingleResult();
+        long totalItems = countByCriteria(criteria);
         if (totalItems > 0) {
             if (pageable != null) {
                 List<Order> orders = new ArrayList<>();

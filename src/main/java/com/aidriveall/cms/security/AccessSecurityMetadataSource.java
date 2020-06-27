@@ -3,11 +3,8 @@ package com.aidriveall.cms.security;
 import com.aidriveall.cms.domain.enumeration.ApiPermissionType;
 import com.aidriveall.cms.service.ApiPermissionService;
 import com.aidriveall.cms.service.dto.ApiPermissionDTO;
-import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -15,7 +12,6 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;

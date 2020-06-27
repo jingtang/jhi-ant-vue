@@ -183,8 +183,6 @@ public class ProcessTableConfigQueryService extends QueryService<ProcessTableCon
     public Page<ProcessTableConfigDTO> selectByCustomEntity(String entityName, ProcessTableConfigCriteria criteria, Predicate predicate, Pageable pageable) {
         List<ProcessTableConfigDTO> dataList = new ArrayList<>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-        Root<ProcessTableConfig> countRoot = countQuery.from(ProcessTableConfig.class);
         CriteriaQuery<Tuple> q = cb.createTupleQuery();
         Root<ProcessTableConfig> root = q.from(ProcessTableConfig.class);
         if (StringUtils.isEmpty(entityName)) {
@@ -213,18 +211,15 @@ public class ProcessTableConfigQueryService extends QueryService<ProcessTableCon
             });
         }
         s.addAll(fields.stream().map(fieldName -> root.get(fieldName).alias(fieldName)).collect(Collectors.toList()));
-        countQuery.select(cb.countDistinct(countRoot.get("id")));
         q.multiselect(s);
         Predicate criteriaPredicate = createSpecification(criteria).toPredicate(root, q, cb);
         if (criteriaPredicate != null) {
             q.where(criteriaPredicate);
-            countQuery.where(criteriaPredicate);
         } else if (predicate != null) {
             q.where(predicate);
-            countQuery.where(predicate);
         }
         q.distinct(true);
-        Long totalItems = em.createQuery(countQuery).getSingleResult();
+        long totalItems = countByCriteria(criteria);
         if (totalItems > 0) {
             if (pageable != null) {
                 List<Order> orders = new ArrayList<>();

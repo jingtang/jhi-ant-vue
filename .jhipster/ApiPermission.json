@@ -21,6 +21,16 @@
             "javadoc": "类型",
             "fieldType": "ApiPermissionType",
             "fieldValues": "BUSINESS,API"
+        },
+        {
+            "fieldName": "method",
+            "javadoc": "请求类型",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "url",
+            "javadoc": "url 地址",
+            "fieldType": "String"
         }
     ],
     "relationships": [
@@ -48,7 +58,7 @@
             "ownerSide": false
         }
     ],
-    "changelogDate": "20200621082800",
+    "changelogDate": "20200625075900",
     "javadoc": "API权限\\n菜单或按钮下有相关的api权限",
     "entityTableName": "api_permission",
     "dto": "mapstruct",

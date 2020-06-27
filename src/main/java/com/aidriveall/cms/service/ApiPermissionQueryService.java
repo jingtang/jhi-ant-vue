@@ -193,8 +193,6 @@ public class ApiPermissionQueryService extends QueryService<ApiPermission> {
     public Page<ApiPermissionDTO> selectByCustomEntity(String entityName, ApiPermissionCriteria criteria, Predicate predicate, Pageable pageable) {
         List<ApiPermissionDTO> dataList = new ArrayList<>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-        Root<ApiPermission> countRoot = countQuery.from(ApiPermission.class);
         CriteriaQuery<Tuple> q = cb.createTupleQuery();
         Root<ApiPermission> root = q.from(ApiPermission.class);
         if (StringUtils.isEmpty(entityName)) {
@@ -224,18 +222,15 @@ public class ApiPermissionQueryService extends QueryService<ApiPermission> {
             });
         }
         s.addAll(fields.stream().map(fieldName -> root.get(fieldName).alias(fieldName)).collect(Collectors.toList()));
-        countQuery.select(cb.countDistinct(countRoot.get("id")));
         q.multiselect(s);
         Predicate criteriaPredicate = createSpecification(criteria).toPredicate(root, q, cb);
         if (criteriaPredicate != null) {
             q.where(criteriaPredicate);
-            countQuery.where(criteriaPredicate);
         } else if (predicate != null) {
             q.where(predicate);
-            countQuery.where(predicate);
         }
         q.distinct(true);
-        Long totalItems = em.createQuery(countQuery).getSingleResult();
+        long totalItems = countByCriteria(criteria);
         if (totalItems > 0) {
             if (pageable != null) {
                 List<Order> orders = new ArrayList<>();

@@ -246,8 +246,6 @@ public class ViewPermissionQueryService extends QueryService<ViewPermission> {
     public Page<ViewPermissionDTO> selectByCustomEntity(String entityName, ViewPermissionCriteria criteria, Predicate predicate, Pageable pageable) {
         List<ViewPermissionDTO> dataList = new ArrayList<>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-        Root<ViewPermission> countRoot = countQuery.from(ViewPermission.class);
         CriteriaQuery<Tuple> q = cb.createTupleQuery();
         Root<ViewPermission> root = q.from(ViewPermission.class);
         if (StringUtils.isEmpty(entityName)) {
@@ -268,6 +266,7 @@ public class ViewPermissionQueryService extends QueryService<ViewPermission> {
                 if (commonTableRelationship.getRelationshipType().equals(RelationshipType.ONE_TO_MANY) || commonTableRelationship.getRelationshipType().equals(RelationshipType.MANY_TO_MANY)) {
                     toManyRelationships.add(commonTableRelationship);
                 } else {
+                    root.join(commonTableRelationship.getRelationshipName(),JoinType.LEFT);
                     s.add(root.get(commonTableRelationship.getRelationshipName()).get("id")
                         .alias(commonTableRelationship.getRelationshipName() + "Id"));
                     s.add(root.get(commonTableRelationship.getRelationshipName()).get(commonTableRelationship.getOtherEntityField())
@@ -276,18 +275,15 @@ public class ViewPermissionQueryService extends QueryService<ViewPermission> {
             });
         }
         s.addAll(fields.stream().map(fieldName -> root.get(fieldName).alias(fieldName)).collect(Collectors.toList()));
-        countQuery.select(cb.countDistinct(countRoot.get("id")));
         q.multiselect(s);
         Predicate criteriaPredicate = createSpecification(criteria).toPredicate(root, q, cb);
         if (criteriaPredicate != null) {
             q.where(criteriaPredicate);
-            countQuery.where(criteriaPredicate);
         } else if (predicate != null) {
             q.where(predicate);
-            countQuery.where(predicate);
         }
         q.distinct(true);
-        Long totalItems = em.createQuery(countQuery).getSingleResult();
+        long totalItems = countByCriteria(criteria);
         if (totalItems > 0) {
             if (pageable != null) {
                 List<Order> orders = new ArrayList<>();

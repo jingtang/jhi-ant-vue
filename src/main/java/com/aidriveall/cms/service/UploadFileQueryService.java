@@ -216,8 +216,6 @@ public class UploadFileQueryService extends QueryService<UploadFile> {
     public Page<UploadFileDTO> selectByCustomEntity(String entityName, UploadFileCriteria criteria, Predicate predicate, Pageable pageable) {
         List<UploadFileDTO> dataList = new ArrayList<>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-        Root<UploadFile> countRoot = countQuery.from(UploadFile.class);
         CriteriaQuery<Tuple> q = cb.createTupleQuery();
         Root<UploadFile> root = q.from(UploadFile.class);
         if (StringUtils.isEmpty(entityName)) {
@@ -246,18 +244,15 @@ public class UploadFileQueryService extends QueryService<UploadFile> {
             });
         }
         s.addAll(fields.stream().map(fieldName -> root.get(fieldName).alias(fieldName)).collect(Collectors.toList()));
-        countQuery.select(cb.countDistinct(countRoot.get("id")));
         q.multiselect(s);
         Predicate criteriaPredicate = createSpecification(criteria).toPredicate(root, q, cb);
         if (criteriaPredicate != null) {
             q.where(criteriaPredicate);
-            countQuery.where(criteriaPredicate);
         } else if (predicate != null) {
             q.where(predicate);
-            countQuery.where(predicate);
         }
         q.distinct(true);
-        Long totalItems = em.createQuery(countQuery).getSingleResult();
+        long totalItems = countByCriteria(criteria);
         if (totalItems > 0) {
             if (pageable != null) {
                 List<Order> orders = new ArrayList<>();

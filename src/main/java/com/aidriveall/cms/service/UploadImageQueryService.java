@@ -228,8 +228,6 @@ public class UploadImageQueryService extends QueryService<UploadImage> {
     public Page<UploadImageDTO> selectByCustomEntity(String entityName, UploadImageCriteria criteria, Predicate predicate, Pageable pageable) {
         List<UploadImageDTO> dataList = new ArrayList<>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-        Root<UploadImage> countRoot = countQuery.from(UploadImage.class);
         CriteriaQuery<Tuple> q = cb.createTupleQuery();
         Root<UploadImage> root = q.from(UploadImage.class);
         if (StringUtils.isEmpty(entityName)) {
@@ -250,6 +248,7 @@ public class UploadImageQueryService extends QueryService<UploadImage> {
                 if (commonTableRelationship.getRelationshipType().equals(RelationshipType.ONE_TO_MANY) || commonTableRelationship.getRelationshipType().equals(RelationshipType.MANY_TO_MANY)) {
                     toManyRelationships.add(commonTableRelationship);
                 } else {
+                    root.join(commonTableRelationship.getRelationshipName(),JoinType.LEFT);
                     s.add(root.get(commonTableRelationship.getRelationshipName()).get("id")
                         .alias(commonTableRelationship.getRelationshipName() + "Id"));
                     s.add(root.get(commonTableRelationship.getRelationshipName()).get(commonTableRelationship.getOtherEntityField())
@@ -258,18 +257,15 @@ public class UploadImageQueryService extends QueryService<UploadImage> {
             });
         }
         s.addAll(fields.stream().map(fieldName -> root.get(fieldName).alias(fieldName)).collect(Collectors.toList()));
-        countQuery.select(cb.countDistinct(countRoot.get("id")));
         q.multiselect(s);
         Predicate criteriaPredicate = createSpecification(criteria).toPredicate(root, q, cb);
         if (criteriaPredicate != null) {
             q.where(criteriaPredicate);
-            countQuery.where(criteriaPredicate);
         } else if (predicate != null) {
             q.where(predicate);
-            countQuery.where(predicate);
         }
         q.distinct(true);
-        Long totalItems = em.createQuery(countQuery).getSingleResult();
+        long totalItems = countByCriteria(criteria);
         if (totalItems > 0) {
             if (pageable != null) {
                 List<Order> orders = new ArrayList<>();
