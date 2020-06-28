@@ -2,17 +2,18 @@ package com.aidriveall.cms.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.aidriveall.cms.domain.enumeration.ApiPermissionType;
+import org.hibernate.annotations.Cache;
 
 /**
  * API权限
