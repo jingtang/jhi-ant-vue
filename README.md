@@ -78,7 +78,7 @@
 微信交流群：
 
 <div align="left">
-	<img src="doc/image/wx.png" width="200">
+	<img src="doc/image/wx.jpeg" width="200">
 </div>
 
 ## 部分截图，演示后续再上吧。
