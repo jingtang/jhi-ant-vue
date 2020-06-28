@@ -3,7 +3,9 @@
 entity UReportFile {
     name String /** 名称 */
     content TextBlob /** 内容 */
+    @CreatedDate
     createAt ZonedDateTime /** 创建时间 */
+    @LastModifiedDate
     updateAt ZonedDateTime /** 更新时间 */
 }
 

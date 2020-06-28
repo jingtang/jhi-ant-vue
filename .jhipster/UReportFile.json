@@ -15,12 +15,18 @@
         {
             "fieldName": "createAt",
             "javadoc": "创建时间",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "ZonedDateTime",
+            "options": {
+                "CreatedDate": true
+            }
         },
         {
             "fieldName": "updateAt",
             "javadoc": "更新时间",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "ZonedDateTime",
+            "options": {
+                "LastModifiedDate": true
+            }
         }
     ],
     "relationships": [
