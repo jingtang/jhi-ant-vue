@@ -358,6 +358,7 @@
       "
       :disabled="disabled || record.options.disabled"
       :allowClear="record.options.clearable"
+      :replaceFields="record.options.replaceFields"
       @change="handleChange($event, record.model)"
       v-decorator="[
         record.model,

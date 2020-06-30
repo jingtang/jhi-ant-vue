@@ -11,6 +11,7 @@ function getDefaultItemData(key: string) {
   return cloneDeep(basicsList.find(item => item.type === key));
 }
 
+/** 生成表单配置数据 */
 export function generateDataForDesigner(commonTableData: ICommonTable) {
   const dataContent = [];
   if (commonTableData.commonTableFields) {
@@ -163,16 +164,16 @@ export function generateDataForDesigner(commonTableData: ICommonTable) {
               }
               default: {
                 if (relationship.otherEntityIsTree) {
-                  const item = getDefaultItemData('modalSelect');
+                  const item = getDefaultItemData('treeSelect');
                   item.label = relationship.name;
                   item.model = relationship.relationshipName + 'Id';
                   item.key = relationship.relationshipName + 'Id';
+                  item.options.multiple = false;
                   item.options.dynamic = true;
                   item.options.dynamicKey = relationship.dataName;
-                  item.options.selectListName = 'jhi-' + kebabCase(relationship.otherEntityName);
-                  item.commonTableName = relationship.otherEntityName;
-                  item.options.valueField = 'id';
-                  item.options.labelField = relationship.otherEntityField;
+                  item.options.replaceFields.key = 'id';
+                  item.options.replaceFields.value = 'id';
+                  item.options.replaceFields.title = relationship.otherEntityField;
                   dataContent.push(item);
                 } else {
                   const item = getDefaultItemData('modalSelect');
@@ -192,16 +193,32 @@ export function generateDataForDesigner(commonTableData: ICommonTable) {
             break;
           case RelationshipType.MANY_TO_MANY:
             if (relationship.ownerSide === true) {
-              const item = getDefaultItemData('customSelect');
-              item.label = relationship.name;
-              item.model = relationship.relationshipName + 'Id';
-              item.key = relationship.relationshipName + 'Id';
-              item.options.multiple = true;
-              item.options.dynamic = true;
-              item.options.dynamicKey = relationship.dataName;
-              item.options.valueField = 'id';
-              item.options.labelField = relationship.otherEntityField;
-              dataContent.push(item);
+              if (relationship.otherEntityIsTree) {
+                const item = getDefaultItemData('treeSelect');
+                item.label = relationship.name;
+                item.model = relationship.relationshipName + 'Id';
+                item.key = relationship.relationshipName + 'Id';
+                item.options.multiple = true;
+                item.options.dynamic = true;
+                item.options.dynamicKey = relationship.dataName;
+                item.options.replaceFields.key = 'id';
+                item.options.replaceFields.value = 'id';
+                item.options.replaceFields.title = relationship.otherEntityField;
+                // item.options.valueField = 'id';
+                // item.options.labelField = relationship.otherEntityField;
+                dataContent.push(item);
+              } else {
+                const item = getDefaultItemData('customSelect');
+                item.label = relationship.name;
+                item.model = relationship.relationshipName + 'Id';
+                item.key = relationship.relationshipName + 'Id';
+                item.options.multiple = true;
+                item.options.dynamic = true;
+                item.options.dynamicKey = relationship.dataName;
+                item.options.valueField = 'id';
+                item.options.labelField = relationship.otherEntityField;
+                dataContent.push(item);
+              }
             }
             break;
           case RelationshipType.ONE_TO_ONE:

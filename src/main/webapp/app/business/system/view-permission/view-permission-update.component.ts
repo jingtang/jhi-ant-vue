@@ -143,7 +143,9 @@ export default class ViewPermissionUpdate extends Vue {
     forkJoin([this.apiPermissionService().tree(), this.viewPermissionService().tree(), this.authorityService().tree()]).subscribe(
       ([apiPermissionsRes, viewPermissionsRes, authoritiesRes]) => {
         this.relationshipsData['apiPermissions'] = apiPermissionsRes.data;
+        console.log('apiPermissions', apiPermissionsRes.data);
         this.relationshipsData['viewPermissions'] = viewPermissionsRes.data;
+        console.log('viewPermissions', viewPermissionsRes.data);
         this.relationshipsData['authorities'] = authoritiesRes.data;
         this.getData();
       },
@@ -200,8 +202,8 @@ export default class ViewPermissionUpdate extends Vue {
             this.formJsonData = JSON.parse(commonTableData.formConfig);
           } else {
             this.formJsonData.list = generateDataForDesigner(commonTableData);
-            console.log(this.formJsonData);
           }
+          console.log(this.formJsonData);
           this.viewPermission = getDataByFormField(this.formJsonData.list, this.viewPermission);
           this.$nextTick(() => {
             this.updateForm.setData(this.viewPermission); // loadsh的pick方法

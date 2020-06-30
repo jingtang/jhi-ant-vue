@@ -5,6 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -18,6 +22,7 @@ import java.time.ZonedDateTime;
 @Table(name = "u_report_file")
 @DynamicInsert
 @DynamicUpdate
+@EntityListeners(AuditingEntityListener.class)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class UReportFile implements Serializable {
 
@@ -43,6 +48,7 @@ public class UReportFile implements Serializable {
     /**
      * 创建时间
      */
+    @CreatedDate
     @Column(name = "create_at")
     private ZonedDateTime createAt;
 
@@ -50,6 +56,7 @@ public class UReportFile implements Serializable {
      * 更新时间
      */
     @Column(name = "update_at")
+    @LastModifiedDate
     private ZonedDateTime updateAt;
 
     /**
