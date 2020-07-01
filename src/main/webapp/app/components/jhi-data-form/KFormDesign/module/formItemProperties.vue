@@ -42,6 +42,9 @@
                 >
                     <a-input placeholder="请输入" v-model="options.placeholder"/>
                 </a-form-item>
+                <a-form-item label="显示控件表达式">
+                    <a-input placeholder="空为正常显示" v-model="options.showExpression"/>
+                </a-form-item>
                 <a-form-item
                     v-if="selectItem.type === 'textarea'"
                     label="自适应内容高度"

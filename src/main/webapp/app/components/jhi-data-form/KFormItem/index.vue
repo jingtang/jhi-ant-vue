@@ -28,6 +28,7 @@
         'treeSelect'
       ].includes(record.type)
     "
+    v-show="evil(record.options.showExpression)"
     :label="record.label"
     :label-col="config.layout === 'horizontal' ? (record.options.labelColSpan ? {span : record.options.labelColSpan} : config.labelCol) : {}"
     :wrapper-col="config.layout === 'horizontal' ? (record.options.labelColSpan ? {span : 24- record.options.labelColSpan} : config.wrapperCol) : {}"
@@ -523,22 +524,28 @@
   </div>
 </template>
 <script>
-/*
- * author kcz
- * date 2019-11-20
- */
-// import moment from "moment";
-import customComponent from "./customComponent";
+    /*
+     * author kcz
+     * date 2019-11-20
+     */
+    // import moment from "moment";
+    import customComponent from "./customComponent";
 
-import KBatch from "../KBatch";
-import KEditor from "../KEditor";
-import UploadFile from "../UploadFile";
-import UploadImg from "../UploadImg";
-import KDatePicker from "../KDatePicker";
-import KTimePicker from "../KTimePicker";
-export default {
+    import KBatch from "../KBatch";
+    import KEditor from "../KEditor";
+    import UploadFile from "../UploadFile";
+    import UploadImg from "../UploadImg";
+    import KDatePicker from "../KDatePicker";
+    import KTimePicker from "../KTimePicker";
+
+    export default {
   name: "KFormItem",
   props: {
+      // 所属的Form
+      myForm: {
+          type: Object,
+          default: () => {}
+      },
     // 表单数组
     record: {
       type: Object,
@@ -579,6 +586,14 @@ export default {
     }
   },
   methods: {
+      evil(fn) {
+          if (fn && this.myForm && Object.keys(this.myForm).length > 0) {
+              console.log('fn');
+              return new Function('return ' + fn).call(this);
+          } else {
+              return true;
+          }
+      },
     validationSubform() {
       // 验证动态表格
       if (!this.$refs.KBatch) return true;

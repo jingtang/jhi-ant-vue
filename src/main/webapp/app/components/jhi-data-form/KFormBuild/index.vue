@@ -20,6 +20,7 @@
         :disabled="disabled"
         :config="value.config"
         :key="index"
+        :my-form="form"
         @change="handleChange"
       />
     </a-form>

@@ -86,6 +86,7 @@
     :key="record.key"
     :record="record"
     :config="config"
+    :my-form="myForm"
   />
 </template>
 <script>
@@ -97,6 +98,10 @@ import KFormItem from "../KFormItem/index";
 export default {
   name: "buildBlocks",
   props: {
+      myForm: {
+          type: Object,
+          default: () => {}
+      },
     record: {
       type: Object,
       required: true

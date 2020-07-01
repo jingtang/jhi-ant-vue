@@ -17,6 +17,7 @@ export const basicsList = [
       clearable: false,
       maxLength: null,
       disabled: false, // 是否禁用，false不禁用，true禁用
+      showExpression: null, // 控制显示的表达式
       labelColSpan: 6 // 标签占用栅格数，其他的控件的
     },
     model: '', // 数据字段
@@ -41,6 +42,7 @@ export const basicsList = [
       defaultValue: '',
       clearable: false,
       disabled: false,
+      showExpression: null, // 控制显示的表达式
       placeholder: '请输入',
       labelColSpan: 6 // 标签占用栅格数，其他的控件的
     },
@@ -66,6 +68,7 @@ export const basicsList = [
       step: 1, // 步长，点击加减按钮时候，加减多少
       disabled: false, //是否禁用
       placeholder: '请输入',
+      showExpression: null, // 控制显示的表达式
       labelColSpan: 6 // 标签占用栅格数，其他的控件的
     },
     model: '', // 数据字段
@@ -87,6 +90,7 @@ export const basicsList = [
       defaultValue: undefined, // 下拉选框请使用undefined为默认值
       multiple: false, // 是否允许多选
       disabled: false, // 是否禁用
+      showExpression: null, // 控制显示的表达式
       clearable: false, // 是否显示清除按钮
       placeholder: '请选择', // 默认提示文字
       dynamicKey: '',
@@ -125,6 +129,7 @@ export const basicsList = [
       defaultValue: undefined, // 下拉选框请使用undefined为默认值
       multiple: false, // 是否允许多选
       disabled: false, // 是否禁用
+      showExpression: null, // 控制显示的表达式
       clearable: false, // 是否显示清除按钮
       placeholder: '请选择', // 默认提示文字
       dynamicKey: '',
@@ -164,6 +169,7 @@ export const basicsList = [
       multiple: false, // 是否允许多选
       mode: undefined, // 多选择模式。
       disabled: false, // 是否禁用
+      showExpression: null, // 控制显示的表达式
       clearable: false, // 是否显示清除按钮
       placeholder: '请选择', // 默认提示文字
       dynamicKey: '',
@@ -196,6 +202,7 @@ export const basicsList = [
     icon: 'icon-duoxuan1',
     options: {
       disabled: false, //是否禁用
+      showExpression: null, // 控制显示的表达式
       labelColSpan: 6, // 标签占用栅格数，其他的控件的
       defaultValue: [],
       dynamicKey: '',
@@ -231,6 +238,7 @@ export const basicsList = [
     options: {
       labelColSpan: 6, // 标签占用栅格数，其他的控件的
       disabled: false, //是否禁用
+      showExpression: null, // 控制显示的表达式
       defaultValue: '', // 默认值
       dynamicKey: '',
       dynamic: false,
@@ -269,6 +277,7 @@ export const basicsList = [
       range: false, // 范围日期选择，为true则会显示两个时间选择框（同时defaultValue和placeholder要改成数组），
       showTime: false, // 是否显示时间选择器
       disabled: false, // 是否禁用
+      showExpression: null, // 控制显示的表达式
       clearable: false, // 是否显示清除按钮
       placeholder: '请选择',
       rangePlaceholder: ['开始时间', '结束时间'],
@@ -292,6 +301,7 @@ export const basicsList = [
       labelColSpan: 6, // 标签占用栅格数，其他的控件的
       defaultValue: '', // 默认值，字符串 12:00:00
       disabled: false, // 是否禁用
+      showExpression: null, // 控制显示的表达式
       clearable: false, // 是否显示清除按钮
       placeholder: '请选择',
       format: 'HH:mm:ss' // 展示格式
@@ -313,6 +323,7 @@ export const basicsList = [
       defaultValue: 0,
       max: 5, // 最大值
       disabled: false, // 是否禁用
+      showExpression: null, // 控制显示的表达式
       allowHalf: false, // 是否允许半选
       labelColSpan: 6 // 标签占用栅格数，其他的控件的
     },
@@ -333,6 +344,7 @@ export const basicsList = [
       width: '100%', // 宽度
       defaultValue: 0, // 默认值， 如果range为true的时候，则需要改成数组,如：[12,15]
       disabled: false, // 是否禁用
+      showExpression: null, // 控制显示的表达式
       min: 0, // 最小值
       max: 100, // 最大值
       step: 1, // 步长，取值必须大于 0，并且可被 (max - min) 整除
@@ -357,6 +369,7 @@ export const basicsList = [
       defaultValue: '',
       multiple: false,
       disabled: false,
+      showExpression: null, // 控制显示的表达式
       drag: false,
       width: '100%',
       limit: 3,
@@ -382,6 +395,7 @@ export const basicsList = [
       defaultValue: '',
       multiple: false,
       disabled: false,
+      showExpression: null, // 控制显示的表达式
       width: '100%',
       data: '{}',
       limit: 3,
@@ -411,6 +425,7 @@ export const basicsList = [
         value: 'value' // 每行的value
       },
       disabled: false, //是否禁用
+      showExpression: null, // 控制显示的表达式
       defaultValue: undefined, // 默认值
       multiple: false,
       clearable: false, // 是否显示清除按钮
@@ -458,6 +473,7 @@ export const basicsList = [
     icon: 'icon-guanlian',
     options: {
       disabled: false, //是否禁用
+      showExpression: null, // 控制显示的表达式
       defaultValue: undefined, // 默认值
       showSearch: false, // 是否显示搜索框，搜索选择的项的值，而不是文字
       placeholder: '请选择',
@@ -505,6 +521,7 @@ export const basicsList = [
     options: {
       scrollY: 0,
       disabled: false,
+      showExpression: null, // 控制显示的表达式
       showLabel: false,
       labelColSpan: 6, // 标签占用栅格数，其他的控件的
       hideSequence: false,
@@ -524,6 +541,7 @@ export const basicsList = [
       defaultValue: '',
       chinesization: true,
       disabled: false,
+      showExpression: null, // 控制显示的表达式
       showLabel: false,
       width: '100%',
       labelColSpan: 6 // 标签占用栅格数，其他的控件的
@@ -543,6 +561,7 @@ export const basicsList = [
     icon: 'icon-kaiguan3',
     options: {
       defaultValue: false, // 默认值 Boolean 类型
+      showExpression: null, // 控制显示的表达式
       disabled: false, // 是否禁用
       labelColSpan: 6 // 标签占用栅格数，其他的控件的
     },
@@ -564,7 +583,8 @@ export const basicsList = [
       handle: 'submit',
       dynamicFun: '',
       parameter: '',
-      disabled: false // 是否禁用，false不禁用，true禁用
+      disabled: false, // 是否禁用，false不禁用，true禁用
+      showExpression: null // 控制显示的表达式
     },
     key: ''
   },
@@ -587,6 +607,7 @@ export const basicsList = [
     icon: 'icon-zihao',
     options: {
       textAlign: 'left',
+      showExpression: null, // 控制显示的表达式
       showRequiredMark: false,
       labelColSpan: 6 // 标签占用栅格数，其他的控件的
     },
@@ -597,6 +618,7 @@ export const basicsList = [
     label: 'HTML',
     icon: 'icon-ai-code',
     options: {
+      showExpression: null, // 控制显示的表达式
       defaultValue: '<strong>HTML</strong>',
       labelColSpan: 6 // 标签占用栅格数，其他的控件的
     },
