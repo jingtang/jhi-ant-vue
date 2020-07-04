@@ -35,8 +35,7 @@
                     <template v-slot:toolbar_buttons>
                         <a-row class="toolbar_buttons_xgrid" :gutter="16">
                             <a-col :md="12" :sm="24">
-                                <a-input-search placeholder="请输入关键字" v-model="searchValue" @search="loadAll" enterButton ref="searchInput">
-                                    <a-icon v-if="searchValue" slot="suffix" type="close-circle" @click="emitEmpty" />
+                                <a-input-search placeholder="请输入关键字" allow-clear v-model="searchValue" @search="loadAll" enterButton ref="searchInput">
                                 </a-input-search>
                             </a-col>
                             <a-col :md="12" :sm="24">

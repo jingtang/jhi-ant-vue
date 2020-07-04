@@ -46,8 +46,7 @@
                             </span>
                         </a-col>
                         <a-col :lg="8" :md="12" :sm="9">
-                            <a-input-search placeholder="请输入关键字" v-model="searchValue" @search="loadAll" enterButton ref="searchInput">
-                                <a-icon v-if="searchValue" slot="suffix" type="close-circle" @click="emitEmpty" />
+                            <a-input-search placeholder="请输入关键字" allow-clear v-model="searchValue" @search="loadAll" enterButton ref="searchInput">
                             </a-input-search>
                         </a-col>
                         <a-col :lg="14" :md="10" :sm="11" align="right">
