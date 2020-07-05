@@ -1,0 +1,57 @@
+{
+    "name": "CommonQueryItem",
+    "fields": [
+        {
+            "fieldName": "prefix",
+            "javadoc": "前置符号",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fieldName",
+            "javadoc": "字段名称",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "operator",
+            "javadoc": "运算符号",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "value",
+            "javadoc": "比较值",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "suffix",
+            "javadoc": "后缀",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "order",
+            "javadoc": "顺序",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "commonQuery",
+            "otherEntityRelationshipName": "items",
+            "javadoc": "查询 config: {\"showInOne\": true}",
+            "relationshipName": "query",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200705094300",
+    "javadoc": "通用查询条目",
+    "entityTableName": "common_query_item",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "commonQuery",
+    "applications": "*",
+    "skipMenu": true
+}

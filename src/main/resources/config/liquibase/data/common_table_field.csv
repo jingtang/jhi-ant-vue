@@ -254,3 +254,14 @@ id;title;entity_field_name;type;table_column_name;column_width;hide_in_list;comm
 254;类型;type;ENUM;type;100;false;10;true;false;false;{"BUSINESS":"BUSINESS","API":"API"};4;false;NULL;false
 255;url 地址;url;STRING;url;100;false;10;true;false;false;NULL;5;false;NULL;false
 256;弹窗编辑;editInModal;BOOLEAN;edit_in_modal;100;false;11;true;false;false;NULL;16;false;NULL;false
+257;Id;id;LONG;id;100;false;34;true;false;true;NULL;0;false;NULL;false
+258;名称;name;STRING;name;100;false;34;true;false;false;NULL;1;true;{"required":true,"maxLength":"50"};false
+259;描述;description;STRING;description;100;false;34;true;false;false;NULL;2;false;NULL;false
+260;最后更新时间;lastModifiedTime;ZONED_DATE_TIME;last_modified_time;100;false;34;true;false;false;NULL;3;false;NULL;false
+261;Id;id;LONG;id;100;false;35;true;false;true;NULL;0;false;NULL;false
+262;前置符号;prefix;STRING;prefix;100;false;35;true;false;false;NULL;1;false;NULL;false
+263;字段名称;fieldName;STRING;field_name;100;false;35;true;false;false;NULL;2;false;NULL;false
+264;运算符号;operator;STRING;operator;100;false;35;true;false;false;NULL;3;false;NULL;false
+265;比较值;value;STRING;value;100;false;35;true;false;false;NULL;4;false;NULL;false
+266;后缀;suffix;STRING;suffix;100;false;35;true;false;false;NULL;5;false;NULL;false
+267;顺序;order;INTEGER;jhi_order;100;false;35;true;false;false;NULL;6;false;NULL;false

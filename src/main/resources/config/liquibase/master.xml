@@ -45,6 +45,8 @@
     <include file="config/liquibase/changelog/20200621084600_added_entity_ProcessFormConfig.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200621084700_added_entity_ProcessEntityRelation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200621084800_added_entity_Leave.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200705094200_added_entity_CommonQuery.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200705094300_added_entity_CommonQueryItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200621082500_added_entity_constraints_UploadFile.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200621082600_added_entity_constraints_UploadImage.xml" relativeToChangelogFile="false"/>
@@ -62,5 +64,7 @@
     <include file="config/liquibase/changelog/20200621084700_added_entity_constraints_UReportFile.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200621084500_added_entity_constraints_ProcessTableConfig.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200621084800_added_entity_constraints_Leave.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200705094200_added_entity_constraints_CommonQuery.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200705094300_added_entity_constraints_CommonQueryItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

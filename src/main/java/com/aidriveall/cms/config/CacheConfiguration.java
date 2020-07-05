@@ -88,6 +88,9 @@ public class CacheConfiguration {
             createCache(cm, com.aidriveall.cms.domain.ProcessEntityRelation.class.getName());
             createCache(cm, com.aidriveall.cms.domain.Leave.class.getName());
             createCache(cm, com.aidriveall.cms.domain.Leave.class.getName() + ".images");
+            createCache(cm, com.aidriveall.cms.domain.CommonQuery.class.getName());
+            createCache(cm, com.aidriveall.cms.domain.CommonQuery.class.getName() + ".items");
+            createCache(cm, com.aidriveall.cms.domain.CommonQueryItem.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

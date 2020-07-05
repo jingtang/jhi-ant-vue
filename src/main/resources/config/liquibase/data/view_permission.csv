@@ -34,3 +34,5 @@ id;text;i_18_n;jhi_group;link;external_link;target;icon;disabled;hide;hide_in_br
 125;报表存储;;false;/business/report/u-report-file;;SELF;;false;false;false;false;false;false;;;MENU;;;124
 126;流程业务配置;;false;/business/workflow/process-table-config;;SELF;;false;false;false;false;false;false;;;MENU;;;100
 127;请假;;false;/business/workflow/leave;;SELF;;false;false;false;false;false;false;;;MENU;;;100
+128;commonQuery;;false;/business/commonQuery;;SELF;anticon anticon-project;false;false;false;false;false;false;;;MENU;;;87
+129;通用查询;;false;/business/commonQuery/common-query;;SELF;;false;false;false;false;false;false;;;MENU;;;128

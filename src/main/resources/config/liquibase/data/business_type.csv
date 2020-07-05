@@ -9,3 +9,4 @@ id;name;code;description;icon
 8;流程管理;workflow;工作流管理;anticon anticon-box-plot
 9;modelConfig;modelConfig;modelConfig;anticon anticon-project
 10;report;report;report;anticon anticon-project
+11;commonQuery;commonQuery;commonQuery;anticon anticon-project

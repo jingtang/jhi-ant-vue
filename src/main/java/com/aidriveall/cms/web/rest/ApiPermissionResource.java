@@ -1,6 +1,5 @@
 package com.aidriveall.cms.web.rest;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.aidriveall.cms.service.ApiPermissionService;
 import com.aidriveall.cms.web.rest.errors.BadRequestAlertException;
 import com.aidriveall.cms.service.dto.ApiPermissionDTO;

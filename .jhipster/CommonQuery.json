@@ -1,0 +1,64 @@
+{
+    "name": "CommonQuery",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "description",
+            "javadoc": "描述",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedTime",
+            "javadoc": "最后更新时间",
+            "fieldType": "ZonedDateTime",
+            "options": {
+                "lastModifiedDate": true
+            }
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "commonQueryItem",
+            "otherEntityRelationshipName": "query",
+            "javadoc": "条件项目 config: {\"showInOne\": true}",
+            "relationshipName": "items"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "commonQuery",
+            "javadoc": "编辑人 config: {\"lastModifiedBy\": true}",
+            "relationshipName": "modifier",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "commonTable",
+            "otherEntityRelationshipName": "commonQuery",
+            "javadoc": "所属模型",
+            "relationshipName": "commonTable",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200705094200",
+    "javadoc": "通用查询",
+    "entityTableName": "common_query",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "commonQuery",
+    "applications": "*"
+}

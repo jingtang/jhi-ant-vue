@@ -184,7 +184,7 @@ export function generateDataForDesigner(commonTableData: ICommonTable) {
                   item.options.labelField = relationship.otherEntityField;
                   item.options.dynamic = true;
                   item.options.dynamicKey = relationship.dataName;
-                  item.options.selectListName = 'jhi-' + kebabCase(relationship.otherEntityName);
+                  item.options.selectListName = 'jhi-' + kebabCase(relationship.otherEntityName) + '-compact';
                   item.commonTableName = relationship.otherEntityName;
                   dataContent.push(item);
                 }

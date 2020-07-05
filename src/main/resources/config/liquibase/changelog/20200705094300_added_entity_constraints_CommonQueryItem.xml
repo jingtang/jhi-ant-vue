@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity CommonQueryItem.
+    -->
+    <changeSet id="20200705094300-2" author="jhipster">
+                <addForeignKeyConstraint baseColumnNames="query_id"
+                                 baseTableName="common_query_item"
+                                 constraintName="fk_common_query_item_query_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="common_query"/>
+    </changeSet>
+</databaseChangeLog>

@@ -27,6 +27,8 @@
         "workflowProcessFormConfig": "Process Form Config",
         "workflowProcessEntityRelation": "Process Entity Relation",
         "workflowLeave": "Leave",
+        "commonQueryCommonQuery": "Common Query",
+        "commonQueryCommonQueryItem": "Common Query Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

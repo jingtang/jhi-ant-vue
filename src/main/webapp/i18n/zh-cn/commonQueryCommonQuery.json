@@ -1,0 +1,32 @@
+{
+  "jhiAntVueApp": {
+    "commonQueryCommonQuery": {
+      "home": {
+        "title": "通用查询",
+        "createLabel": "创建新 通用查询",
+        "createOrEditLabel": "创建或编辑 通用查询",
+        "notFound": "No 通用查询 found"
+      },
+      "created": "通用查询 {{ param }} 创建成功",
+      "updated": "通用查询 {{ param }} 更新成功",
+      "deleted": "通用查询 {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 通用查询 {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "通用查询"
+      },
+      "name": "名称",
+      "description": "描述",
+      "lastModifiedTime": "最后更新时间",
+      "items": "条件项目",
+      "modifier": "编辑人",
+      "commonTable": "所属模型",
+      "help": {
+        "name": "名称",
+        "description": "描述",
+        "lastModifiedTime": "最后更新时间"
+      }
+    }
+  }
+}

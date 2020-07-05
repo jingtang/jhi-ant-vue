@@ -7,6 +7,7 @@ import { systemRoute } from '@/business/system/system.route';
 import { modelConfigRoute } from '@/business/modelConfig/modelConfig.route';
 import { companyRoute } from '@/business/company/company.route';
 import { reportRoute } from '@/business/report/report.route';
+import { queryRoute } from '@/business/commonQuery/commonQuery.route';
 // jhipster-needle-add-client-root-folder-router-to-business-router-import - JHipster will import entities to the client root folder router here
 
 export const businessRoute: RouteConfig = {
@@ -21,7 +22,8 @@ export const businessRoute: RouteConfig = {
     systemRoute,
     modelConfigRoute,
     companyRoute,
-    reportRoute
+    reportRoute,
+    queryRoute
     // jhipster-needle-add-client-root-folder-router-to-business-router - JHipster will import entities to the client root folder router here
   ]
 };

@@ -4,10 +4,11 @@ import com.aidriveall.cms.domain.User;
 import com.aidriveall.cms.security.SecurityUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Configuration
+@Component
 public class CurrentUserAuditorAware implements AuditorAware<User> {
     @Override
     public Optional<User> getCurrentAuditor() {

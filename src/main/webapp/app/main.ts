@@ -105,6 +105,12 @@ import ProcessEntityRelationService from '@/business/workflow/process-entity-rel
 import Leave from '@/business/workflow/leave';
 Vue.use(Leave);
 import LeaveService from '@/business/workflow/leave/leave.service';
+import CommonQuery from '@/business/commonQuery/common-query';
+Vue.use(CommonQuery);
+import CommonQueryService from '@/business/commonQuery/common-query/common-query.service';
+import CommonQueryItem from '@/business/commonQuery/common-query-item';
+Vue.use(CommonQueryItem);
+import CommonQueryItemService from '@/business/commonQuery/common-query-item/common-query-item.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 import ProcessDefinitionService from '@/business/workflow/process-definition/process-definition.service';
 import DeploymentService from '@/business/workflow/deployment/deployment.service';
@@ -184,6 +190,8 @@ new Vue({
     processFormConfigService: () => new ProcessFormConfigService(),
     processEntityRelationService: () => new ProcessEntityRelationService(),
     leaveService: () => new LeaveService(),
+    commonQueryService: () => new CommonQueryService(),
+    commonQueryItemService: () => new CommonQueryItemService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     processDefinitionService: () => new ProcessDefinitionService(),
     deploymentService: () => new DeploymentService(),

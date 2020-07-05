@@ -1,0 +1,36 @@
+{
+  "jhiAntVueApp": {
+    "commonQueryCommonQueryItem": {
+      "home": {
+        "title": "通用查询条目",
+        "createLabel": "创建新 通用查询条目",
+        "createOrEditLabel": "创建或编辑 通用查询条目",
+        "notFound": "No 通用查询条目 found"
+      },
+      "created": "通用查询条目 {{ param }} 创建成功",
+      "updated": "通用查询条目 {{ param }} 更新成功",
+      "deleted": "通用查询条目 {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 通用查询条目 {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "通用查询条目"
+      },
+      "prefix": "前置符号",
+      "fieldName": "字段名称",
+      "operator": "运算符号",
+      "value": "比较值",
+      "suffix": "后缀",
+      "order": "顺序",
+      "query": "查询",
+      "help": {
+        "prefix": "前置符号",
+        "fieldName": "字段名称",
+        "operator": "运算符号",
+        "value": "比较值",
+        "suffix": "后缀",
+        "order": "顺序"
+      }
+    }
+  }
+}

@@ -39,3 +39,7 @@ id;relationship_type;source_type;name;other_entity_field;relationship_name;other
 38;MANY_TO_ONE;ENTITY;申请人;login;creator;leave;100;;false;;;;NULL;33;users;select;false;User
 39;MANY_TO_ONE;ENTITY;上传者;login;user;uploadImage;100;;false;;;;NULL;4;users;select;false;User
 40;MANY_TO_ONE;ENTITY;内容;name;leave;images;100;;false;;;;NULL;4;leaves;select;false;Leave
+41;ONE_TO_MANY;ENTITY;条件项目;NULL;items;query;100;;false;;;;NULL;34;commonQueryItems;;false;CommonQueryItem
+42;MANY_TO_ONE;ENTITY;编辑人;firstName;modifier;commonQuery;100;;false;;;;NULL;34;users;select;false;User
+43;MANY_TO_ONE;ENTITY;所属模型;name;commonTable;commonQuery;100;;false;;;;NULL;34;commonTables;select;false;CommonTable
+44;MANY_TO_ONE;ENTITY;查询;name;query;items;100;;false;;;;NULL;35;commonQueries;select;false;CommonQuery

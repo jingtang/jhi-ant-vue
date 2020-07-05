@@ -32,3 +32,5 @@ id;name;entity_name;table_name;clazz_name;jhi_system;generated;creat_at;generate
 31;流程表单;ProcessFormConfig;process_form_config;ProcessFormConfig;true;true;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;流程表单;3;8;false
 32;流程与实体关联;ProcessEntityRelation;process_entity_relation;ProcessEntityRelation;true;true;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;流程与实体关联;3;8;false
 33;请假;Leave;jhi_leave;Leave;true;true;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;请假;3;8;false
+34;通用查询;CommonQuery;common_query;CommonQuery;true;true;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;通用查询;3;11;false
+35;通用查询条目;CommonQueryItem;common_query_item;CommonQueryItem;true;true;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;2019-10-30 05:49:43.000000000;通用查询条目;3;11;false
