@@ -19,6 +19,7 @@ const validations: any = {
   commonQueryItem: {
     prefix: {},
     fieldName: {},
+    fieldType: {},
     operator: {},
     value: {},
     suffix: {},

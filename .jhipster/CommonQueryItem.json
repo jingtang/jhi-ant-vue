@@ -12,6 +12,11 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "fieldType",
+            "javadoc": "字段类型",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "operator",
             "javadoc": "运算符号",
             "fieldType": "String"

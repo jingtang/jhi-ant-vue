@@ -66,7 +66,7 @@ public class CommonQuery implements Serializable {
     /**
      * 编辑人
      */
-    @LastModifiedBy
+//    @LastModifiedBy
     @ManyToOne
     @JsonIgnoreProperties("commonQueries")
     private User modifier;

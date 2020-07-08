@@ -40,6 +40,8 @@ public class CommonQueryCriteria implements Serializable, Criteria {
 
     private LongFilter commonTableId;
 
+    private StringFilter commonTableClazzName;
+
     public CommonQueryCriteria(){
     }
 
@@ -51,6 +53,7 @@ public class CommonQueryCriteria implements Serializable, Criteria {
         this.itemsId = other.itemsId == null ? null : other.itemsId.copy();
         this.modifierId = other.modifierId == null ? null : other.modifierId.copy();
         this.commonTableId = other.commonTableId == null ? null : other.commonTableId.copy();
+        this.commonTableClazzName = other.commonTableClazzName == null ? null : other.commonTableClazzName.copy();
     }
 
     @Override
@@ -122,6 +125,14 @@ public class CommonQueryCriteria implements Serializable, Criteria {
         this.jhiCommonSearchKeywords = jhiCommonSearchKeywords;
     }
 
+    public StringFilter getCommonTableClazzName() {
+        return commonTableClazzName;
+    }
+
+    public void setCommonTableClazzName(StringFilter commonTableClazzName) {
+        this.commonTableClazzName = commonTableClazzName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -138,7 +149,8 @@ public class CommonQueryCriteria implements Serializable, Criteria {
             Objects.equals(lastModifiedTime, that.lastModifiedTime) &&
             Objects.equals(itemsId, that.itemsId) &&
             Objects.equals(modifierId, that.modifierId) &&
-            Objects.equals(commonTableId, that.commonTableId);
+            Objects.equals(commonTableId, that.commonTableId) &&
+            Objects.equals(commonTableClazzName, that.commonTableClazzName);
     }
 
     @Override
@@ -150,7 +162,8 @@ public class CommonQueryCriteria implements Serializable, Criteria {
         lastModifiedTime,
         itemsId,
         modifierId,
-        commonTableId
+        commonTableId,
+        commonTableClazzName
         );
     }
 
@@ -164,6 +177,7 @@ public class CommonQueryCriteria implements Serializable, Criteria {
                 (itemsId != null ? "itemsId=" + itemsId + ", " : "") +
                 (modifierId != null ? "modifierId=" + modifierId + ", " : "") +
                 (commonTableId != null ? "commonTableId=" + commonTableId + ", " : "") +
+                (commonTableClazzName != null ? "commonTableClazzName=" + commonTableClazzName + ", " : "") +
             "}";
     }
 

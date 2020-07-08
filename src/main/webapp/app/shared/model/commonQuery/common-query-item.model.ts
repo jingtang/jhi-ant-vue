@@ -2,6 +2,7 @@ export interface ICommonQueryItem {
   id?: number;
   prefix?: string;
   fieldName?: string;
+  fieldType?: string;
   operator?: string;
   value?: string;
   suffix?: string;
@@ -15,6 +16,7 @@ export class CommonQueryItem implements ICommonQueryItem {
     public id?: number,
     public prefix?: string,
     public fieldName?: string,
+    public fieldType?: string,
     public operator?: string,
     public value?: string,
     public suffix?: string,

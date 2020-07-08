@@ -21,7 +21,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new CommonQueryItemService();
 
-      elemDefault = new CommonQueryItem(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
+      elemDefault = new CommonQueryItem(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
     });
 
     describe('Service methods', () => {
@@ -53,6 +53,7 @@ describe('Service Tests', () => {
           {
             prefix: 'BBBBBB',
             fieldName: 'BBBBBB',
+            fieldType: 'BBBBBB',
             operator: 'BBBBBB',
             value: 'BBBBBB',
             suffix: 'BBBBBB',
@@ -73,6 +74,7 @@ describe('Service Tests', () => {
           {
             prefix: 'BBBBBB',
             fieldName: 'BBBBBB',
+            fieldType: 'BBBBBB',
             operator: 'BBBBBB',
             value: 'BBBBBB',
             suffix: 'BBBBBB',

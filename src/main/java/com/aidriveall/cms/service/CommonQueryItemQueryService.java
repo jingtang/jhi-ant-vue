@@ -124,6 +124,9 @@ public class CommonQueryItemQueryService extends QueryService<CommonQueryItem> {
                         new StringFilter().setContains(criteria.getJhiCommonSearchKeywords()),CommonQueryItem_.fieldName)
                     );
                     specification = specification.or(buildStringSpecification(
+                        new StringFilter().setContains(criteria.getJhiCommonSearchKeywords()),CommonQueryItem_.fieldType)
+                    );
+                    specification = specification.or(buildStringSpecification(
                         new StringFilter().setContains(criteria.getJhiCommonSearchKeywords()),CommonQueryItem_.operator)
                     );
                     specification = specification.or(buildStringSpecification(
@@ -142,6 +145,9 @@ public class CommonQueryItemQueryService extends QueryService<CommonQueryItem> {
                 }
                 if (criteria.getFieldName() != null) {
                     specification = specification.and(buildStringSpecification(criteria.getFieldName(), CommonQueryItem_.fieldName));
+                }
+                if (criteria.getFieldType() != null) {
+                    specification = specification.and(buildStringSpecification(criteria.getFieldType(), CommonQueryItem_.fieldType));
                 }
                 if (criteria.getOperator() != null) {
                     specification = specification.and(buildStringSpecification(criteria.getOperator(), CommonQueryItem_.operator));

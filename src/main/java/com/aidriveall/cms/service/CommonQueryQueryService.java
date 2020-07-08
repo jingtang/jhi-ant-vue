@@ -1,7 +1,10 @@
 package com.aidriveall.cms.service;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import antlr.ParseTree;
 import cn.hutool.core.bean.BeanUtil;
 
 import javax.persistence.EntityManager;
@@ -10,9 +13,19 @@ import javax.persistence.TupleElement;
 import javax.persistence.TypedQuery;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
-import io.github.jhipster.service.filter.StringFilter;
-import io.github.jhipster.service.filter.ZonedDateTimeFilter;
-import io.github.jhipster.service.filter.LongFilter;
+import javax.persistence.metamodel.SingularAttribute;
+
+import cn.hutool.core.bean.DynaBean;
+import com.aidriveall.cms.anltr.CriteriaLogicExprListener;
+import com.aidriveall.cms.anltr.LogicExprLexer;
+import com.aidriveall.cms.anltr.LogicExprParser;
+import io.github.jhipster.service.filter.*;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.query.criteria.internal.path.PluralAttributePath;
@@ -48,6 +61,8 @@ import com.aidriveall.cms.service.mapper.CommonQueryMapper;
 public class CommonQueryQueryService extends QueryService<CommonQuery> {
 
     private final Logger log = LoggerFactory.getLogger(CommonQueryQueryService.class);
+
+    public static Map<String, Object> specificationMap = new HashMap<>();
 
     private final CommonQueryRepository commonQueryRepository;
 
@@ -145,6 +160,10 @@ public class CommonQueryQueryService extends QueryService<CommonQuery> {
                 if (criteria.getCommonTableId() != null) {
                     specification = specification.and(buildSpecification(criteria.getCommonTableId(),
                         root -> root.join(CommonQuery_.commonTable, JoinType.LEFT).get(CommonTable_.id)));
+                }
+                if (criteria.getCommonTableClazzName() != null) {
+                    specification = specification.and(buildSpecification(criteria.getCommonTableClazzName(),
+                        root -> root.join(CommonQuery_.commonTable, JoinType.LEFT).get(CommonTable_.clazzName)));
                 }
             }
         }
@@ -308,6 +327,144 @@ public class CommonQueryQueryService extends QueryService<CommonQuery> {
             return String.valueOf(chars);
         }
         return string;
+    }
+
+    // 把commonQuery转为Specification
+    public Specification createSpecification(Long commonQueryId) throws ClassNotFoundException {
+        CommonQuery commonQuery = commonQueryRepository.getOne(commonQueryId);
+        String packageName = ClassUtils.getPackageName(CommonQuery.class);
+        String servicePackageName = ClassUtils.getPackageName(this.getClass());
+        Specification specification;
+        if (commonQuery != null) {
+            Class targetClass = Class.forName(packageName + "." + commonQuery.getCommonTable().getClazzName() + "_");
+            Class targetCriteriaClass = Class.forName(servicePackageName + ".dto." + commonQuery.getCommonTable().getClazzName() + "Criteria");
+
+            LinkedList temp = new LinkedList();
+
+            LinkedList operateSymbol = new LinkedList();
+            StringBuffer s = new StringBuffer();
+            Set<CommonQueryItem> queryItems = commonQuery.getItems();
+            queryItems.forEach( queryItem -> {
+                String prefix = queryItem.getPrefix();
+                String suffix = queryItem.getSuffix();
+                if (StringUtils.isNotEmpty(prefix)) {
+                    switch (prefix) {
+                        case ")":
+                            s.append(" )");
+                            break;
+                        case "(":
+                            s.append(" (");
+                            break;
+                        case "AND":
+                            s.append(" AND");
+                            break;
+                        case "OR":
+                            s.append(" AND");
+                            break;
+                        default:
+
+                    }
+                }
+                try {
+                    Integer specId = specificationMap.size()+1;
+                    specificationMap.put(queryItem.getId() + "_" + specId, createSpecificationByQueryItem(queryItem,targetClass,targetCriteriaClass));
+                    s.append(" " +queryItem.getId() + "_" + specId);
+                } catch (NoSuchFieldException | InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                if (StringUtils.isNotEmpty(suffix)) {
+                    switch (suffix) {
+                        case ")":
+                            s.append(" )");
+                            break;
+                        case "(":
+                            s.append(" (");
+                            break;
+                        case "AND":
+                            s.append(" AND");
+                            break;
+                        case "OR":
+                            s.append(" AND");
+                            break;
+                        default:
+                    }
+                }
+            });
+            ANTLRInputStream input = new ANTLRInputStream(s.toString());
+            LogicExprLexer lexer = new LogicExprLexer(input);
+            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            LogicExprParser parser = new LogicExprParser(tokenStream);
+            LogicExprParser.StatContext parseTree = parser.stat();
+            CriteriaLogicExprListener visitor = new CriteriaLogicExprListener();
+            System.out.println(parseTree.toStringTree(parser)); //打印规则数
+            ParseTreeWalker walker = new ParseTreeWalker();
+            walker.walk(visitor, parseTree);
+            specification = Specification.where(visitor.specifications.get(parseTree));
+            return specification;
+        } else {
+            return null;
+        }
+
+    }
+
+    private Specification createSpecificationByQueryItem(CommonQueryItem commonQueryItem,Class jPAMetaModelClass, Class targetCriteriaClass) throws NoSuchFieldException, IllegalAccessException, InstantiationException {
+        if (StringUtils.isNotEmpty(commonQueryItem.getFieldName()) &&
+            StringUtils.isNotEmpty(commonQueryItem.getOperator()) &&
+            StringUtils.isNotEmpty(commonQueryItem.getValue())
+        ) {
+            DynaBean criteria = DynaBean.create(targetCriteriaClass.newInstance());
+            DynaBean filter;
+            switch (commonQueryItem.getFieldType()) {
+                case "LONG":
+                    filter = DynaBean.create(LongFilter.class);
+                    filter.set(commonQueryItem.getOperator(), Long.parseLong(commonQueryItem.getValue()));
+                    criteria.set(commonQueryItem.getFieldName(), filter.getBean());
+                    return buildRangeSpecification(criteria.get(commonQueryItem.getFieldName()),
+                        (SingularAttribute)jPAMetaModelClass.getField(commonQueryItem.getFieldName()).get(targetCriteriaClass));
+                case "INTEGER":
+                    filter = DynaBean.create(IntegerFilter.class);
+                    filter.set(commonQueryItem.getOperator(), Integer.parseInt(commonQueryItem.getValue()));
+                    criteria.set(commonQueryItem.getFieldName(), filter.getBean());
+                    return buildRangeSpecification(criteria.get(commonQueryItem.getFieldName()),
+                        (SingularAttribute)jPAMetaModelClass.getField(commonQueryItem.getFieldName()).get(targetCriteriaClass));
+                case "STRING":
+                    filter = DynaBean.create(new StringFilter());
+                    filter.set(commonQueryItem.getOperator(),commonQueryItem.getValue());
+                    criteria.set(commonQueryItem.getFieldName(), filter.getBean());
+                    return buildStringSpecification(criteria.get(commonQueryItem.getFieldName()),
+                        (SingularAttribute)jPAMetaModelClass.getField(commonQueryItem.getFieldName()).get(targetCriteriaClass));
+                case "FLOAT":
+                    filter = DynaBean.create(FloatFilter.class);
+                    filter.set(commonQueryItem.getOperator(), Float.parseFloat(commonQueryItem.getValue()));
+                    criteria.set(commonQueryItem.getFieldName(), filter.getBean());
+                    return buildRangeSpecification(criteria.get(commonQueryItem.getFieldName()),
+                        (SingularAttribute)jPAMetaModelClass.getField(commonQueryItem.getFieldName()).get(targetCriteriaClass));
+                case "DOUBLE":
+                    filter = DynaBean.create(DoubleFilter.class);
+                    filter.set(commonQueryItem.getOperator(), Double.parseDouble(commonQueryItem.getValue()));
+                    criteria.set(commonQueryItem.getFieldName(), filter.getBean());
+                    return buildRangeSpecification(criteria.get(commonQueryItem.getFieldName()),
+                        (SingularAttribute)jPAMetaModelClass.getField(commonQueryItem.getFieldName()).get(targetCriteriaClass));
+                case "BOOLEAN":
+                    filter = DynaBean.create(BooleanFilter.class);
+                    filter.set(commonQueryItem.getOperator(), Boolean.parseBoolean(commonQueryItem.getValue()));
+                    criteria.set(commonQueryItem.getFieldName(), filter.getBean());
+                    return buildSpecification(criteria.get(commonQueryItem.getFieldName()),
+                        (SingularAttribute)jPAMetaModelClass.getField(commonQueryItem.getFieldName()).get(targetCriteriaClass));
+                case "ZONED_DATE_TIME":
+                    filter = DynaBean.create(ZonedDateTimeFilter.class);
+                    filter.set(commonQueryItem.getOperator(), ZonedDateTime.parse(commonQueryItem.getValue()));
+                    criteria.set(commonQueryItem.getFieldName(), filter.getBean());
+                    return buildRangeSpecification(criteria.get(commonQueryItem.getFieldName()),
+                        (SingularAttribute)jPAMetaModelClass.getField(commonQueryItem.getFieldName()).get(targetCriteriaClass));
+                default:
+                    return null;
+            }
+        } else {
+            return null;
+        }
     }
 
 }

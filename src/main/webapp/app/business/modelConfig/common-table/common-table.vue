@@ -53,6 +53,16 @@
                             <span class="table-page-search-submitButtons">
                                 <a-button type="primary" icon="sync" @click="loadAll"></a-button>
                             </span>
+                            <a-dropdown>
+                                <a-menu slot="overlay" @click="handleQueryMenuClick">
+                                    <a-menu-item :key="-1"> <a-icon type="undo" />恢复默认</a-menu-item>
+                                    <a-menu-divider />
+                                    <a-menu-item :key="item.id" v-for="item in commonQueries"> <a-icon type="filter" />{{item.name}}</a-menu-item>
+                                    <a-menu-divider />
+                                    <a-menu-item :key="0"> <a-icon type="plus-circle" />新建查询</a-menu-item>
+                                </a-menu>
+                                <a-button type="primary" icon="filter"></a-button>
+                            </a-dropdown>
                         </a-col>
                     </a-row>
                 </template>

@@ -1,21 +1,29 @@
 package com.aidriveall.cms.service;
 
+import cn.hutool.core.bean.DynaBean;
 import com.aidriveall.cms.domain.CommonQuery;
+import com.aidriveall.cms.domain.CommonQueryItem;
 import com.aidriveall.cms.repository.CommonQueryRepository;
 import com.aidriveall.cms.repository.CommonTableRepository;
+import com.aidriveall.cms.service.dto.CommonQueryCriteria;
 import com.aidriveall.cms.service.dto.CommonQueryDTO;
 import com.aidriveall.cms.service.mapper.CommonQueryMapper;
+import io.github.jhipster.service.filter.*;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.cache.CacheManager;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import cn.hutool.core.bean.BeanUtil;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 // jhipster-needle-add-import - JHipster will add getters and setters here, do not remove
@@ -137,6 +145,7 @@ public class CommonQueryService {
         commonQueryDTO = save(commonQueryDTO);
         return commonQueryDTO;
     }
+
     private void clearRelationsCache() {
         this.relationCacheNames.forEach(cacheName -> {
             if (cacheManager.getCache(cacheName) != null) {
@@ -144,6 +153,7 @@ public class CommonQueryService {
             }
         });
     }
+
     // jhipster-needle-service-add-method - JHipster will add getters and setters here, do not remove
 
 }

@@ -17,6 +17,12 @@
                         <span>{{commonQueryItem.fieldName}}</span>
                     </dd>
                     <dt>
+                        <span v-text="$t('jhiAntVueApp.commonQueryCommonQueryItem.fieldType')">Field Type</span>
+                    </dt>
+                    <dd>
+                        <span>{{commonQueryItem.fieldType}}</span>
+                    </dd>
+                    <dt>
                         <span v-text="$t('jhiAntVueApp.commonQueryCommonQueryItem.operator')">Operator</span>
                     </dt>
                     <dd>

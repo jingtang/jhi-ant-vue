@@ -11,11 +11,14 @@ import { AxiosResponse } from 'axios';
 import { xGenerateFilterTree, xGenerateTableColumns } from '@/utils/entity-list-utils';
 import { FieldType } from '@/shared/model/modelConfig/common-table-field.model';
 import { forkJoin } from 'rxjs';
+import CommonQueryService from '@/business/commonQuery/common-query/common-query.service';
+import { CommonQuery, ICommonQuery } from '@/shared/model/commonQuery/common-query.model';
 
 @Component
 export default class UserComponent extends mixins(Vue2Filters.mixin, AlertMixin) {
   @Inject('userService') private userService: () => UserService;
   @Inject('commonTableService') private commonTableService: () => CommonTableService;
+  @Inject('commonQueryService') private commonQueryService: () => CommonQueryService;
   @Ref() public searchInput;
   @Ref('xGrid') public xGrid;
   public xGridData = [];
@@ -66,7 +69,7 @@ export default class UserComponent extends mixins(Vue2Filters.mixin, AlertMixin)
   public searchValue = '';
   usersNzTreeNodes: any[]; // todo 有时可能多余。
   users: IUser[];
-
+  public commonQueries: ICommonQuery[] = [];
   public created(): void {
     this.initRelationships();
   }
@@ -287,8 +290,9 @@ export default class UserComponent extends mixins(Vue2Filters.mixin, AlertMixin)
 
   public initRelationships(): void {
     this.loading = true;
-    forkJoin([this.userService().retrieve()]).subscribe(
-      ([users]) => {
+    forkJoin([this.userService().retrieve(), this.commonQueryService().retrieve()]).subscribe(
+      ([users, commonQueriesRes]) => {
+        this.commonQueries = commonQueriesRes.data;
         this.relationshipsData['users'] = users.data;
         const listOfFilteruser = users.data.slice(0, users.data.length > 8 ? 7 : users.data.length - 1);
         this.mapOfFilter.user = { list: listOfFilteruser, value: [], type: 'many-to-one' };
@@ -308,5 +312,9 @@ export default class UserComponent extends mixins(Vue2Filters.mixin, AlertMixin)
     this.xGridPagerConfig.currentPage = currentPage;
     this.xGridPagerConfig.pageSize = pageSize;
     this.loadAll();
+  }
+
+  public handleQueryMenuClick({ key }) {
+    console.log('click', key);
   }
 }

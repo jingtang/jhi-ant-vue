@@ -12,6 +12,8 @@ export default class CommonQueryItemUpdatePage extends AlertPage {
 
   fieldNameInput: ElementFinder = element(by.css('input#common-query-item-fieldName'));
 
+  fieldTypeInput: ElementFinder = element(by.css('input#common-query-item-fieldType'));
+
   operatorInput: ElementFinder = element(by.css('input#common-query-item-operator'));
 
   valueInput: ElementFinder = element(by.css('input#common-query-item-value'));

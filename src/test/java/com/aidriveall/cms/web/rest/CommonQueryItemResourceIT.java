@@ -45,6 +45,9 @@ public class CommonQueryItemResourceIT {
     private static final String DEFAULT_FIELD_NAME = "AAAAAAAAAA";
     private static final String UPDATED_FIELD_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_FIELD_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_FIELD_TYPE = "BBBBBBBBBB";
+
     private static final String DEFAULT_OPERATOR = "AAAAAAAAAA";
     private static final String UPDATED_OPERATOR = "BBBBBBBBBB";
 
@@ -111,6 +114,7 @@ public class CommonQueryItemResourceIT {
         CommonQueryItem commonQueryItem = new CommonQueryItem()
             .prefix(DEFAULT_PREFIX)
             .fieldName(DEFAULT_FIELD_NAME)
+            .fieldType(DEFAULT_FIELD_TYPE)
             .operator(DEFAULT_OPERATOR)
             .value(DEFAULT_VALUE)
             .suffix(DEFAULT_SUFFIX)
@@ -127,6 +131,7 @@ public class CommonQueryItemResourceIT {
         CommonQueryItem commonQueryItem = new CommonQueryItem()
             .prefix(UPDATED_PREFIX)
             .fieldName(UPDATED_FIELD_NAME)
+            .fieldType(UPDATED_FIELD_TYPE)
             .operator(UPDATED_OPERATOR)
             .value(UPDATED_VALUE)
             .suffix(UPDATED_SUFFIX)
@@ -157,6 +162,7 @@ public class CommonQueryItemResourceIT {
         CommonQueryItem testCommonQueryItem = commonQueryItemList.get(commonQueryItemList.size() - 1);
         assertThat(testCommonQueryItem.getPrefix()).isEqualTo(DEFAULT_PREFIX);
         assertThat(testCommonQueryItem.getFieldName()).isEqualTo(DEFAULT_FIELD_NAME);
+        assertThat(testCommonQueryItem.getFieldType()).isEqualTo(DEFAULT_FIELD_TYPE);
         assertThat(testCommonQueryItem.getOperator()).isEqualTo(DEFAULT_OPERATOR);
         assertThat(testCommonQueryItem.getValue()).isEqualTo(DEFAULT_VALUE);
         assertThat(testCommonQueryItem.getSuffix()).isEqualTo(DEFAULT_SUFFIX);
@@ -197,6 +203,7 @@ public class CommonQueryItemResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(commonQueryItem.getId().intValue())))
             .andExpect(jsonPath("$.[*].prefix").value(hasItem(DEFAULT_PREFIX)))
             .andExpect(jsonPath("$.[*].fieldName").value(hasItem(DEFAULT_FIELD_NAME)))
+            .andExpect(jsonPath("$.[*].fieldType").value(hasItem(DEFAULT_FIELD_TYPE)))
             .andExpect(jsonPath("$.[*].operator").value(hasItem(DEFAULT_OPERATOR)))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].suffix").value(hasItem(DEFAULT_SUFFIX)))
@@ -216,6 +223,7 @@ public class CommonQueryItemResourceIT {
             .andExpect(jsonPath("$.id").value(commonQueryItem.getId().intValue()))
             .andExpect(jsonPath("$.prefix").value(DEFAULT_PREFIX))
             .andExpect(jsonPath("$.fieldName").value(DEFAULT_FIELD_NAME))
+            .andExpect(jsonPath("$.fieldType").value(DEFAULT_FIELD_TYPE))
             .andExpect(jsonPath("$.operator").value(DEFAULT_OPERATOR))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE))
             .andExpect(jsonPath("$.suffix").value(DEFAULT_SUFFIX))
@@ -395,6 +403,84 @@ public class CommonQueryItemResourceIT {
 
         // Get all the commonQueryItemList where fieldName does not contain UPDATED_FIELD_NAME
         defaultCommonQueryItemShouldBeFound("fieldName.doesNotContain=" + UPDATED_FIELD_NAME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCommonQueryItemsByFieldTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        commonQueryItemRepository.saveAndFlush(commonQueryItem);
+
+        // Get all the commonQueryItemList where fieldType equals to DEFAULT_FIELD_TYPE
+        defaultCommonQueryItemShouldBeFound("fieldType.equals=" + DEFAULT_FIELD_TYPE);
+
+        // Get all the commonQueryItemList where fieldType equals to UPDATED_FIELD_TYPE
+        defaultCommonQueryItemShouldNotBeFound("fieldType.equals=" + UPDATED_FIELD_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCommonQueryItemsByFieldTypeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        commonQueryItemRepository.saveAndFlush(commonQueryItem);
+
+        // Get all the commonQueryItemList where fieldType not equals to DEFAULT_FIELD_TYPE
+        defaultCommonQueryItemShouldNotBeFound("fieldType.notEquals=" + DEFAULT_FIELD_TYPE);
+
+        // Get all the commonQueryItemList where fieldType not equals to UPDATED_FIELD_TYPE
+        defaultCommonQueryItemShouldBeFound("fieldType.notEquals=" + UPDATED_FIELD_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCommonQueryItemsByFieldTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        commonQueryItemRepository.saveAndFlush(commonQueryItem);
+
+        // Get all the commonQueryItemList where fieldType in DEFAULT_FIELD_TYPE or UPDATED_FIELD_TYPE
+        defaultCommonQueryItemShouldBeFound("fieldType.in=" + DEFAULT_FIELD_TYPE + "," + UPDATED_FIELD_TYPE);
+
+        // Get all the commonQueryItemList where fieldType equals to UPDATED_FIELD_TYPE
+        defaultCommonQueryItemShouldNotBeFound("fieldType.in=" + UPDATED_FIELD_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCommonQueryItemsByFieldTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        commonQueryItemRepository.saveAndFlush(commonQueryItem);
+
+        // Get all the commonQueryItemList where fieldType is not null
+        defaultCommonQueryItemShouldBeFound("fieldType.specified=true");
+
+        // Get all the commonQueryItemList where fieldType is null
+        defaultCommonQueryItemShouldNotBeFound("fieldType.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllCommonQueryItemsByFieldTypeContainsSomething() throws Exception {
+        // Initialize the database
+        commonQueryItemRepository.saveAndFlush(commonQueryItem);
+
+        // Get all the commonQueryItemList where fieldType contains DEFAULT_FIELD_TYPE
+        defaultCommonQueryItemShouldBeFound("fieldType.contains=" + DEFAULT_FIELD_TYPE);
+
+        // Get all the commonQueryItemList where fieldType contains UPDATED_FIELD_TYPE
+        defaultCommonQueryItemShouldNotBeFound("fieldType.contains=" + UPDATED_FIELD_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCommonQueryItemsByFieldTypeNotContainsSomething() throws Exception {
+        // Initialize the database
+        commonQueryItemRepository.saveAndFlush(commonQueryItem);
+
+        // Get all the commonQueryItemList where fieldType does not contain DEFAULT_FIELD_TYPE
+        defaultCommonQueryItemShouldNotBeFound("fieldType.doesNotContain=" + DEFAULT_FIELD_TYPE);
+
+        // Get all the commonQueryItemList where fieldType does not contain UPDATED_FIELD_TYPE
+        defaultCommonQueryItemShouldBeFound("fieldType.doesNotContain=" + UPDATED_FIELD_TYPE);
     }
 
 
@@ -766,6 +852,7 @@ public class CommonQueryItemResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(commonQueryItem.getId().intValue())))
             .andExpect(jsonPath("$.[*].prefix").value(hasItem(DEFAULT_PREFIX)))
             .andExpect(jsonPath("$.[*].fieldName").value(hasItem(DEFAULT_FIELD_NAME)))
+            .andExpect(jsonPath("$.[*].fieldType").value(hasItem(DEFAULT_FIELD_TYPE)))
             .andExpect(jsonPath("$.[*].operator").value(hasItem(DEFAULT_OPERATOR)))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].suffix").value(hasItem(DEFAULT_SUFFIX)))
@@ -819,6 +906,7 @@ public class CommonQueryItemResourceIT {
         updatedCommonQueryItem
             .prefix(UPDATED_PREFIX)
             .fieldName(UPDATED_FIELD_NAME)
+            .fieldType(UPDATED_FIELD_TYPE)
             .operator(UPDATED_OPERATOR)
             .value(UPDATED_VALUE)
             .suffix(UPDATED_SUFFIX)
@@ -836,6 +924,7 @@ public class CommonQueryItemResourceIT {
         CommonQueryItem testCommonQueryItem = commonQueryItemList.get(commonQueryItemList.size() - 1);
         assertThat(testCommonQueryItem.getPrefix()).isEqualTo(UPDATED_PREFIX);
         assertThat(testCommonQueryItem.getFieldName()).isEqualTo(UPDATED_FIELD_NAME);
+        assertThat(testCommonQueryItem.getFieldType()).isEqualTo(UPDATED_FIELD_TYPE);
         assertThat(testCommonQueryItem.getOperator()).isEqualTo(UPDATED_OPERATOR);
         assertThat(testCommonQueryItem.getValue()).isEqualTo(UPDATED_VALUE);
         assertThat(testCommonQueryItem.getSuffix()).isEqualTo(UPDATED_SUFFIX);

@@ -265,3 +265,4 @@ id;title;entity_field_name;type;table_column_name;column_width;hide_in_list;comm
 265;比较值;value;STRING;value;100;false;35;true;false;false;NULL;4;false;NULL;false
 266;后缀;suffix;STRING;suffix;100;false;35;true;false;false;NULL;5;false;NULL;false
 267;顺序;order;INTEGER;jhi_order;100;false;35;true;false;false;NULL;6;false;NULL;false
+269;字段类型;fieldType;STRING;field_type;100;false;35;true;false;false;NULL;1;false;NULL;false

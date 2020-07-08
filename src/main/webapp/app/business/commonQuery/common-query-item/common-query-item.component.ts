@@ -106,7 +106,7 @@ export default class CommonQueryItemComponent extends mixins(Vue2Filters.mixin, 
         .subscribe(res => {
           const commonTableData = res.data;
           commonTableData.commonTableFields.forEach(field => {
-            const selectOption = { value: field.entityFieldName, label: field.title };
+            const selectOption = { value: field.entityFieldName, label: field.title, fieldType: field.type.toString() };
             this.commonTableColumns.push(selectOption);
           });
         });
@@ -225,6 +225,16 @@ export default class CommonQueryItemComponent extends mixins(Vue2Filters.mixin, 
     }
   }
 
+  public changeFieldName({ row }, { value }) {
+    console.log(value);
+    let findColumn = this.commonTableColumns.find(column => column.value === value);
+    console.log(findColumn);
+    if (findColumn) {
+      row.fieldType = findColumn.fieldType.toString();
+    }
+    console.log(row);
+    console.log(this.commonTableColumns);
+  }
   getCommonTableData() {
     const queryItemColumns = [];
     const checkBoxColumn = { type: 'checkbox', width: 60 };
@@ -240,7 +250,8 @@ export default class CommonQueryItemComponent extends mixins(Vue2Filters.mixin, 
       ]
     };
     const fieldNameColumn = { field: 'fieldName', minWidth: 100, params: { type: 'STRING' }, title: '字段名称', editRender: {} };
-    fieldNameColumn.editRender = { name: '$select', options: this.commonTableColumns };
+    fieldNameColumn.editRender = { name: '$select', options: this.commonTableColumns, events: { change: this.changeFieldName } };
+    const fieldTypeColumn = { field: 'fieldType', minWidth: 100, params: { type: 'STRING' }, title: '字段类型' };
     const operatorColumn = { field: 'operator', minWidth: 100, params: { type: 'STRING' }, title: '操作符号', editRender: {} };
     operatorColumn.editRender = {
       name: '$select',
@@ -251,7 +262,7 @@ export default class CommonQueryItemComponent extends mixins(Vue2Filters.mixin, 
         { value: 'contains', label: '包含' }
       ]
     };
-    const valueColumn = { field: 'value', minWidth: 100, params: { type: 'STRING' }, title: '比较值' };
+    const valueColumn = { field: 'value', minWidth: 100, params: { type: 'STRING' }, title: '比较值', editRender: { name: '$input' } };
     const suffixColumn = { field: 'suffix', minWidth: 100, params: { type: 'STRING' }, title: '后置符号', editRender: {} };
     suffixColumn.editRender = {
       name: '$select',
@@ -269,11 +280,13 @@ export default class CommonQueryItemComponent extends mixins(Vue2Filters.mixin, 
     this.xGridColumns.push(idColumn);
     this.xGridColumns.push(prefixColumn);
     this.xGridColumns.push(fieldNameColumn);
+    this.xGridColumns.push(fieldTypeColumn);
     this.xGridColumns.push(operatorColumn);
     this.xGridColumns.push(valueColumn);
     this.xGridColumns.push(suffixColumn);
     this.xGridColumns.push(orderColumn);
     this.xGridColumns.push(actionColumn);
+    this.loading = false;
     /*this.commonTableService()
       .findByEntityName('CommonQueryItem')
       .subscribe(res => {
@@ -434,5 +447,25 @@ export default class CommonQueryItemComponent extends mixins(Vue2Filters.mixin, 
 
   public switchFilterTree() {
     this.filterTreeSpan = this.filterTreeSpan > 0 ? 0 : 6;
+  }
+
+  public saveAll() {
+    this.xGridData.forEach(item => {
+      if (item.id && typeof item.id === 'number') {
+        this.commonQueryItemService()
+          .update(item)
+          .subscribe(res => {
+            console.log('更新成功');
+          });
+      } else {
+        const copy = item;
+        copy.id = null;
+        this.commonQueryItemService()
+          .create(copy)
+          .subscribe(res => {
+            console.log('创建成功');
+          });
+      }
+    });
   }
 }

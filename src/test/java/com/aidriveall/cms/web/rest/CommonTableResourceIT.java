@@ -7,11 +7,11 @@ import com.aidriveall.cms.domain.CommonTableRelationship;
 import com.aidriveall.cms.domain.User;
 import com.aidriveall.cms.domain.BusinessType;
 import com.aidriveall.cms.repository.CommonTableRepository;
+import com.aidriveall.cms.service.CommonQueryQueryService;
 import com.aidriveall.cms.service.CommonTableService;
 import com.aidriveall.cms.service.dto.CommonTableDTO;
 import com.aidriveall.cms.service.mapper.CommonTableMapper;
 import com.aidriveall.cms.web.rest.errors.ExceptionTranslator;
-import com.aidriveall.cms.service.dto.CommonTableCriteria;
 import com.aidriveall.cms.service.CommonTableQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -111,6 +110,9 @@ public class CommonTableResourceIT {
     private CommonTableQueryService commonTableQueryService;
 
     @Autowired
+    private CommonQueryQueryService commonQueryQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -132,7 +134,7 @@ public class CommonTableResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CommonTableResource commonTableResource = new CommonTableResource(commonTableService, commonTableQueryService);
+        final CommonTableResource commonTableResource = new CommonTableResource(commonTableService, commonTableQueryService, commonQueryQueryService);
         this.restCommonTableMockMvc = MockMvcBuilders.standaloneSetup(commonTableResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -354,7 +356,7 @@ public class CommonTableResourceIT {
             .andExpect(jsonPath("$.[*].listConfig").value(hasItem(DEFAULT_LIST_CONFIG.toString())))
             .andExpect(jsonPath("$.[*].formConfig").value(hasItem(DEFAULT_FORM_CONFIG.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCommonTable() throws Exception {

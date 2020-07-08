@@ -74,6 +74,7 @@ class CommonQueryItemGatlingTest extends Simulation {
                 "id":null
                 , "prefix":"SAMPLE_TEXT"
                 , "fieldName":"SAMPLE_TEXT"
+                , "fieldType":"SAMPLE_TEXT"
                 , "operator":"SAMPLE_TEXT"
                 , "value":"SAMPLE_TEXT"
                 , "suffix":"SAMPLE_TEXT"

@@ -88,6 +88,19 @@ public class CommonTableQueryService extends QueryService<CommonTable> {
     }
 
     /**
+     * Return a {@link Page} of {@link CommonTableDTO} which matches the criteria from the database.
+     * @param specification The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<CommonTableDTO> findBySpecification(Specification<CommonTable> specification,Pageable page) {
+        log.debug("find by criteria : {}, page: {}", specification, page);
+        return commonTableRepository.findAll(specification, page)
+            .map(commonTableMapper::toDto);
+    }
+
+    /**
      * Return the number of matching entities in the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the number of matching entities.
@@ -96,6 +109,17 @@ public class CommonTableQueryService extends QueryService<CommonTable> {
     public long countByCriteria(CommonTableCriteria criteria) {
         log.debug("count by criteria : {}", criteria);
         final Specification<CommonTable> specification = createSpecification(criteria);
+        return commonTableRepository.count(specification);
+    }
+
+    /**
+     * Return the number of matching entities in the database.
+     * @param specification The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countBySpecification(Specification specification) {
+        log.debug("count by specification : {}", specification);
         return commonTableRepository.count(specification);
     }
 
@@ -219,7 +243,7 @@ public class CommonTableQueryService extends QueryService<CommonTable> {
      * @return Page<CommonTableDTO>
      */
     @Transactional(readOnly = true)
-    public Page<CommonTableDTO> selectByCustomEntity(String entityName, CommonTableCriteria criteria, Predicate predicate, Pageable pageable) {
+    public Page<CommonTableDTO> selectByCustomEntity(String entityName, CommonTableCriteria criteria, Predicate predicate,Specification specification, Pageable pageable) {
         List<CommonTableDTO> dataList = new ArrayList<>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
@@ -255,15 +279,25 @@ public class CommonTableQueryService extends QueryService<CommonTable> {
         countQuery.select(cb.countDistinct(countRoot.get("id")));
         q.multiselect(s);
         Predicate criteriaPredicate = createSpecification(criteria).toPredicate(root, q, cb);
+        Predicate specificationPredicate = specification == null ? null : specification.toPredicate(root, q, cb);
         if (criteriaPredicate != null) {
             q.where(criteriaPredicate);
             countQuery.where(criteriaPredicate);
         } else if (predicate != null) {
             q.where(predicate);
             countQuery.where(predicate);
+        } else if (specificationPredicate != null) {
+            q.where(specificationPredicate);
+            countQuery.where(specificationPredicate);
         }
         q.distinct(true);
-        long totalItems = countByCriteria(criteria);
+        long totalItems;
+        if (specificationPredicate != null) {
+            totalItems = countBySpecification(specification);
+        } else {
+            totalItems = countByCriteria(criteria);
+        }
+
         if (totalItems > 0) {
             if (pageable != null) {
                 List<Order> orders = new ArrayList<>();
@@ -298,7 +332,7 @@ public class CommonTableQueryService extends QueryService<CommonTable> {
                             this.selectByCustomEntity(
                                 "CommonTable",
                                 null,
-                                cb.equal(manyRoot.get(commonTableRelationship.getOtherEntityRelationshipName()).get("id"), itemmap.get("id")), null));
+                                cb.equal(manyRoot.get(commonTableRelationship.getOtherEntityRelationshipName()).get("id"), itemmap.get("id")), null, null));
                     } else {
                         Selection<Object> idAlias = manyRoot.get("id").alias("id");
                         if (commonTableRelationship.getOtherEntityField() != null) {

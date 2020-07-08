@@ -18,6 +18,7 @@
       },
       "prefix": "Prefix",
       "fieldName": "Field Name",
+      "fieldType": "Field Type",
       "operator": "Operator",
       "value": "Value",
       "suffix": "Suffix",
@@ -26,6 +27,7 @@
       "help": {
         "prefix": "前置符号",
         "fieldName": "字段名称",
+        "fieldType": "字段类型",
         "operator": "运算符号",
         "value": "比较值",
         "suffix": "后缀",

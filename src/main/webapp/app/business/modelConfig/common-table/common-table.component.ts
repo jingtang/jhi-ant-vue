@@ -15,12 +15,15 @@ import { AxiosResponse } from 'axios';
 import { getFilter, xGenerateFilterTree, xGenerateTableColumns } from '@/utils/entity-list-utils';
 import { FieldType } from '@/shared/model/modelConfig/common-table-field.model';
 import { forkJoin } from 'rxjs';
+import CommonQueryService from '@/business/commonQuery/common-query/common-query.service';
+import { ICommonQuery } from '@/shared/model/commonQuery/common-query.model';
 
 @Component
 export default class CommonTableComponent extends mixins(JhiDataUtils, Vue2Filters.mixin, AlertMixin) {
   @Inject('commonTableService') private commonTableService: () => CommonTableService;
   @Inject('userService') private userService: () => UserService;
   @Inject('businessTypeService') private businessTypeService: () => BusinessTypeService;
+  @Inject('commonQueryService') private commonQueryService: () => CommonQueryService;
   @Ref() public searchInput;
   @Ref('xGrid') public xGrid;
   public xGridData = [];
@@ -71,6 +74,8 @@ export default class CommonTableComponent extends mixins(JhiDataUtils, Vue2Filte
   public editStatus: { [key: string]: any } = {};
   public isFetching = false;
   public searchValue = '';
+  public commonQueries: ICommonQuery[] = [];
+  public selectCommonQueryId: number = null;
   usersNzTreeNodes: any[]; // todo 有时可能多余。
   users: IUser[];
   businesstypesNzTreeNodes: any[]; // todo 有时可能多余。
@@ -96,7 +101,8 @@ export default class CommonTableComponent extends mixins(JhiDataUtils, Vue2Filte
       page: this.xGridPagerConfig.currentPage - 1,
       size: this.xGridPagerConfig.pageSize,
       sort: this.sort(),
-      filter: getFilter(this.searchValue, this.mapOfFilter)
+      filter: getFilter(this.searchValue, this.mapOfFilter),
+      commonQueryId: this.selectCommonQueryId
     };
     this.commonTableService()
       .retrieve(paginationQuery)
@@ -309,11 +315,18 @@ export default class CommonTableComponent extends mixins(JhiDataUtils, Vue2Filte
 
   public initRelationships(): void {
     this.loading = true;
-    forkJoin([this.userService().retrieve(), this.businessTypeService().retrieve()]).subscribe(
-      ([users, businessTypes]) => {
+    const commonQueryOption = {
+      'commonTableClazzName.equals': 'CommonTable'
+    };
+    forkJoin([
+      this.userService().retrieve(),
+      this.businessTypeService().retrieve(),
+      this.commonQueryService().retrieve(commonQueryOption)
+    ]).subscribe(
+      ([users, businessTypes, commonQueriesRes]) => {
         this.relationshipsData['users'] = users.data;
         this.relationshipsData['businessTypes'] = businessTypes.data;
-
+        this.commonQueries = commonQueriesRes.data;
         const listOfFiltercreator = users.data.slice(0, users.data.length > 8 ? 7 : users.data.length - 1);
         this.mapOfFilter.creator = { list: listOfFiltercreator, value: [], type: 'many-to-one' };
         const listOfFilterbusinessType = businessTypes.data.slice(0, businessTypes.data.length > 8 ? 7 : businessTypes.data.length - 1);
@@ -357,5 +370,17 @@ export default class CommonTableComponent extends mixins(JhiDataUtils, Vue2Filte
     }
     this.mapOfFilter[property] = { value: tempValues, type: type };
     this.loadAll();
+  }
+
+  public handleQueryMenuClick({ key }) {
+    if (key === -1) {
+      this.selectCommonQueryId = null;
+      this.loadAll();
+    } else if (key === 0) {
+      // todo 显示新建查询页面
+    } else {
+      this.selectCommonQueryId = key;
+      this.loadAll();
+    }
   }
 }

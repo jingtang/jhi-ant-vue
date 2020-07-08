@@ -3,7 +3,7 @@
         <k-form-build :value="formJsonData" ref="updateForm" :dynamicData="relationshipsData"/>
         <a-tabs defaultActiveKey="1">
             <a-tab-pane :tab="$t('jhiAntVueApp.commonQueryCommonQuery.items')" key="1">
-                <jhi-common-query-item :showInOther="true" :queryId="commonQuery.id" :commonTableId="commonQuery.commonTableId"></jhi-common-query-item>
+                <jhi-common-query-item :showInOther="true" :queryId="commonQuery.id" :commonTableId="commonQuery.commonTableId" ref="itemListComponent"></jhi-common-query-item>
             </a-tab-pane>
         </a-tabs>
         <a-row type="flex" justify="center">

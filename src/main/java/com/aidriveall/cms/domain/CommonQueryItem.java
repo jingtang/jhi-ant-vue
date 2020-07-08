@@ -39,6 +39,12 @@ public class CommonQueryItem implements Serializable {
     private String fieldName;
 
     /**
+     * 字段类型
+     */
+    @Column(name = "field_type")
+    private String fieldType;
+
+    /**
      * 运算符号
      */
     @Column(name = "operator")
@@ -101,6 +107,19 @@ public class CommonQueryItem implements Serializable {
 
     public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
+    }
+
+    public String getFieldType() {
+        return fieldType;
+    }
+
+    public CommonQueryItem fieldType(String fieldType) {
+        this.fieldType = fieldType;
+        return this;
+    }
+
+    public void setFieldType(String fieldType) {
+        this.fieldType = fieldType;
     }
 
     public String getOperator() {
@@ -192,6 +211,7 @@ public class CommonQueryItem implements Serializable {
             "id=" + getId() +
             ", prefix='" + getPrefix() + "'" +
             ", fieldName='" + getFieldName() + "'" +
+            ", fieldType='" + getFieldType() + "'" +
             ", operator='" + getOperator() + "'" +
             ", value='" + getValue() + "'" +
             ", suffix='" + getSuffix() + "'" +

@@ -31,6 +31,8 @@ public class CommonQueryItemCriteria implements Serializable, Criteria {
 
     private StringFilter fieldName;
 
+    private StringFilter fieldType;
+
     private StringFilter operator;
 
     private StringFilter value;
@@ -48,6 +50,7 @@ public class CommonQueryItemCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.prefix = other.prefix == null ? null : other.prefix.copy();
         this.fieldName = other.fieldName == null ? null : other.fieldName.copy();
+        this.fieldType = other.fieldType == null ? null : other.fieldType.copy();
         this.operator = other.operator == null ? null : other.operator.copy();
         this.value = other.value == null ? null : other.value.copy();
         this.suffix = other.suffix == null ? null : other.suffix.copy();
@@ -82,6 +85,14 @@ public class CommonQueryItemCriteria implements Serializable, Criteria {
 
     public void setFieldName(StringFilter fieldName) {
         this.fieldName = fieldName;
+    }
+
+    public StringFilter getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(StringFilter fieldType) {
+        this.fieldType = fieldType;
     }
 
     public StringFilter getOperator() {
@@ -145,6 +156,7 @@ public class CommonQueryItemCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(prefix, that.prefix) &&
             Objects.equals(fieldName, that.fieldName) &&
+            Objects.equals(fieldType, that.fieldType) &&
             Objects.equals(operator, that.operator) &&
             Objects.equals(value, that.value) &&
             Objects.equals(suffix, that.suffix) &&
@@ -158,6 +170,7 @@ public class CommonQueryItemCriteria implements Serializable, Criteria {
         id,
         prefix,
         fieldName,
+        fieldType,
         operator,
         value,
         suffix,
@@ -172,6 +185,7 @@ public class CommonQueryItemCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (prefix != null ? "prefix=" + prefix + ", " : "") +
                 (fieldName != null ? "fieldName=" + fieldName + ", " : "") +
+                (fieldType != null ? "fieldType=" + fieldType + ", " : "") +
                 (operator != null ? "operator=" + operator + ", " : "") +
                 (value != null ? "value=" + value + ", " : "") +
                 (suffix != null ? "suffix=" + suffix + ", " : "") +

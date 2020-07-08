@@ -1,6 +1,6 @@
 package com.aidriveall.cms.web.rest;
 
-import cn.hutool.core.bean.BeanUtil;
+import com.aidriveall.cms.service.CommonQueryQueryService;
 import com.aidriveall.cms.service.CommonTableService;
 import com.aidriveall.cms.web.rest.errors.BadRequestAlertException;
 import com.aidriveall.cms.service.dto.CommonTableDTO;
@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,13 +26,11 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
-import cn.afterturn.easypoi.util.PoiPublicUtil;
 
 import org.apache.poi.ss.usermodel.Workbook;
 
 import javax.validation.Valid;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
@@ -46,7 +44,7 @@ import java.util.UUID;
 // jhipster-needle-add-import - JHipster will add getters and setters here, do not remove
 
 /**
- * REST controller for managing {@link com.honmtech.cms.domain.CommonTable}.
+ * REST controller for managing {@link com.aidriveall.cms.domain.CommonTable}.
  */
 @RestController
 @RequestMapping("/api")
@@ -63,9 +61,12 @@ public class CommonTableResource {
 
     private final CommonTableQueryService commonTableQueryService;
 
-    public CommonTableResource(CommonTableService commonTableService, CommonTableQueryService commonTableQueryService) {
+    private final CommonQueryQueryService commonQueryQueryService;
+
+    public CommonTableResource(CommonTableService commonTableService, CommonTableQueryService commonTableQueryService, CommonQueryQueryService commonQueryQueryService) {
         this.commonTableService = commonTableService;
         this.commonTableQueryService = commonTableQueryService;
+        this.commonQueryQueryService = commonQueryQueryService;
     }
 
     /**
@@ -128,19 +129,31 @@ public class CommonTableResource {
     /**
      * {@code GET  /common-tables} : get all the commonTables.
      *
-
+     * @param commonQueryId the commonQuery id
+     * @param listModelName listModelName
      * @param pageable the pagination information.
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of commonTables in body.
      */
     @GetMapping("/common-tables")
-    public ResponseEntity<List<CommonTableDTO>> getAllCommonTables(CommonTableCriteria criteria, Pageable pageable, @RequestParam(value = "listModelName", required = false) String listModelName) {
+    public ResponseEntity<List<CommonTableDTO>> getAllCommonTables(CommonTableCriteria criteria, Pageable pageable, @RequestParam(value = "listModelName", required = false) String listModelName, @RequestParam(value = "commonQueryId", required = false) Long commonQueryId) throws ClassNotFoundException {
         log.debug("REST request to get CommonTables by criteria: {}", criteria);
         Page<CommonTableDTO> page;
         if (listModelName != null) {
-            page = commonTableQueryService.selectByCustomEntity(listModelName, criteria,null, pageable);
+            if (commonQueryId != null) {
+                Specification specification = commonQueryQueryService.createSpecification(commonQueryId);
+                page = commonTableQueryService.selectByCustomEntity(listModelName, criteria,null, specification, pageable);
+            } else {
+                page = commonTableQueryService.selectByCustomEntity(listModelName, criteria,null, null, pageable);
+            }
+
         } else {
-            page = commonTableQueryService.findByCriteria(criteria, pageable);
+            if (commonQueryId != null) {
+                Specification specification = commonQueryQueryService.createSpecification(commonQueryId);
+                page = commonTableQueryService.findBySpecification(specification, pageable);
+            } else {
+                page = commonTableQueryService.findByCriteria(criteria, pageable);
+            }
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -300,7 +313,8 @@ public class CommonTableResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
-        /**
+
+    /**
      * {@code GET  /common-tables/entity-name/:entityName} : get the "entityName" commonTable.
      *
      * @param entityName the entityName of the commonTableDTO to retrieve.

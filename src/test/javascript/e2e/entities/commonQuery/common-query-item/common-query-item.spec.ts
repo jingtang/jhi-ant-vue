@@ -69,6 +69,9 @@ describe('CommonQueryItem e2e test', () => {
       await updatePage.fieldNameInput.sendKeys('fieldName');
       expect(await updatePage.fieldNameInput.getAttribute('value')).to.match(/fieldName/);
 
+      await updatePage.fieldTypeInput.sendKeys('fieldType');
+      expect(await updatePage.fieldTypeInput.getAttribute('value')).to.match(/fieldType/);
+
       await updatePage.operatorInput.sendKeys('operator');
       expect(await updatePage.operatorInput.getAttribute('value')).to.match(/operator/);
 
@@ -146,6 +149,10 @@ describe('CommonQueryItem e2e test', () => {
         await updatePage.fieldNameInput.clear();
         await updatePage.fieldNameInput.sendKeys('modified');
         expect(await updatePage.fieldNameInput.getAttribute('value')).to.match(/modified/);
+
+        await updatePage.fieldTypeInput.clear();
+        await updatePage.fieldTypeInput.sendKeys('modified');
+        expect(await updatePage.fieldTypeInput.getAttribute('value')).to.match(/modified/);
 
         await updatePage.operatorInput.clear();
         await updatePage.operatorInput.sendKeys('modified');

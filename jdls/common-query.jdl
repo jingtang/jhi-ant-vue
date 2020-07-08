@@ -11,6 +11,7 @@ entity CommonQuery {
 entity CommonQueryItem {
     prefix String /** 前置符号 */
     fieldName String /** 字段名称 */
+    fieldType String /** 字段类型 */
     operator String /** 运算符号 */
     value String /** 比较值 */
     suffix String /** 后缀 */

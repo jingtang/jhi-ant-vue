@@ -56,6 +56,7 @@ export default class CommonQueryUpdate extends Vue {
   public isSaving = false;
   public loading = false;
   @Ref('updateForm') readonly updateForm: any;
+  @Ref('itemListComponent') readonly itemListComponent: any;
   public formJsonData = {
     list: [],
     config: {
@@ -83,40 +84,39 @@ export default class CommonQueryUpdate extends Vue {
 
   public mounted(): void {}
 
-  public getFormValue() {
+  public getFormValue() {}
+
+  public save(): void {
     this.updateForm
       .getData()
       .then(values => {
         Object.assign(this.commonQuery, values);
+        this.isSaving = true;
+        this.itemListComponent.saveAll();
+        if (this.commonQuery.id) {
+          this.commonQueryService()
+            .update(this.commonQuery)
+            .subscribe(param => {
+              this.isSaving = false;
+              const message = this.$t('jhiAntVueApp.commonQueryCommonQuery.updated', { param: param.data.id }).toString();
+              this.alertService().showAlert(message, 'info');
+              this.$router.go(-1);
+            });
+        } else {
+          this.commonQueryService()
+            .create(this.commonQuery)
+            .subscribe(param => {
+              this.isSaving = false;
+              const message = this.$t('jhiAntVueApp.commonQueryCommonQuery.created', { param: param.data.id }).toString();
+              this.alertService().showAlert(message, 'success');
+              this.$router.go(-1);
+            });
+        }
       })
-      .catch(() => {
+      .catch(error => {
         this.$message.error('数据获取失败！');
-        console.log('验证未通过，获取失败');
+        console.log(error);
       });
-  }
-
-  public save(): void {
-    this.getFormValue();
-    this.isSaving = true;
-    if (this.commonQuery.id) {
-      this.commonQueryService()
-        .update(this.commonQuery)
-        .subscribe(param => {
-          this.isSaving = false;
-          const message = this.$t('jhiAntVueApp.commonQueryCommonQuery.updated', { param: param.data.id }).toString();
-          this.alertService().showAlert(message, 'info');
-          this.$router.go(-1);
-        });
-    } else {
-      this.commonQueryService()
-        .create(this.commonQuery)
-        .subscribe(param => {
-          this.isSaving = false;
-          const message = this.$t('jhiAntVueApp.commonQueryCommonQuery.created', { param: param.data.id }).toString();
-          this.alertService().showAlert(message, 'success');
-          this.$router.go(-1);
-        });
-    }
   }
 
   public retrieveCommonQuery(commonQueryId): void {
