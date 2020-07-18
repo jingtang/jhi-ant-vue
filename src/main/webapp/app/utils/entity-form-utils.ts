@@ -210,8 +210,8 @@ export function generateDataForDesigner(commonTableData: ICommonTable) {
               } else {
                 const item = getDefaultItemData('customSelect');
                 item.label = relationship.name;
-                item.model = relationship.relationshipName + 'Id';
-                item.key = relationship.relationshipName + 'Id';
+                item.model = relationship.relationshipName;
+                item.key = relationship.relationshipName;
                 item.options.multiple = true;
                 item.options.dynamic = true;
                 item.options.dynamicKey = relationship.dataName;
@@ -425,4 +425,28 @@ export function getDataByFormField(formFields: any[], data) {
     return field.key;
   });
   return pick(data, fields);
+}
+
+export function idsToIdObjectArray(ids: any): any[] {
+  const idArray = [];
+  const result = [];
+  console.log(typeof ids);
+  if (typeof ids === 'string') {
+    idArray.push(ids.split(','));
+  }
+  console.log(Object.prototype.toString.call(ids));
+  if (Object.prototype.toString.call(ids) === '[object Array]') {
+    ids.forEach(id => {
+      result.push({ id: id });
+    });
+  }
+  return result;
+}
+
+export function idObjectArrayToIdArray(idObjectArray: any[]): any[] {
+  const result = [];
+  idObjectArray.forEach(idObject => {
+    result.push(idObject.id);
+  });
+  return result;
 }

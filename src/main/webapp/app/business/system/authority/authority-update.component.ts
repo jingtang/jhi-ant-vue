@@ -15,7 +15,7 @@ import AlertService from '@/shared/alert/alert.service';
 import { IAuthority, Authority } from '@/shared/model/system/authority.model';
 import AuthorityService from './authority.service';
 import { forkJoin } from 'rxjs';
-import { generateDataForDesigner, getDataByFormField } from '@/utils/entity-form-utils';
+import { generateDataForDesigner, getDataByFormField, idObjectArrayToIdArray, idsToIdObjectArray } from '@/utils/entity-form-utils';
 
 const validations: any = {
   authority: {
@@ -89,27 +89,40 @@ export default class AuthorityUpdate extends Vue {
   }
 
   public save(): void {
-    this.getFormValue();
     this.isSaving = true;
-    if (this.authority.id) {
-      this.authorityService()
-        .update(this.authority)
-        .subscribe(param => {
-          this.isSaving = false;
-          const message = this.$t('jhiAntVueApp.systemAuthority.updated', { param: param.data.id }).toString();
-          this.alertService().showAlert(message, 'info');
-          this.$router.go(-1);
-        });
-    } else {
-      this.authorityService()
-        .create(this.authority)
-        .subscribe(param => {
-          this.isSaving = false;
-          const message = this.$t('jhiAntVueApp.systemAuthority.created', { param: param.data.id }).toString();
-          this.alertService().showAlert(message, 'success');
-          this.$router.go(-1);
-        });
-    }
+    this.updateForm
+      .getData()
+      .then(values => {
+        console.log(this.authority);
+        Object.assign(this.authority, values);
+        console.log(this.authority);
+        console.log(values);
+        this.authority.users = idsToIdObjectArray(this.authority['users']);
+        if (this.authority.id) {
+          this.authorityService()
+            .update(this.authority)
+            .subscribe(param => {
+              this.isSaving = false;
+              const message = this.$t('jhiAntVueApp.systemAuthority.updated', { param: param.data.id }).toString();
+              this.alertService().showAlert(message, 'info');
+              this.$router.go(-1);
+            });
+        } else {
+          this.authorityService()
+            .create(this.authority)
+            .subscribe(param => {
+              this.isSaving = false;
+              const message = this.$t('jhiAntVueApp.systemAuthority.created', { param: param.data.id }).toString();
+              this.alertService().showAlert(message, 'success');
+              this.$router.go(-1);
+            });
+        }
+      })
+      .catch(() => {
+        this.$message.error('数据获取失败！');
+        console.log('验证未通过，获取失败');
+        this.isSaving = false;
+      });
   }
 
   public retrieveAuthority(authorityId): void {
@@ -117,6 +130,8 @@ export default class AuthorityUpdate extends Vue {
       .find(authorityId)
       .subscribe(res => {
         this.authority = res.data;
+        this.authority.users = idObjectArrayToIdArray(this.authority.users);
+        console.log(this.authority);
         this.getFormData();
       });
   }

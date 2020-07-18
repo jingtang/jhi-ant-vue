@@ -76,10 +76,7 @@ export default class CommonTableComponent extends mixins(JhiDataUtils, Vue2Filte
   public searchValue = '';
   public commonQueries: ICommonQuery[] = [];
   public selectCommonQueryId: number = null;
-  usersNzTreeNodes: any[]; // todo 有时可能多余。
   users: IUser[];
-  businesstypesNzTreeNodes: any[]; // todo 有时可能多余。
-  businesstypes: IBusinessType[];
 
   public created(): void {
     this.initRelationships();

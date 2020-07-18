@@ -338,10 +338,6 @@ public class CommonQueryQueryService extends QueryService<CommonQuery> {
         if (commonQuery != null) {
             Class targetClass = Class.forName(packageName + "." + commonQuery.getCommonTable().getClazzName() + "_");
             Class targetCriteriaClass = Class.forName(servicePackageName + ".dto." + commonQuery.getCommonTable().getClazzName() + "Criteria");
-
-            LinkedList temp = new LinkedList();
-
-            LinkedList operateSymbol = new LinkedList();
             StringBuffer s = new StringBuffer();
             Set<CommonQueryItem> queryItems = commonQuery.getItems();
             queryItems.forEach( queryItem -> {
