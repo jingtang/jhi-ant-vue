@@ -78,7 +78,7 @@
 微信交流群：
 
 <div align="left">
-	<img src="doc/image/wx.jpeg" width="200">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/wx.jpeg" width="200">
 </div>
 
 ## 部分截图，演示后续再上吧。
@@ -86,25 +86,25 @@
 ### 1.登录
 
 <div align="center">
-	<img src="doc/image/login.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/login.png" width="800">
 </div>
 
 ### 2.首页
 
 <div align="center">
-	<img src="doc/image/index.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/index.png" width="800">
 </div>
 
 ### 3.API
 
 <div align="center">
-	<img src="doc/image/api.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/api.png" width="800">
 </div>
 
 ### 4.菜单管理
 
 <div align="center">
-	<img src="doc/image/menu.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/menu.png" width="800">
 </div>
 
 ### 5.列表配置
@@ -116,31 +116,31 @@
 ### 6.模型配置
 
 <div align="center">
-	<img src="doc/image/model.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/model.png" width="800">
 </div>
 
 ### 7.用户列表
 
 <div align="center">
-	<img src="doc/image/user.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/user.png" width="800">
 </div>
 
 ### 8.表单配置
 
 <div align="center">
-	<img src="doc/image/form.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/form.png" width="800">
 </div>
 
 ### 9.流程设计
 
 <div align="center">
-	<img src="doc/image/workflow.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/workflow.png" width="800">
 </div>
 
 ### 10.报表设计器
 
 <div align="center">
-	<img src="doc/image/report.png" width="800">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/report.png" width="800">
 </div>
 其他内容请浏览 Jhipster 官网。
 
