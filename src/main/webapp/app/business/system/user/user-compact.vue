@@ -70,8 +70,8 @@
             </a-col>
         </a-row>
         <a-row>
-            <a-col :lg="8" :md="12" :sm="0"></a-col>
-            <a-col :lg="16" :md="12" :sm="24">
+            <a-col :lg="4" :md="6" :sm="2"></a-col>
+            <a-col :lg="12" :md="12" :sm="20">
                 <span class="table-page-search-submitButtons" style="display: inline-block">
                     <a-button type="primary" icon="close" @click="handleCancel">取消</a-button>
                 </span>

@@ -1,47 +1,35 @@
 package com.aidriveall.cms.web.rest;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.aidriveall.cms.service.UploadImageService;
-import com.aidriveall.cms.web.rest.errors.BadRequestAlertException;
-import com.aidriveall.cms.service.dto.UploadImageDTO;
-import com.aidriveall.cms.service.dto.UploadImageCriteria;
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.aidriveall.cms.service.UploadImageQueryService;
-
+import com.aidriveall.cms.service.UploadImageService;
+import com.aidriveall.cms.service.dto.UploadImageCriteria;
+import com.aidriveall.cms.service.dto.UploadImageDTO;
+import com.aidriveall.cms.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.ExcelImportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
-import cn.afterturn.easypoi.excel.entity.ImportParams;
-import cn.afterturn.easypoi.util.PoiPublicUtil;
-
-import org.apache.poi.ss.usermodel.Workbook;
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 // jhipster-needle-add-import - JHipster will add getters and setters here, do not remove
 
@@ -71,16 +59,18 @@ public class UploadImageResource {
     /**
      * {@code POST  /upload-images} : Create a new uploadImage.
      *
-     * @param uploadImageDTO the uploadImageDTO to create.
+     * @param image the uploadImageDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new uploadImageDTO, or with status {@code 400 (Bad Request)} if the uploadImage has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/upload-images")
-    public ResponseEntity<UploadImageDTO> createUploadImage(@RequestBody UploadImageDTO uploadImageDTO) throws URISyntaxException {
-        log.debug("REST request to save UploadImage : {}", uploadImageDTO);
-        if (uploadImageDTO.getId() != null) {
-            throw new BadRequestAlertException("A new uploadImage cannot already have an ID", ENTITY_NAME, "idexists");
+    public ResponseEntity<UploadImageDTO> createUploadImage(@RequestParam(value = "image", required = false) final MultipartFile image) throws URISyntaxException {
+        log.debug("REST request to save UploadImage : {}", image.getOriginalFilename());
+        if (image.isEmpty()) {
+            throw new BadRequestAlertException("A new uploadImage cannot null", ENTITY_NAME, "imageisnull");
         }
+        UploadImageDTO uploadImageDTO = new UploadImageDTO();
+        uploadImageDTO.setImage(image);
         UploadImageDTO result = uploadImageService.save(uploadImageDTO);
         return ResponseEntity.created(new URI("/api/upload-images/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

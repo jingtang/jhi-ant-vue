@@ -105,7 +105,7 @@ public class UploadImageDTO implements Serializable {
     private String userImageUrl;
     private String userLogin;
 
-        private MultipartFile image;
+    private MultipartFile image;
     // jhipster-needle-dto-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -233,7 +233,7 @@ public class UploadImageDTO implements Serializable {
     public void setUserImageUrl(String userImageUrl) {
         this.userImageUrl = userImageUrl;
     }
-    
+
     public String getUserLogin() {
         return userLogin;
     }
@@ -246,7 +246,7 @@ public class UploadImageDTO implements Serializable {
             return image;
         }
 
-        public void setImage(MultipartFile image) {
+    public void setImage(MultipartFile image) {
             this.image = image;
         }
 // jhipster-needle-dto-add-getters-setters - JHipster will add getters and setters here, do not remove

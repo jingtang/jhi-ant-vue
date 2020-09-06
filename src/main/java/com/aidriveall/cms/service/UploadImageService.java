@@ -1,38 +1,30 @@
 package com.aidriveall.cms.service;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.aidriveall.cms.config.ApplicationProperties;
+import com.aidriveall.cms.config.Constants;
 import com.aidriveall.cms.domain.UploadImage;
 import com.aidriveall.cms.repository.UploadImageRepository;
 import com.aidriveall.cms.repository.UserRepository;
 import com.aidriveall.cms.security.SecurityUtils;
 import com.aidriveall.cms.service.dto.UploadImageDTO;
 import com.aidriveall.cms.service.mapper.UploadImageMapper;
+import com.aidriveall.cms.web.rest.errors.BadRequestAlertException;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.BeanUtils;
-import cn.hutool.core.bean.BeanUtil;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.beans.PropertyDescriptor;
-
-
-    import org.apache.commons.io.FilenameUtils;
-    import org.apache.commons.io.FileUtils;
-    import java.util.UUID;
-    import java.io.IOException;
-    import com.aidriveall.cms.web.rest.errors.BadRequestAlertException;
-    import com.aidriveall.cms.security.SecurityUtils;
-    import com.aidriveall.cms.config.ApplicationProperties;
-    import com.aidriveall.cms.config.Constants;
-    import com.aidriveall.cms.repository.UserRepository;
-    import java.time.ZonedDateTime;
-    import java.time.format.DateTimeFormatter;
-    import java.io.File;
 // jhipster-needle-add-import - JHipster will add getters and setters here, do not remove
 
 /**
@@ -69,11 +61,37 @@ public class UploadImageService {
     /**
      * Save a uploadImage.
      *
-     * @param uploadImageDTO the entity to save.
-     * @return the persisted entity.
+     * @param uploadImageDTO the entity to save
+     * @return the persisted entity
      */
     public UploadImageDTO save(UploadImageDTO uploadImageDTO) {
         log.debug("Request to save UploadImage : {}", uploadImageDTO);
+        if (!uploadImageDTO.getImage().isEmpty()) {
+            final String extName = FilenameUtils.getExtension(uploadImageDTO.getImage().getOriginalFilename());
+            final String randomNameNew = UUID.randomUUID().toString().replaceAll("\\-", "");
+            final String yearAndMonth = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy_MM"));
+            final String savePathNew = Constants.DATA_PATH + File.separator + applicationProperties.getUpload().getRootPath() + File.separator + yearAndMonth + File.separator ;
+            final String saveFileName = savePathNew  + randomNameNew + "." + extName;
+            final String fileUrl = applicationProperties.getUpload().getDomainUrl() + applicationProperties.getUpload().getRootPath()+ "/" + yearAndMonth + "/" + randomNameNew + "." + extName;
+            final long fileSize = uploadImageDTO.getImage().getSize();
+            try {
+                FileUtils.writeByteArrayToFile(new File(saveFileName),uploadImageDTO.getImage().getBytes());
+            } catch (IOException e) {
+                throw new BadRequestAlertException("Invalid file", "UploadImage", "IOerror");
+            }
+            uploadImageDTO.setCreateAt(ZonedDateTime.now());
+            uploadImageDTO.setExt(extName);
+            uploadImageDTO.setFullName(uploadImageDTO.getImage().getOriginalFilename());
+            uploadImageDTO.setName(uploadImageDTO.getImage().getName());
+            SecurityUtils.getCurrentUserLogin().ifPresent(
+                login -> userRepository.findOneByLogin(login).ifPresent(
+                    user -> uploadImageDTO.setUserId(user.getId())));
+            uploadImageDTO.setFolder(savePathNew);
+            uploadImageDTO.setUrl(fileUrl);
+            uploadImageDTO.setFileSize(fileSize);
+        } else {
+            throw new BadRequestAlertException("Invalid file", "UploadFile", "imagesnull");
+        }
         UploadImage uploadImage = uploadImageMapper.toEntity(uploadImageDTO);
         uploadImage = uploadImageRepository.save(uploadImage);
         return uploadImageMapper.toDto(uploadImage);

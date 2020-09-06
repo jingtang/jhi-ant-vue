@@ -93,10 +93,7 @@ export default class AuthorityUpdate extends Vue {
     this.updateForm
       .getData()
       .then(values => {
-        console.log(this.authority);
         Object.assign(this.authority, values);
-        console.log(this.authority);
-        console.log(values);
         this.authority.users = idsToIdObjectArray(this.authority['users']);
         if (this.authority.id) {
           this.authorityService()
@@ -130,8 +127,8 @@ export default class AuthorityUpdate extends Vue {
       .find(authorityId)
       .subscribe(res => {
         this.authority = res.data;
+        // todo 更新关系中自带的数据，防止显示列表中没有相关的内容，包括多对一和多对多和一对一。
         this.authority.users = idObjectArrayToIdArray(this.authority.users);
-        console.log(this.authority);
         this.getFormData();
       });
   }

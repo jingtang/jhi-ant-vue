@@ -78,7 +78,7 @@
 微信交流群：
 
 <div align="left">
-	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/wx.jpeg" width="200">
+	<img src="https://gitee.com/wangxinxx/jhi-ant-vue/raw/master/doc/image/wx.jpg" width="200">
 </div>
 
 ## 部分截图，演示后续再上吧。

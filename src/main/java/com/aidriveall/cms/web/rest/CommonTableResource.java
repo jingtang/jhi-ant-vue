@@ -7,6 +7,7 @@ import com.aidriveall.cms.service.dto.CommonTableDTO;
 import com.aidriveall.cms.service.dto.CommonTableCriteria;
 import com.aidriveall.cms.service.CommonTableQueryService;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpHeaders;
@@ -155,6 +157,20 @@ public class CommonTableResource {
                 page = commonTableQueryService.findByCriteria(criteria, pageable);
             }
         }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /common-tables} : get all the commonTables.
+     *
+     * @param listModelName listModelName
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of commonTables in body.
+     */
+    @GetMapping("/common-tables/query")
+    public ResponseEntity<List<CommonTableDTO>> getAllCommonTablesByQuery(Pageable pageable, @RequestParam(value = "listModelName", required = false) String listModelName, @RequestParam(value = "query", required = false) ObjectNode query) throws ClassNotFoundException {
+        Page<CommonTableDTO> page = (Page<CommonTableDTO>) PageRequest.of(0,20);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

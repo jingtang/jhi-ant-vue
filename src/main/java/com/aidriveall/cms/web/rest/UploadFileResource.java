@@ -71,16 +71,18 @@ public class UploadFileResource {
     /**
      * {@code POST  /upload-files} : Create a new uploadFile.
      *
-     * @param uploadFileDTO the uploadFileDTO to create.
+     * @param file the uploadFile to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new uploadFileDTO, or with status {@code 400 (Bad Request)} if the uploadFile has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/upload-files")
-    public ResponseEntity<UploadFileDTO> createUploadFile(@RequestBody UploadFileDTO uploadFileDTO) throws URISyntaxException {
-        log.debug("REST request to save UploadFile : {}", uploadFileDTO);
-        if (uploadFileDTO.getId() != null) {
-            throw new BadRequestAlertException("A new uploadFile cannot already have an ID", ENTITY_NAME, "idexists");
+    public ResponseEntity<UploadFileDTO> createUploadFile(@RequestParam(value = "file", required = false) final MultipartFile file) throws URISyntaxException {
+        log.debug("REST request to save UploadFile : {}", file.getOriginalFilename());
+        if (file.isEmpty()) {
+            throw new BadRequestAlertException("A new uploadImage cannot null", ENTITY_NAME, "imageisnull");
         }
+        UploadFileDTO uploadFileDTO = new UploadFileDTO();
+        uploadFileDTO.setFile(file);
         UploadFileDTO result = uploadFileService.save(uploadFileDTO);
         return ResponseEntity.created(new URI("/api/upload-files/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
