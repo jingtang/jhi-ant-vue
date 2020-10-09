@@ -12,7 +12,6 @@ import ProcessDefinitionService from '@/business/workflow/process-definition/pro
 import CommonTableService from '@/business/modelConfig/common-table/common-table.service';
 import ProcessTableConfigService from '@/business/workflow/process-table-config/process-table-config.service';
 import { IProcessTableConfig } from '@/shared/model/workflow/process-table-config.model';
-import { forkJoin } from 'rxjs';
 import { Mutation } from 'vuex-class';
 
 @Component({
@@ -83,6 +82,12 @@ export default class WorkflowDesignComponent extends mixins(JhiDataUtils, Vue2Fi
             .subscribe(
               res => {
                 if (res.data && res.data.length > 0) {
+                  const addCommonTableId = res.data[0].commonTableId;
+                  this.commonTableService()
+                    .retrieve({ 'id.equals': addCommonTableId })
+                    .subscribe(res => {
+                      this.commonTables = this.commonTables.concat(res.data);
+                    });
                   this.$nextTick(() => {
                     this.processDefinitionBpmn = res.data[0].processBpmnData;
                     this.commonTableId = res.data[0].commonTableId;

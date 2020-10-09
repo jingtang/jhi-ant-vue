@@ -7,11 +7,9 @@ import AlertMixin from '@/shared/alert/alert.mixin';
 import CommonQueryItemService from './common-query-item.service';
 import { ICommonQuery } from '@/shared/model/commonQuery/common-query.model';
 import CommonQueryService from '@/business/commonQuery/common-query/common-query.service';
-import { ICommonTable } from '@/shared/model/modelConfig/common-table.model';
 import CommonTableService from '@/business/modelConfig/common-table/common-table.service';
 import { AxiosResponse } from 'axios';
 import { getFilter, xGenerateFilterTree, xGenerateTableColumns } from '@/utils/entity-list-utils';
-import CommonQueryItemUpdate from '@/business/commonQuery/common-query-item/common-query-item-update.vue';
 import { forkJoin } from 'rxjs';
 
 @Component
